@@ -1,6 +1,6 @@
 ﻿namespace ModernSteward
 {
-    partial class Form1
+    partial class AddPluginTestForm
     {
         /// <summary>
         /// Required designer variable.

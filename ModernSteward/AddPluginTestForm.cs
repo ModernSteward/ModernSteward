@@ -10,11 +10,11 @@ using Core;
 
 namespace ModernSteward
 {
-    public partial class Form1 : Form
+    public partial class AddPluginTestForm : Form
     {
         PluginHandler pluginHandler = new PluginHandler();
 
-        public Form1()
+        public AddPluginTestForm()
         {
             InitializeComponent();
         } 
