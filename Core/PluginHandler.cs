@@ -7,7 +7,7 @@ namespace ModernSteward
 {
     public class PluginHandler
     {
-        List<Plugin> Plugins;
+        public List<Plugin> Plugins = new List<Plugin>();
 
         public bool FindPluginAndTrigger(string aKeyword, string aAdditionalCommands)
         {

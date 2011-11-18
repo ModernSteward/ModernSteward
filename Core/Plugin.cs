@@ -27,7 +27,7 @@ namespace ModernSteward
             set;
         }
 
-        Plugin(string aName, string aKeyword, string aCommand)
+        public Plugin(string aName, string aKeyword, string aCommand)
         {
             Name = aName;
             Keyword = aKeyword;
@@ -36,7 +36,7 @@ namespace ModernSteward
 
         public void TriggerPlugin(string aAdditionalCommands)
         {
-            Console.WriteLine("Command{0}\nAdditionalCommands{1}\n", Command, aAdditionalCommands);
+            Console.WriteLine("Command: {0}\nAdditionalCommands: {1}\n", Command, aAdditionalCommands);
         }
     }
 }
