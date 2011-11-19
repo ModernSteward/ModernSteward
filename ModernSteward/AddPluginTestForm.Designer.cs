@@ -32,18 +32,19 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxKeyword = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.comboBoxPlugins = new System.Windows.Forms.ComboBox();
             this.groupTriggerPlugin = new System.Windows.Forms.GroupBox();
-            this.buttonTriggerPlugin = new System.Windows.Forms.Button();
             this.textBoxAdditionalCommands = new System.Windows.Forms.TextBox();
+            this.buttonTriggerPlugin = new System.Windows.Forms.Button();
+            this.textBoxPluginPath = new System.Windows.Forms.TextBox();
+            this.buttonBrowseForPlugin = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupTriggerPlugin.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddPlugin
             // 
-            this.buttonAddPlugin.Location = new System.Drawing.Point(34, 101);
+            this.buttonAddPlugin.Location = new System.Drawing.Point(34, 128);
             this.buttonAddPlugin.Name = "buttonAddPlugin";
             this.buttonAddPlugin.Size = new System.Drawing.Size(75, 23);
             this.buttonAddPlugin.TabIndex = 0;
@@ -57,6 +58,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 20);
             this.textBoxName.TabIndex = 1;
+            this.textBoxName.Text = "Name";
             // 
             // textBoxKeyword
             // 
@@ -64,26 +66,21 @@
             this.textBoxKeyword.Name = "textBoxKeyword";
             this.textBoxKeyword.Size = new System.Drawing.Size(100, 20);
             this.textBoxKeyword.TabIndex = 2;
+            this.textBoxKeyword.Text = "Keyword";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBoxCommand);
+            this.groupBox1.Controls.Add(this.buttonBrowseForPlugin);
+            this.groupBox1.Controls.Add(this.textBoxPluginPath);
             this.groupBox1.Controls.Add(this.buttonAddPlugin);
             this.groupBox1.Controls.Add(this.textBoxKeyword);
             this.groupBox1.Controls.Add(this.textBoxName);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(120, 130);
+            this.groupBox1.Size = new System.Drawing.Size(120, 157);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AddPlugin";
-            // 
-            // textBoxCommand
-            // 
-            this.textBoxCommand.Location = new System.Drawing.Point(9, 73);
-            this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCommand.TabIndex = 3;
             // 
             // comboBoxPlugins
             // 
@@ -105,6 +102,13 @@
             this.groupTriggerPlugin.TabStop = false;
             this.groupTriggerPlugin.Text = "TriggerPlugin";
             // 
+            // textBoxAdditionalCommands
+            // 
+            this.textBoxAdditionalCommands.Location = new System.Drawing.Point(10, 45);
+            this.textBoxAdditionalCommands.Name = "textBoxAdditionalCommands";
+            this.textBoxAdditionalCommands.Size = new System.Drawing.Size(121, 20);
+            this.textBoxAdditionalCommands.TabIndex = 6;
+            // 
             // buttonTriggerPlugin
             // 
             this.buttonTriggerPlugin.Location = new System.Drawing.Point(56, 71);
@@ -115,21 +119,31 @@
             this.buttonTriggerPlugin.UseVisualStyleBackColor = true;
             this.buttonTriggerPlugin.Click += new System.EventHandler(this.buttonTriggerPlugin_Click);
             // 
-            // textBoxAdditionalCommands
+            // textBoxPluginPath
             // 
-            this.textBoxAdditionalCommands.Location = new System.Drawing.Point(10, 45);
-            this.textBoxAdditionalCommands.Name = "textBoxAdditionalCommands";
-            this.textBoxAdditionalCommands.Size = new System.Drawing.Size(121, 20);
-            this.textBoxAdditionalCommands.TabIndex = 6;
+            this.textBoxPluginPath.Location = new System.Drawing.Point(9, 73);
+            this.textBoxPluginPath.Name = "textBoxPluginPath";
+            this.textBoxPluginPath.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPluginPath.TabIndex = 3;
             // 
-            // Form1
+            // buttonBrowseForPlugin
+            // 
+            this.buttonBrowseForPlugin.Location = new System.Drawing.Point(34, 99);
+            this.buttonBrowseForPlugin.Name = "buttonBrowseForPlugin";
+            this.buttonBrowseForPlugin.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseForPlugin.TabIndex = 4;
+            this.buttonBrowseForPlugin.Text = "Browse";
+            this.buttonBrowseForPlugin.UseVisualStyleBackColor = true;
+            this.buttonBrowseForPlugin.Click += new System.EventHandler(this.buttonBrowseForPlugin_Click);
+            // 
+            // AddPluginTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 157);
+            this.ClientSize = new System.Drawing.Size(284, 181);
             this.Controls.Add(this.groupTriggerPlugin);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "AddPluginTestForm";
             this.Text = "ModernSteward";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -145,11 +159,12 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxKeyword;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBoxCommand;
         private System.Windows.Forms.ComboBox comboBoxPlugins;
         private System.Windows.Forms.GroupBox groupTriggerPlugin;
         private System.Windows.Forms.Button buttonTriggerPlugin;
         private System.Windows.Forms.TextBox textBoxAdditionalCommands;
+        private System.Windows.Forms.Button buttonBrowseForPlugin;
+        private System.Windows.Forms.TextBox textBoxPluginPath;
     }
 }
 

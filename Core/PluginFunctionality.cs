@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Core
 {
-    public class Core
+    public abstract class PluginFunctionality
     {
+        public abstract void Trigger(string aArguments);
     }
 }

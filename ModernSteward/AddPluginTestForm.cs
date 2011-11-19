@@ -21,7 +21,7 @@ namespace ModernSteward
 
         private void buttonAddPlugin_Click(object sender, EventArgs e)
         {
-            pluginHandler.Plugins.Add(new Plugin(textBoxName.Text, textBoxKeyword.Text, textBoxCommand.Text));
+            pluginHandler.Plugins.Add(new Plugin(textBoxName.Text, textBoxKeyword.Text, textBoxPluginPath.Text));
             comboBoxPlugins.Items.Clear();
             foreach (var plugin in pluginHandler.Plugins)
             {
@@ -29,12 +29,34 @@ namespace ModernSteward
             }
             textBoxName.Text = "";
             textBoxKeyword.Text = "";
-            textBoxCommand.Text = "";
         }
 
         private void buttonTriggerPlugin_Click(object sender, EventArgs e)
         {
             (comboBoxPlugins.SelectedItem as Plugin).TriggerPlugin(textBoxAdditionalCommands.Text);
+        }
+
+        private void buttonBrowseForPlugin_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "dll files (*.dll)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    textBoxPluginPath.Text = openFileDialog.FileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+            
         }
     }
 }
