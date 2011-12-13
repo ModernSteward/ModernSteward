@@ -6,6 +6,7 @@ using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Speech.Recognition;
 using Core;
 
 namespace ModernSteward
@@ -40,6 +41,15 @@ namespace ModernSteward
             object instanceOfMyType = Activator.CreateInstance(type);
 
             (instanceOfMyType as PluginFunctionality).Trigger(aAdditionalCommands);
+        }
+
+        public Grammar GetLevelGrammar(int level)
+        {
+            Type type = Assembly.GetType("ModernSteward.CustomPlugin");
+
+            object instanceOfMyType = Activator.CreateInstance(type);
+
+            return (instanceOfMyType as PluginFunctionality).GetLevelGrammar(level);
         }
     }
 }

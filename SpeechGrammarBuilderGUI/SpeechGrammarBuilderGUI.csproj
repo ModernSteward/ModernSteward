@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{685B063F-90AF-42FA-B3CE-8351652E6EDD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{2CE29B6B-FA47-474B-B1D3-80C56F3C95EC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModernSteward</RootNamespace>
-    <AssemblyName>ModernSteward</AssemblyName>
+    <RootNamespace>SpeechGrammarBuilderGUI</RootNamespace>
+    <AssemblyName>SpeechGrammarBuilderGUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -23,7 +23,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,9 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPluginTestForm.cs">
+    <Compile Include="SpeechGrammarBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPluginTestForm.Designer.cs">
-      <DependentUpon>AddPluginTestForm.cs</DependentUpon>
+    <Compile Include="SpeechGrammarBuilder.Designer.cs">
+      <DependentUpon>SpeechGrammarBuilder.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddPluginTestForm.resx">
-      <DependentUpon>AddPluginTestForm.cs</DependentUpon>
+    <EmbeddedResource Include="SpeechGrammarBuilder.resx">
+      <DependentUpon>SpeechGrammarBuilder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,12 +75,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{E465DCA0-BEE6-48E8-A7C1-1DB4DBC5B2D9}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
