@@ -37,17 +37,17 @@ namespace SpeechGrammarBuilderGUI
             //MessageBox.Show(ExportGrammarBuilder().DebugShowPhrases);
 
 
-            treeViewCommands.Nodes.Add("first node");
-            treeViewCommands.Nodes[0].Nodes.Add("1.1");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("1.1.1");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("1.1.2");
-            treeViewCommands.Nodes[0].Nodes.Add("1.2");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("1.2.1");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("1.2.2");
-            treeViewCommands.Nodes.Add("second node");
-            treeViewCommands.Nodes[1].Nodes.Add("2.1");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("2.1.1");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("2.1.2");
+            treeViewCommands.Nodes.Add("I would like a");
+            treeViewCommands.Nodes[0].Nodes.Add("pizza");
+            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("with peperoni");
+            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("without peperoni");
+            treeViewCommands.Nodes[0].Nodes.Add("hotdog");
+            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("with peperoni");
+            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("without peperoni");
+            treeViewCommands.Nodes.Add("I hate");
+            treeViewCommands.Nodes[1].Nodes.Add("pizza");
+            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with peperoni");
+            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with salt");
 
             treeViewCommands.ExpandAll();
 
@@ -109,12 +109,15 @@ namespace SpeechGrammarBuilderGUI
             }
             Choices tempGrammar = new Choices();
 
-            for (int i = 0; i < currentNode.Nodes.Count; ++i)
+            for (int i = 0; i < currentNode.Nodes.Count; i++)
             {
                 tempGrammar.Add(MakeGrammarBuilderRecursively(currentNode.Nodes[i]));
             }
-            currentGrammar.Append(tempGrammar);
-            Console.WriteLine(currentNode.Text);
+            if (tempGrammar.ToGrammarBuilder().DebugShowPhrases != "[]")
+            {
+                currentGrammar.Append(tempGrammar);
+            }
+            //Console.WriteLine(currentNode.Text);
             return currentGrammar;
         }
 
@@ -122,13 +125,17 @@ namespace SpeechGrammarBuilderGUI
         {
             GrammarBuilder currentGrammar = new GrammarBuilder();
             Choices wholeGrammar = new Choices();
+            
             for (int i = 0; i < treeViewCommands.Nodes.Count; ++i)
             {
                 currentGrammar = MakeGrammarBuilderRecursively(treeViewCommands.Nodes[i]);
                 wholeGrammar.Add(new Choices(currentGrammar));
             }
 
-            return wholeGrammar.ToGrammarBuilder();
+            GrammarBuilder returnGrammar = new GrammarBuilder("Computer");
+            returnGrammar.Append(wholeGrammar);
+            Console.WriteLine("{0}", returnGrammar.DebugShowPhrases);
+            return returnGrammar;
         }
 
         private void buttonWriteInConsoleTheTree_Click(object sender, EventArgs e)
@@ -136,7 +143,23 @@ namespace SpeechGrammarBuilderGUI
             GrammarBuilder wholeGrammar = ExportGrammarBuilder(treeViewCommands);
 
             MessageBox.Show(wholeGrammar.DebugShowPhrases);
-            Console.WriteLine("{0}", wholeGrammar.DebugShowPhrases);
+        }
+
+        private void buttonStartRecognition_Click(object sender, EventArgs e)
+        {
+            SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
+            recognitionEngine.SetInputToDefaultAudioDevice();
+            MessageBox.Show(ExportGrammarBuilder(treeViewCommands).DebugShowPhrases);
+
+            Grammar grammar = new Grammar(ExportGrammarBuilder(treeViewCommands));
+            grammar.Enabled = true;
+            recognitionEngine.LoadGrammar(grammar);
+
+            recognitionEngine.SpeechRecognized += (s, args) =>
+            {
+                Console.WriteLine("\n\t--{0}", args.Result.Text);
+            };
+            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
         }
     }
 }
