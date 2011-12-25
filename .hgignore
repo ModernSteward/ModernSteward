@@ -46,3 +46,13 @@ TestPlugin/bin/Debug/TestPlugin.pdb
 TestPlugin/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 TestPlugin/obj/Debug/ResolveAssemblyReference.cache
 TestPlugin/obj/Debug/TestPlugin.csproj.FileListAbsolute.txt
+Utility/obj/Debug/Utility.pdb
+Utility/obj/Debug/Utility.dll
+Utility/obj/Debug/Utility.csproj.FileListAbsolute.txt
+Utility/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Utility/bin/Debug/Utility.pdb
+Utility/bin/Debug/Utility.dll
+SpeechGrammarBuilderGUI/bin/DebugtryingToSerializeATree.xml
+SpeechGrammarBuilderGUI/bin/Debug/jhTreeViewTools.dll
+SpeechGrammarBuilderGUI/bin/Debug/Utility.pdb
+SpeechGrammarBuilderGUI/bin/Debug/Utility.dll

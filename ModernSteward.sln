@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "TestPlugin\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechGrammarBuilderGUI", "SpeechGrammarBuilderGUI\SpeechGrammarBuilderGUI.csproj", "{2CE29B6B-FA47-474B-B1D3-80C56F3C95EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{54735883-D676-445E-A3F3-855E04AF4A52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{2CE29B6B-FA47-474B-B1D3-80C56F3C95EC}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2CE29B6B-FA47-474B-B1D3-80C56F3C95EC}.Release|x86.ActiveCfg = Release|x86
 		{2CE29B6B-FA47-474B-B1D3-80C56F3C95EC}.Release|x86.Build.0 = Release|x86
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{54735883-D676-445E-A3F3-855E04AF4A52}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

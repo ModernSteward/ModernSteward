@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.treeViewCommands = new System.Windows.Forms.TreeView();
-            this.buttonWriteInConsoleTheTree = new System.Windows.Forms.Button();
             this.buttonStartRecognition = new System.Windows.Forms.Button();
+            this.buttonExportToXML = new System.Windows.Forms.Button();
+            this.buttonLoadTree = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeViewCommands
@@ -40,33 +41,44 @@
             this.treeViewCommands.Size = new System.Drawing.Size(259, 237);
             this.treeViewCommands.TabIndex = 0;
             // 
-            // buttonWriteInConsoleTheTree
-            // 
-            this.buttonWriteInConsoleTheTree.Location = new System.Drawing.Point(197, 254);
-            this.buttonWriteInConsoleTheTree.Name = "buttonWriteInConsoleTheTree";
-            this.buttonWriteInConsoleTheTree.Size = new System.Drawing.Size(75, 51);
-            this.buttonWriteInConsoleTheTree.TabIndex = 1;
-            this.buttonWriteInConsoleTheTree.Text = "Try writing it in the console!";
-            this.buttonWriteInConsoleTheTree.UseVisualStyleBackColor = true;
-            this.buttonWriteInConsoleTheTree.Click += new System.EventHandler(this.buttonWriteInConsoleTheTree_Click);
-            // 
             // buttonStartRecognition
             // 
             this.buttonStartRecognition.Location = new System.Drawing.Point(13, 257);
             this.buttonStartRecognition.Name = "buttonStartRecognition";
-            this.buttonStartRecognition.Size = new System.Drawing.Size(75, 39);
+            this.buttonStartRecognition.Size = new System.Drawing.Size(75, 48);
             this.buttonStartRecognition.TabIndex = 2;
             this.buttonStartRecognition.Text = "Start recognition";
             this.buttonStartRecognition.UseVisualStyleBackColor = true;
             this.buttonStartRecognition.Click += new System.EventHandler(this.buttonStartRecognition_Click);
+            // 
+            // buttonExportToXML
+            // 
+            this.buttonExportToXML.Location = new System.Drawing.Point(95, 257);
+            this.buttonExportToXML.Name = "buttonExportToXML";
+            this.buttonExportToXML.Size = new System.Drawing.Size(96, 48);
+            this.buttonExportToXML.TabIndex = 3;
+            this.buttonExportToXML.Text = "Export to XML";
+            this.buttonExportToXML.UseVisualStyleBackColor = true;
+            this.buttonExportToXML.Click += new System.EventHandler(this.buttonExportToXML_Click);
+            // 
+            // buttonLoadTree
+            // 
+            this.buttonLoadTree.Location = new System.Drawing.Point(198, 257);
+            this.buttonLoadTree.Name = "buttonLoadTree";
+            this.buttonLoadTree.Size = new System.Drawing.Size(74, 48);
+            this.buttonLoadTree.TabIndex = 4;
+            this.buttonLoadTree.Text = "Load tree";
+            this.buttonLoadTree.UseVisualStyleBackColor = true;
+            this.buttonLoadTree.Click += new System.EventHandler(this.buttonLoadTree_Click);
             // 
             // SpeechGrammarBuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 308);
+            this.Controls.Add(this.buttonLoadTree);
+            this.Controls.Add(this.buttonExportToXML);
             this.Controls.Add(this.buttonStartRecognition);
-            this.Controls.Add(this.buttonWriteInConsoleTheTree);
             this.Controls.Add(this.treeViewCommands);
             this.Name = "SpeechGrammarBuilderForm";
             this.Text = "SpeechGrammarBuilder";
@@ -79,6 +91,8 @@
         private System.Windows.Forms.TreeView treeViewCommands;
         private System.Windows.Forms.Button buttonWriteInConsoleTheTree;
         private System.Windows.Forms.Button buttonStartRecognition;
+        private System.Windows.Forms.Button buttonExportToXML;
+        private System.Windows.Forms.Button buttonLoadTree;
     }
 }
 

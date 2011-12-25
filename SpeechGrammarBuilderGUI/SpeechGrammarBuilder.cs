@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq.Expressions;
 using System.Speech.Recognition;
+using System.Diagnostics;
+using System.Xml.Serialization;
+using Utility;
 
 namespace SpeechGrammarBuilderGUI
 {
@@ -36,29 +39,29 @@ namespace SpeechGrammarBuilderGUI
 
             //MessageBox.Show(ExportGrammarBuilder().DebugShowPhrases);
 
-
+            /*
             treeViewCommands.Nodes.Add("I would like a");
             treeViewCommands.Nodes[0].Nodes.Add("pizza");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("with peperoni");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("without peperoni");
+            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("with some sugar");
+            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("without some sugar");
             treeViewCommands.Nodes[0].Nodes.Add("hotdog");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("with peperoni");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("without peperoni");
+            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("with salt");
+            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("without some salt");
             treeViewCommands.Nodes.Add("I hate");
             treeViewCommands.Nodes[1].Nodes.Add("pizza");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with peperoni");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with salt");
+            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with some sugar");
+            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with sugar");
+            treeViewCommands.Nodes.Add("open");
+            treeViewCommands.Nodes[2].Nodes.Add("notepad");
+            */
 
             treeViewCommands.ExpandAll();
-
         }
 
         private void InitializeNodeContextMenu()
         {            
             nodeContextMenu.MenuItems.Add("Add custom command", new EventHandler(ContextMenuAddCustomComamand_OnClick));
-            nodeContextMenu.MenuItems.Add("Add custom choises", new EventHandler(ContextMenuAddCustomChoises_OnClick));
-            nodeContextMenu.MenuItems.Add("Add full wildcard", new EventHandler(ContextMenuAddFullWildCard_OnClick));
-            nodeContextMenu.MenuItems.Add("Edit node", new EventHandler(ContextMenuEditNode_OnClick));
+            nodeContextMenu.MenuItems.Add("Add full wildcard", new EventHandler(ContextMenuAddWildcard_OnClick));
             nodeContextMenu.MenuItems.Add("Delede node", new EventHandler(ContextMenuDeleteNode_OnClick));
         }
 
@@ -75,91 +78,84 @@ namespace SpeechGrammarBuilderGUI
             AddNode(treeViewCommands.SelectedNode, "CustomCommand");
         }
 
-        void ContextMenuAddCustomChoises_OnClick(object s, EventArgs args)
+        void ContextMenuAddWildcard_OnClick(object s, EventArgs args)
         {
-            throw new NotImplementedException();
-        }
-
-        void ContextMenuAddFullWildCard_OnClick(object s, EventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ContextMenuEditNode_OnClick(object s, EventArgs args)
-        {
-            throw new NotImplementedException();
+            AddNode(treeViewCommands.SelectedNode, "WILDCARD");
         }
 
         void ContextMenuDeleteNode_OnClick(object s, EventArgs args)
         {
-            throw new NotImplementedException();
-        }
-
-        private GrammarBuilder MakeGrammarBuilderRecursively(TreeNode currentNode)
-        {
-            GrammarBuilder currentGrammar;
-            if (currentNode.Text != "WILDCARD")
-            {
-                currentGrammar = new GrammarBuilder(currentNode.Text);
-            }
-            else
-            {
-                currentGrammar = new GrammarBuilder();
-                currentGrammar.AppendWildcard();
-            }
-            Choices tempGrammar = new Choices();
-
-            for (int i = 0; i < currentNode.Nodes.Count; i++)
-            {
-                tempGrammar.Add(MakeGrammarBuilderRecursively(currentNode.Nodes[i]));
-            }
-            if (tempGrammar.ToGrammarBuilder().DebugShowPhrases != "[]")
-            {
-                currentGrammar.Append(tempGrammar);
-            }
-            //Console.WriteLine(currentNode.Text);
-            return currentGrammar;
-        }
-
-        public GrammarBuilder ExportGrammarBuilder(TreeView treeView)
-        {
-            GrammarBuilder currentGrammar = new GrammarBuilder();
-            Choices wholeGrammar = new Choices();
-            
-            for (int i = 0; i < treeViewCommands.Nodes.Count; ++i)
-            {
-                currentGrammar = MakeGrammarBuilderRecursively(treeViewCommands.Nodes[i]);
-                wholeGrammar.Add(new Choices(currentGrammar));
-            }
-
-            GrammarBuilder returnGrammar = new GrammarBuilder("Computer");
-            returnGrammar.Append(wholeGrammar);
-            Console.WriteLine("{0}", returnGrammar.DebugShowPhrases);
-            return returnGrammar;
-        }
-
-        private void buttonWriteInConsoleTheTree_Click(object sender, EventArgs e)
-        {
-            GrammarBuilder wholeGrammar = ExportGrammarBuilder(treeViewCommands);
-
-            MessageBox.Show(wholeGrammar.DebugShowPhrases);
+            treeViewCommands.SelectedNode.Remove();
         }
 
         private void buttonStartRecognition_Click(object sender, EventArgs e)
         {
             SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
             recognitionEngine.SetInputToDefaultAudioDevice();
-            MessageBox.Show(ExportGrammarBuilder(treeViewCommands).DebugShowPhrases);
+            MessageBox.Show("Recognition engine started!");
 
-            Grammar grammar = new Grammar(ExportGrammarBuilder(treeViewCommands));
-            grammar.Enabled = true;
+            Grammar grammar = new Grammar(TreeViewToGrammarBuilderAlgorithm.ExportGrammarBuilder(treeViewCommands));
             recognitionEngine.LoadGrammar(grammar);
+
+            recognitionEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(recognitionEngine_SpeechDetected);
 
             recognitionEngine.SpeechRecognized += (s, args) =>
             {
                 Console.WriteLine("\n\t--{0}", args.Result.Text);
+                if (args.Result.Text == "Computer open notepad")
+                {
+                    Process notepadProcess = new Process();
+                    notepadProcess.StartInfo.FileName = "notepad.exe";
+                    notepadProcess.Start();
+                }
             };
+
+            recognitionEngine.SpeechRecognitionRejected += (s, args) =>
+            {
+                foreach(var alt in args.Result.Alternates)
+                Console.WriteLine("\nREJECTED\nAlt:{0}\t conf:{1}", alt.Text, alt.Confidence);
+            };
+
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
         }
+
+        void recognitionEngine_SpeechDetected(object sender, SpeechDetectedEventArgs e)
+        {
+            Console.WriteLine("\n\t--{0}", e.AudioPosition.ToString());
+        }
+
+        private void buttonExportToXML_Click(object sender, EventArgs e)
+        {
+            jhTreeViewTools.LoadAndSave.saveTree(treeViewCommands,
+                System.Environment.CurrentDirectory + "tryingToSerializeATree.xml");
+        }
+
+        private void buttonLoadTree_Click(object sender, EventArgs e)
+        {
+            jhTreeViewTools.LoadAndSave.loadTree(treeViewCommands, 
+                System.Environment.CurrentDirectory + "tryingToSerializeATree.xml");
+
+            SetContextMenuToAllNodesRecursive(treeViewCommands);
+        }
+
+        #region Recursion to set the contextmenu of all the nodes
+        private void TreeViewGoRecursive(TreeNode treeNode)
+        {
+            treeNode.ContextMenu = nodeContextMenu;
+            foreach (TreeNode tn in treeNode.Nodes)
+            {
+                TreeViewGoRecursive(tn);
+            }
+        }
+
+        private void SetContextMenuToAllNodesRecursive(TreeView treeView)
+        {
+            TreeNodeCollection nodes = treeView.Nodes;
+            foreach (TreeNode n in nodes)
+            {
+                TreeViewGoRecursive(n);
+            }
+        }
+        #endregion
     }
 }
