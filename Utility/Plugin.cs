@@ -43,13 +43,18 @@ namespace ModernSteward
             (instanceOfMyType as PluginFunctionality).Trigger(aAdditionalCommands);
         }
 
-        public Grammar GetLevelGrammar(int level)
+        public Grammar GetGrammar()
         {
             Type type = Assembly.GetType("ModernSteward.CustomPlugin");
 
             object instanceOfMyType = Activator.CreateInstance(type);
 
-            return (instanceOfMyType as PluginFunctionality).GetLevelGrammar(level);
+            return (instanceOfMyType as PluginFunctionality).GetGrammar();
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

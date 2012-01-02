@@ -11,35 +11,30 @@ using System.Speech.Recognition;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using Utility;
+using Telerik.WinControls.UI;
+using Telerik.WinControls;
+using SpeechLib;
 
 namespace SpeechGrammarBuilderGUI
 {
-    public partial class SpeechGrammarBuilderForm : Form
+    public partial class SpeechGrammarBuilderForm : RadForm
     {
-        ContextMenu nodeContextMenu = new ContextMenu();
-
-        EventHandler lambdaEvent;
+        RadContextMenu nodeContextMenu = new RadContextMenu();
 
         public SpeechGrammarBuilderForm()
         {
             InitializeComponent();
 
-            InitializeNodeContextMenu();
+            treeViewCommands.AllowEdit = true;
+            treeViewCommands.AllowRemove = true;
+            treeViewCommands.AllowAdd = true;
+            treeViewCommands.AllowDefaultContextMenu = true;
 
-            treeViewCommands.LabelEdit = true;
+            treeViewCommands.ContextMenuOpening += new TreeViewContextMenuOpeningEventHandler(treeViewCommands_ContextMenuOpening);
 
-            treeViewCommands.ContextMenu = new ContextMenu();
-            treeViewCommands.ContextMenu.MenuItems.Add("Add first node", 
-                lambdaEvent += (sender, args) => {
-                    treeViewCommands.Nodes.Add("first node");
-                    treeViewCommands.Nodes[treeViewCommands.Nodes.Count - 1].ContextMenu = nodeContextMenu;
-                });
-
+            radCheckBoxIsTheNodeWildcard.IsThreeState = false;
+            radCheckBoxIsTheNodeWildcard.Visible = false;
             
-
-            //MessageBox.Show(ExportGrammarBuilder().DebugShowPhrases);
-
-            /*
             treeViewCommands.Nodes.Add("I would like a");
             treeViewCommands.Nodes[0].Nodes.Add("pizza");
             treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("with some sugar");
@@ -53,48 +48,51 @@ namespace SpeechGrammarBuilderGUI
             treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with sugar");
             treeViewCommands.Nodes.Add("open");
             treeViewCommands.Nodes[2].Nodes.Add("notepad");
-            */
+
+            treeViewCommands.SelectedNodeChanged += new RadTreeView.RadTreeViewEventHandler(treeViewCommands_SelectedNodeChanged);
 
             treeViewCommands.ExpandAll();
         }
 
-        private void InitializeNodeContextMenu()
-        {            
-            nodeContextMenu.MenuItems.Add("Add custom command", new EventHandler(ContextMenuAddCustomComamand_OnClick));
-            nodeContextMenu.MenuItems.Add("Add full wildcard", new EventHandler(ContextMenuAddWildcard_OnClick));
-            nodeContextMenu.MenuItems.Add("Delede node", new EventHandler(ContextMenuDeleteNode_OnClick));
+        void treeViewCommands_ContextMenuOpening(object s, TreeViewContextMenuOpeningEventArgs args)
+        {
+            foreach (var item in args.Menu.Items)
+            {
+                if (args.Node.Tag == Consts.Wildcard)
+                {
+                    //args.Menu.Items["New"].Visibility = ElementVisibility.Collapsed;
+                }
+                else
+                {
+                    args.Menu.Items["New"].Visibility = ElementVisibility.Visible;
+                }
+            }
         }
 
-        void AddNode(TreeNode aParrentNode, string aName)
+        void treeViewCommands_SelectedNodeChanged(object s, RadTreeViewEventArgs args)
         {
-            treeViewCommands.BeginUpdate();
-            aParrentNode.Nodes.Add(aName);
-            aParrentNode.Nodes[aParrentNode.Nodes.Count - 1].ContextMenu = nodeContextMenu;
-            treeViewCommands.EndUpdate();
-        }
-
-        void ContextMenuAddCustomComamand_OnClick(object s, EventArgs args)
-        {
-            AddNode(treeViewCommands.SelectedNode, "CustomCommand");
-        }
-
-        void ContextMenuAddWildcard_OnClick(object s, EventArgs args)
-        {
-            AddNode(treeViewCommands.SelectedNode, "WILDCARD");
-        }
-
-        void ContextMenuDeleteNode_OnClick(object s, EventArgs args)
-        {
-            treeViewCommands.SelectedNode.Remove();
+            radCheckBoxIsTheNodeWildcard.Visible = true;
+            if (args.Node.Tag != null)
+            {
+                if (args.Node.Tag.ToString() == Consts.Wildcard)
+                {
+                    radCheckBoxIsTheNodeWildcard.Checked = true;
+                }
+            }
+            else
+            {
+                radCheckBoxIsTheNodeWildcard.Checked = false;
+            }
         }
 
         private void buttonStartRecognition_Click(object sender, EventArgs e)
         {
             SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
             recognitionEngine.SetInputToDefaultAudioDevice();
-            MessageBox.Show("Recognition engine started!");
 
-            Grammar grammar = new Grammar(TreeViewToGrammarBuilderAlgorithm.ExportGrammarBuilder(treeViewCommands));
+            Grammar grammar = new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromTree(treeViewCommands));
+            MessageBox.Show(
+                TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromTree(treeViewCommands).DebugShowPhrases);
             recognitionEngine.LoadGrammar(grammar);
 
             recognitionEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(recognitionEngine_SpeechDetected);
@@ -102,7 +100,11 @@ namespace SpeechGrammarBuilderGUI
             recognitionEngine.SpeechRecognized += (s, args) =>
             {
                 Console.WriteLine("\n\t--{0}", args.Result.Text);
-                if (args.Result.Text == "Computer open notepad")
+                foreach (var item in args.Result.Semantics)
+                {
+                    Console.WriteLine("\n\t-->Value: {0}, Key: {1}", item.Value.Value, item.Key);
+                }
+                if (args.Result.Text == "open notepad")
                 {
                     Process notepadProcess = new Process();
                     notepadProcess.StartInfo.FileName = "notepad.exe";
@@ -116,7 +118,10 @@ namespace SpeechGrammarBuilderGUI
                 Console.WriteLine("\nREJECTED\nAlt:{0}\t conf:{1}", alt.Text, alt.Confidence);
             };
 
-            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            //recognitionEngine.EmulateRecognize("I would like a banana");
+
+            MessageBox.Show("Recognition engine started!");
+            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);            
         }
 
         void recognitionEngine_SpeechDetected(object sender, SpeechDetectedEventArgs e)
@@ -124,38 +129,64 @@ namespace SpeechGrammarBuilderGUI
             Console.WriteLine("\n\t--{0}", e.AudioPosition.ToString());
         }
 
+
         private void buttonExportToXML_Click(object sender, EventArgs e)
         {
-            jhTreeViewTools.LoadAndSave.saveTree(treeViewCommands,
-                System.Environment.CurrentDirectory + "tryingToSerializeATree.xml");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.SupportMultiDottedExtensions = false;
+            saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                treeViewCommands.SaveXML(saveFileDialog.FileName);
+            }
         }
 
         private void buttonLoadTree_Click(object sender, EventArgs e)
         {
-            jhTreeViewTools.LoadAndSave.loadTree(treeViewCommands, 
-                System.Environment.CurrentDirectory + "tryingToSerializeATree.xml");
-
-            SetContextMenuToAllNodesRecursive(treeViewCommands);
-        }
-
-        #region Recursion to set the contextmenu of all the nodes
-        private void TreeViewGoRecursive(TreeNode treeNode)
-        {
-            treeNode.ContextMenu = nodeContextMenu;
-            foreach (TreeNode tn in treeNode.Nodes)
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                TreeViewGoRecursive(tn);
+                try
+                {
+                    treeViewCommands.LoadXML(openFileDialog.FileName);
+                    MessageBox.Show("Grammar loaded successfully");
+                }
+                catch {
+                    MessageBox.Show("Invalid file format", "Error");
+                }
             }
         }
 
-        private void SetContextMenuToAllNodesRecursive(TreeView treeView)
+        private void radCheckBoxIsTheNodeWildcard_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            TreeNodeCollection nodes = treeView.Nodes;
-            foreach (TreeNode n in nodes)
+            if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
             {
-                TreeViewGoRecursive(n);
+                treeViewCommands.SelectedNode.Tag = Consts.Wildcard;
+            }
+            else if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off)
+            {
+                treeViewCommands.SelectedNode.Tag = null;
             }
         }
-        #endregion
+
+        private void buttonPrintDictItems_Click(object sender, EventArgs e)
+        {
+            ISpeechLexiconWords splexWords;
+            SpLexicon lex = new SpLexicon();
+            int generationId = 0;
+            splexWords = lex.GetWords(SpeechLexiconType.SLTUser, out generationId);
+            foreach (ISpeechLexiconWord splexWord in splexWords)
+            {
+                Console.WriteLine("{0}, {1}", splexWord.Word, splexWord.LangId);   
+            }
+        }
+
+        private void buttonAddWordToTheDictionary_Click(object sender, EventArgs e)
+        {
+            SpLexicon lex = new SpLexicon();
+            lex.AddPronunciation(textBoxWordToAddToTheDictionary.Text, 1033);
+        }
     }
 }

@@ -10,6 +10,6 @@ namespace Core
     {
         public abstract void Trigger(string aArguments);
 
-        public abstract Grammar GetLevelGrammar(int level);
+        public abstract Grammar GetGrammar();
     }
 }

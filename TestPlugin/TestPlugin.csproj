@@ -49,6 +49,15 @@
       <Project>{E465DCA0-BEE6-48E8-A7C1-1DB4DBC5B2D9}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{54735883-D676-445E-A3F3-855E04AF4A52}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestGrammarWithSearchEngine.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

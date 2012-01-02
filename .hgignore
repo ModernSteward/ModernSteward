@@ -56,3 +56,17 @@ SpeechGrammarBuilderGUI/bin/DebugtryingToSerializeATree.xml
 SpeechGrammarBuilderGUI/bin/Debug/jhTreeViewTools.dll
 SpeechGrammarBuilderGUI/bin/Debug/Utility.pdb
 SpeechGrammarBuilderGUI/bin/Debug/Utility.dll
+TestPlugin/bin/Debug/Utility.pdb
+TestPlugin/bin/Debug/Utility.dll
+TestPlugin/bin/Debug/TestGrammarWithSearchEngine.xml
+SpeechGrammarBuilderGUI/obj/x86/Debug/SpeechGrammarBuilderGUI.csproj.ResolveComReference.cache
+SpeechGrammarBuilderGUI/obj/x86/Debug/Interop.SpeechLib.dll
+SpeechGrammarBuilderGUI/bin/testSaving.xmlgram
+SpeechGrammarBuilderGUI/bin/TestGrammarWithSearchEngine.xml
+SpeechGrammarBuilderGUI/bin/TestGrammarWithNodesAfterWildcard.xml
+SpeechGrammarBuilderGUI/bin/TestGrammar.xml
+ModernSteward/bin/Debug/Utility.pdb
+ModernSteward/bin/Debug/Utility.dll
+Core/obj/Debug/ResolveAssemblyReference.cache
+Core/bin/Debug/Utility.pdb
+Core/bin/Debug/Utility.dll

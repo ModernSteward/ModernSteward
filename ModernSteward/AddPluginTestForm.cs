@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utility;
 using Core;
 
 namespace ModernSteward
@@ -40,10 +41,8 @@ namespace ModernSteward
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "dll files (*.dll)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Filter = "dll files (*.dll)|*.dll|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

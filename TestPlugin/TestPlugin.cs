@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Speech.Recognition;
 using Core;
+using Utility;
 
 namespace ModernSteward
 {
@@ -14,9 +15,9 @@ namespace ModernSteward
             Console.WriteLine("{0}\n", aArguments);
         }
 
-        public override Grammar GetLevelGrammar(int level)
+        public override Grammar GetGrammar()
         {
-            throw new NotImplementedException();
+            return new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml"));
         }
     }
 }

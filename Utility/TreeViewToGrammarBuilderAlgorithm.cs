@@ -4,23 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using Telerik.WinControls.UI;
 
 namespace Utility
 {
     public static class TreeViewToGrammarBuilderAlgorithm
     {
-        private static GrammarBuilder MakeGrammarBuilderRecursively(TreeNode currentNode)
+        private static GrammarBuilder MakeGrammarBuilderRecursively(RadTreeNode currentNode)
         {
-            GrammarBuilder currentGrammar;
-            if (currentNode.Text != "WILDCARD")
+            GrammarBuilder currentGrammar = new GrammarBuilder();
+            if (currentNode.Tag == null)
             {
-                currentGrammar = new GrammarBuilder(currentNode.Text);
+                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, new GrammarBuilder(currentNode.Text)));
             }
-            else
+            else if (currentNode.Tag.ToString() == Consts.Wildcard) 
             {
-                currentGrammar = new GrammarBuilder();
-                currentGrammar.AppendWildcard();
+                GrammarBuilder fakeWildcard = new GrammarBuilder();
+                fakeWildcard.AppendDictation();
+                DictationGrammar dictGrammar = new DictationGrammar();
+                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeWildcard));
             }
+
             Choices tempGrammar = new Choices();
 
             for (int i = 0; i < currentNode.Nodes.Count; i++)
@@ -34,7 +38,7 @@ namespace Utility
             return currentGrammar;
         }
 
-        public static GrammarBuilder ExportGrammarBuilder(TreeView treeView)
+        public static GrammarBuilder CreateGrammarFromTree(RadTreeView treeView)
         {
             GrammarBuilder currentGrammar = new GrammarBuilder();
             Choices wholeGrammar = new Choices();
@@ -46,6 +50,13 @@ namespace Utility
             }
             
             return wholeGrammar;
+        }
+
+        public static GrammarBuilder CreateGrammarFromXML(string path)
+        {
+            RadTreeView XMLTree = new RadTreeView();
+            XMLTree.LoadXML(path);
+            return CreateGrammarFromTree(XMLTree);
         }
     }
 }

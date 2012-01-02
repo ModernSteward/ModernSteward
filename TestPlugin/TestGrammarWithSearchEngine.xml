@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TreeView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SpacingBetweenNodes="-1" LabelEdit="true" CausesValidation="true" BackColor="191, 219, 255">
+  <Nodes Name="I would like a" Expanded="true" Text="I would like a">
+    <Nodes Name="pizza" Expanded="true" Text="food">
+      <Nodes Name="with some sugar" Expanded="true" Text="for">
+        <Nodes Name="New Node" Text="lunch" />
+        <Nodes Name="New Node" Text="dinner" />
+      </Nodes>
+      <Tag xsi:type="xsd:string">wildcard</Tag>
+    </Nodes>
+  </Nodes>
+  <Nodes Name="open" Expanded="true" Text="open">
+    <Nodes Name="notepad" Expanded="true" Text="notepad" />
+    <Nodes Name="New Node" Expanded="true" Text="site">
+      <Nodes Name="New Node" Expanded="true" Text="and search for">
+        <Nodes Name="New Node" Text="search item">
+          <Tag xsi:type="xsd:string">wildcard</Tag>
+        </Nodes>
+      </Nodes>
+      <Tag xsi:type="xsd:string">wildcard</Tag>
+    </Nodes>
+  </Nodes>
+</TreeView>
