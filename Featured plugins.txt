@@ -1,0 +1,33 @@
+1! 12. Run 
+	- with arguments...
+
+2! 2. SUMC manager plugin:
+Плъгин за градския транспорт. 
+
+3! 16. Searcher
+	15. Chitanka search
+	10. Zamunda search
+	3. Google search:
+		Търсене в гугъл...
+	4. Wikipedia Search
+	5. IMDb search
+
+4! 14. Switch to application
+
+5! 9. Google gmail
+
+6! 1. Winamp manager plugin:
+	http://www.codeproject.com/KB/cs/winamparticle.aspx
+
+7! 6. Skype controller
+
+8! 11. Torrent client manager
+
+9! 7. Camera control
+
+
+
+Extra:
+1? 8. Google calendar
+
+2? 13. Windows resize

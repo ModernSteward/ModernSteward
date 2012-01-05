@@ -1,0 +1,18 @@
+start
+ firefox
+ firefox
+   with arguments
+ word 
+ word
+   with arguments
+ skype
+ skype
+   with arguments
+
+
+
+start
+ firefox
+  with arguments
+
+start [firefox, [firefox [with arguments]
