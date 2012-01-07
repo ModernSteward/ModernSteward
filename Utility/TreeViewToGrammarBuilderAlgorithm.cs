@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Speech.Recognition;
 using Telerik.WinControls.UI;
 
-namespace Utility
+namespace ModernSteward
 {
     public static class TreeViewToGrammarBuilderAlgorithm
     {
@@ -17,12 +17,12 @@ namespace Utility
             {
                 currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, new GrammarBuilder(currentNode.Text)));
             }
-            else if (currentNode.Tag.ToString() == Consts.Wildcard) 
+            else if (currentNode.Tag.ToString() == Consts.Dictation) 
             {
-                GrammarBuilder fakeWildcard = new GrammarBuilder();
-                fakeWildcard.AppendDictation();
+                GrammarBuilder fakeDictation = new GrammarBuilder();
+                fakeDictation.AppendDictation();
                 DictationGrammar dictGrammar = new DictationGrammar();
-                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeWildcard));
+                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation));
             }
 
             Choices tempGrammar = new Choices();
@@ -48,7 +48,6 @@ namespace Utility
                 currentGrammar = MakeGrammarBuilderRecursively(treeView.Nodes[i]);
                 wholeGrammar.Add(new Choices(currentGrammar));
             }
-            
             return wholeGrammar;
         }
 

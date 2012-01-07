@@ -1,10 +1,13 @@
 1! 12. Run 
-	- with arguments...
+	- with arguments?
 
-2! 2. SUMC manager plugin:
+2! 17. Open webpage
+	- switch tabs in the browser
+
+3! 2. SUMC manager plugin:
 Плъгин за градския транспорт. 
 
-3! 16. Searcher
+4! 16. Searcher
 	15. Chitanka search
 	10. Zamunda search
 	3. Google search:
@@ -12,18 +15,21 @@
 	4. Wikipedia Search
 	5. IMDb search
 
-4! 14. Switch to application
+5! 14. Switch to application
 
-5! 9. Google gmail
+6! 9. Google gmail
 
-6! 1. Winamp manager plugin:
+7! 1. Winamp manager plugin:
 	http://www.codeproject.com/KB/cs/winamparticle.aspx
 
-7! 6. Skype controller
+8! 6. Skype controller
 
-8! 11. Torrent client manager
+9! 11. Torrent client manager
+	good luck... how exactly are we gonna browse for the .torrent file?
 
-9! 7. Camera control
+10! 7. Camera control
+
+11! Light manager
 
 
 

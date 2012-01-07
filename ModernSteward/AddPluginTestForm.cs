@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Utility;
-using Core;
+using ModernSteward;
+using ModernSteward;
 
 namespace ModernSteward
 {
@@ -34,7 +34,7 @@ namespace ModernSteward
 
         private void buttonTriggerPlugin_Click(object sender, EventArgs e)
         {
-            (comboBoxPlugins.SelectedItem as Plugin).TriggerPlugin(textBoxAdditionalCommands.Text);
+            //(comboBoxPlugins.SelectedItem as Plugin).TriggerPlugin(textBoxAdditionalCommands.Text);
         }
 
         private void buttonBrowseForPlugin_Click(object sender, EventArgs e)

@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Speech.Recognition;
-using Core;
-using Utility;
+using ModernSteward;
 
 namespace ModernSteward
 {
     public class CustomPlugin : PluginFunctionality
     {
-        public override void Trigger(string aArguments)
+        public override void Trigger(SemanticValue aSemantics)
         {
-            Console.WriteLine("{0}\n", aArguments);
+            
         }
 
         public override Grammar GetGrammar()
         {
             return new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml"));
+        }
+
+        public override void Initialize()
+        {
+            
         }
     }
 }

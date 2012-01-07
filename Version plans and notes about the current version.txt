@@ -2,5 +2,9 @@ Current version:
 To think about the generation of the grammar.
  - See "Way to generate grammar.txt"
 
+Create a mobile version?
+Create a web service?
+
 Version 2:
 Text to speech for better experience
+

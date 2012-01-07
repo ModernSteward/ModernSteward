@@ -10,10 +10,11 @@ using System.Linq.Expressions;
 using System.Speech.Recognition;
 using System.Diagnostics;
 using System.Xml.Serialization;
-using Utility;
+using ModernSteward;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SpeechLib;
+using System.IO.Ports;
 
 namespace SpeechGrammarBuilderGUI
 {
@@ -32,22 +33,12 @@ namespace SpeechGrammarBuilderGUI
 
             treeViewCommands.ContextMenuOpening += new TreeViewContextMenuOpeningEventHandler(treeViewCommands_ContextMenuOpening);
 
-            radCheckBoxIsTheNodeWildcard.IsThreeState = false;
-            radCheckBoxIsTheNodeWildcard.Visible = false;
+            radCheckBoxIsTheNodeDictation.IsThreeState = false;
+            radCheckBoxIsTheNodeDictation.Visible = false;
             
-            treeViewCommands.Nodes.Add("I would like a");
-            treeViewCommands.Nodes[0].Nodes.Add("pizza");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("with some sugar");
-            treeViewCommands.Nodes[0].Nodes[0].Nodes.Add("without some sugar");
-            treeViewCommands.Nodes[0].Nodes.Add("hotdog");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("with salt");
-            treeViewCommands.Nodes[0].Nodes[1].Nodes.Add("without some salt");
-            treeViewCommands.Nodes.Add("I hate");
-            treeViewCommands.Nodes[1].Nodes.Add("pizza");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with some sugar");
-            treeViewCommands.Nodes[1].Nodes[0].Nodes.Add("with sugar");
-            treeViewCommands.Nodes.Add("open");
-            treeViewCommands.Nodes[2].Nodes.Add("notepad");
+            treeViewCommands.Nodes.Add("Turn the lights");
+            treeViewCommands.Nodes[0].Nodes.Add("on");
+            treeViewCommands.Nodes[0].Nodes.Add("off");
 
             treeViewCommands.SelectedNodeChanged += new RadTreeView.RadTreeViewEventHandler(treeViewCommands_SelectedNodeChanged);
 
@@ -58,7 +49,7 @@ namespace SpeechGrammarBuilderGUI
         {
             foreach (var item in args.Menu.Items)
             {
-                if (args.Node.Tag == Consts.Wildcard)
+                if (args.Node.Tag == Consts.Dictation)
                 {
                     //args.Menu.Items["New"].Visibility = ElementVisibility.Collapsed;
                 }
@@ -71,17 +62,17 @@ namespace SpeechGrammarBuilderGUI
 
         void treeViewCommands_SelectedNodeChanged(object s, RadTreeViewEventArgs args)
         {
-            radCheckBoxIsTheNodeWildcard.Visible = true;
+            radCheckBoxIsTheNodeDictation.Visible = true;
             if (args.Node.Tag != null)
             {
-                if (args.Node.Tag.ToString() == Consts.Wildcard)
+                if (args.Node.Tag.ToString() == Consts.Dictation)
                 {
-                    radCheckBoxIsTheNodeWildcard.Checked = true;
+                    radCheckBoxIsTheNodeDictation.Checked = true;
                 }
             }
             else
             {
-                radCheckBoxIsTheNodeWildcard.Checked = false;
+                radCheckBoxIsTheNodeDictation.Checked = false;
             }
         }
 
@@ -96,6 +87,18 @@ namespace SpeechGrammarBuilderGUI
             recognitionEngine.LoadGrammar(grammar);
 
             recognitionEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(recognitionEngine_SpeechDetected);
+            /*
+            SerialPort port;
+
+            port = new SerialPort("COM4");
+
+            port.BaudRate = 4800;
+            port.DataBits = 8;
+            port.StopBits = StopBits.One;
+            port.Parity = Parity.None;
+
+            port.Open();
+             */
 
             recognitionEngine.SpeechRecognized += (s, args) =>
             {
@@ -103,12 +106,6 @@ namespace SpeechGrammarBuilderGUI
                 foreach (var item in args.Result.Semantics)
                 {
                     Console.WriteLine("\n\t-->Value: {0}, Key: {1}", item.Value.Value, item.Key);
-                }
-                if (args.Result.Text == "open notepad")
-                {
-                    Process notepadProcess = new Process();
-                    notepadProcess.StartInfo.FileName = "notepad.exe";
-                    notepadProcess.Start();
                 }
             };
 
@@ -159,11 +156,11 @@ namespace SpeechGrammarBuilderGUI
             }
         }
 
-        private void radCheckBoxIsTheNodeWildcard_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        private void radCheckBoxIsTheNodeDictation_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
             if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
             {
-                treeViewCommands.SelectedNode.Tag = Consts.Wildcard;
+                treeViewCommands.SelectedNode.Tag = Consts.Dictation;
             }
             else if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off)
             {
@@ -187,6 +184,73 @@ namespace SpeechGrammarBuilderGUI
         {
             SpLexicon lex = new SpLexicon();
             lex.AddPronunciation(textBoxWordToAddToTheDictionary.Text, 1033);
+        }
+
+        private void buttonShowTheTreeInPlainText_Click(object sender, EventArgs e)
+        {
+            foreach (var node in treeViewCommands.Nodes)
+            {
+                closedBrackets = 0;
+                openedBrackets = 0;
+                Recursion(node, 0);
+                while (closedBrackets < openedBrackets)
+                {
+                    ShiftNTabsInTheConsole((openedBrackets - closedBrackets) - 1);
+                    Console.WriteLine("}");
+                    closedBrackets++;
+                }
+            }
+        }
+
+
+        int openedBrackets = 0;
+        int closedBrackets = 0;
+
+        void ShiftNTabsInTheConsole(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("\t");
+            }
+        }
+
+        const string semanticsInString = "aSemantics";
+        private void Recursion(RadTreeNode node, int level)
+        {
+            ShiftNTabsInTheConsole(level);
+            Console.Write("if({0}[{1}].Key == \"{2}\")", semanticsInString, level, node.Text); Console.WriteLine("{");
+            openedBrackets++;
+
+            if (node.Nodes.Count == 0)
+            {
+                if (node.Tag != null)
+                {
+                    if (node.Tag.ToString() == Consts.Dictation)
+                    {
+                        ShiftNTabsInTheConsole(level + 1);
+                        string dictationFor = node.Text.Replace(" ", "");
+                        Console.WriteLine("string dictationFor{0} = {1}[{2}].Value;", dictationFor, semanticsInString, level);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\n");
+                }
+
+                ShiftNTabsInTheConsole(level);
+                Console.WriteLine("}");
+                closedBrackets++;
+            }
+
+            foreach (var childNode in node.Nodes)
+            {
+                Recursion(childNode, level+1);
+            }
         }
     }
 }

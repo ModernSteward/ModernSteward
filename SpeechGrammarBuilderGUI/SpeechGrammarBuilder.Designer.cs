@@ -33,18 +33,20 @@ namespace SpeechGrammarBuilderGUI
             this.buttonStartRecognition = new Telerik.WinControls.UI.RadButton();
             this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
             this.buttonLoadTree = new Telerik.WinControls.UI.RadButton();
-            this.radCheckBoxIsTheNodeWildcard = new Telerik.WinControls.UI.RadCheckBox();
+            this.radCheckBoxIsTheNodeDictation = new Telerik.WinControls.UI.RadCheckBox();
             this.buttonPrintDictItems = new Telerik.WinControls.UI.RadButton();
             this.textBoxWordToAddToTheDictionary = new Telerik.WinControls.UI.RadTextBox();
             this.buttonAddWordToTheDictionary = new Telerik.WinControls.UI.RadButton();
+            this.buttonShowTheTreeInPlainText = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartRecognition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radCheckBoxIsTheNodeWildcard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radCheckBoxIsTheNodeDictation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonPrintDictItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxWordToAddToTheDictionary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddWordToTheDictionary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonShowTheTreeInPlainText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,14 +88,14 @@ namespace SpeechGrammarBuilderGUI
             this.buttonLoadTree.TextWrap = true;
             this.buttonLoadTree.Click += new System.EventHandler(this.buttonLoadTree_Click);
             // 
-            // radCheckBoxIsTheNodeWildcard
+            // radCheckBoxIsTheNodeDictation
             // 
-            this.radCheckBoxIsTheNodeWildcard.Location = new System.Drawing.Point(279, 13);
-            this.radCheckBoxIsTheNodeWildcard.Name = "radCheckBoxIsTheNodeWildcard";
-            this.radCheckBoxIsTheNodeWildcard.Size = new System.Drawing.Size(65, 18);
-            this.radCheckBoxIsTheNodeWildcard.TabIndex = 5;
-            this.radCheckBoxIsTheNodeWildcard.Text = "Wildcard";
-            this.radCheckBoxIsTheNodeWildcard.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.radCheckBoxIsTheNodeWildcard_ToggleStateChanged);
+            this.radCheckBoxIsTheNodeDictation.Location = new System.Drawing.Point(279, 13);
+            this.radCheckBoxIsTheNodeDictation.Name = "radCheckBoxIsTheNodeDictation";
+            this.radCheckBoxIsTheNodeDictation.Size = new System.Drawing.Size(65, 18);
+            this.radCheckBoxIsTheNodeDictation.TabIndex = 5;
+            this.radCheckBoxIsTheNodeDictation.Text = "Dictation";
+            this.radCheckBoxIsTheNodeDictation.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.radCheckBoxIsTheNodeDictation_ToggleStateChanged);
             // 
             // buttonPrintDictItems
             // 
@@ -123,15 +125,26 @@ namespace SpeechGrammarBuilderGUI
             this.buttonAddWordToTheDictionary.TextWrap = true;
             this.buttonAddWordToTheDictionary.Click += new System.EventHandler(this.buttonAddWordToTheDictionary_Click);
             // 
+            // buttonShowTheTreeInPlainText
+            // 
+            this.buttonShowTheTreeInPlainText.Location = new System.Drawing.Point(279, 38);
+            this.buttonShowTheTreeInPlainText.Name = "buttonShowTheTreeInPlainText";
+            this.buttonShowTheTreeInPlainText.Size = new System.Drawing.Size(72, 55);
+            this.buttonShowTheTreeInPlainText.TabIndex = 9;
+            this.buttonShowTheTreeInPlainText.Text = "Show the tree in plain text";
+            this.buttonShowTheTreeInPlainText.TextWrap = true;
+            this.buttonShowTheTreeInPlainText.Click += new System.EventHandler(this.buttonShowTheTreeInPlainText_Click);
+            // 
             // SpeechGrammarBuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 308);
+            this.Controls.Add(this.buttonShowTheTreeInPlainText);
             this.Controls.Add(this.buttonAddWordToTheDictionary);
             this.Controls.Add(this.textBoxWordToAddToTheDictionary);
             this.Controls.Add(this.buttonPrintDictItems);
-            this.Controls.Add(this.radCheckBoxIsTheNodeWildcard);
+            this.Controls.Add(this.radCheckBoxIsTheNodeDictation);
             this.Controls.Add(this.buttonLoadTree);
             this.Controls.Add(this.buttonExportToXML);
             this.Controls.Add(this.buttonStartRecognition);
@@ -146,10 +159,11 @@ namespace SpeechGrammarBuilderGUI
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartRecognition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radCheckBoxIsTheNodeWildcard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radCheckBoxIsTheNodeDictation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonPrintDictItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxWordToAddToTheDictionary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddWordToTheDictionary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonShowTheTreeInPlainText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,10 +177,11 @@ namespace SpeechGrammarBuilderGUI
         private RadButton buttonStartRecognition;
         private RadButton buttonExportToXML;
         private RadButton buttonLoadTree;
-        private RadCheckBox radCheckBoxIsTheNodeWildcard;
+        private RadCheckBox radCheckBoxIsTheNodeDictation;
         private RadButton buttonPrintDictItems;
         private RadButton buttonAddWordToTheDictionary;
         private RadTextBox textBoxWordToAddToTheDictionary;
+        private RadButton buttonShowTheTreeInPlainText;
     }
 }
 

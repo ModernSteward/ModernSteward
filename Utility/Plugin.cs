@@ -7,7 +7,7 @@ using Microsoft.CSharp;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Speech.Recognition;
-using Core;
+using ModernSteward;
 
 namespace ModernSteward
 {
@@ -34,13 +34,13 @@ namespace ModernSteward
             Assembly = Assembly.LoadFrom(aAssemblyPath);
         }
 
-        public void TriggerPlugin(string aAdditionalCommands)
+        public void TriggerPlugin(SemanticValue aSemantics)
         {
             Type type = Assembly.GetType("ModernSteward.CustomPlugin");
 
             object instanceOfMyType = Activator.CreateInstance(type);
 
-            (instanceOfMyType as PluginFunctionality).Trigger(aAdditionalCommands);
+            (instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
         }
 
         public Grammar GetGrammar()
