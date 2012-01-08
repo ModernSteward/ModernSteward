@@ -4,6 +4,7 @@ To think about the generation of the grammar.
 
 Create a mobile version?
 Create a web service?
+Market for plugins...
 
 Version 2:
 Text to speech for better experience

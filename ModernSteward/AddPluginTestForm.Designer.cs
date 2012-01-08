@@ -32,14 +32,11 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxKeyword = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBoxPlugins = new System.Windows.Forms.ComboBox();
-            this.groupTriggerPlugin = new System.Windows.Forms.GroupBox();
-            this.textBoxAdditionalCommands = new System.Windows.Forms.TextBox();
-            this.buttonTriggerPlugin = new System.Windows.Forms.Button();
-            this.textBoxPluginPath = new System.Windows.Forms.TextBox();
             this.buttonBrowseForPlugin = new System.Windows.Forms.Button();
+            this.textBoxPluginPath = new System.Windows.Forms.TextBox();
+            this.buttonStartTheEngine = new Telerik.WinControls.UI.RadButton();
             this.groupBox1.SuspendLayout();
-            this.groupTriggerPlugin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonStartTheEngine)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddPlugin
@@ -82,50 +79,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AddPlugin";
             // 
-            // comboBoxPlugins
-            // 
-            this.comboBoxPlugins.FormattingEnabled = true;
-            this.comboBoxPlugins.Location = new System.Drawing.Point(10, 18);
-            this.comboBoxPlugins.Name = "comboBoxPlugins";
-            this.comboBoxPlugins.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxPlugins.TabIndex = 4;
-            // 
-            // groupTriggerPlugin
-            // 
-            this.groupTriggerPlugin.Controls.Add(this.textBoxAdditionalCommands);
-            this.groupTriggerPlugin.Controls.Add(this.buttonTriggerPlugin);
-            this.groupTriggerPlugin.Controls.Add(this.comboBoxPlugins);
-            this.groupTriggerPlugin.Location = new System.Drawing.Point(138, 12);
-            this.groupTriggerPlugin.Name = "groupTriggerPlugin";
-            this.groupTriggerPlugin.Size = new System.Drawing.Size(137, 103);
-            this.groupTriggerPlugin.TabIndex = 5;
-            this.groupTriggerPlugin.TabStop = false;
-            this.groupTriggerPlugin.Text = "TriggerPlugin";
-            // 
-            // textBoxAdditionalCommands
-            // 
-            this.textBoxAdditionalCommands.Location = new System.Drawing.Point(10, 45);
-            this.textBoxAdditionalCommands.Name = "textBoxAdditionalCommands";
-            this.textBoxAdditionalCommands.Size = new System.Drawing.Size(121, 20);
-            this.textBoxAdditionalCommands.TabIndex = 6;
-            // 
-            // buttonTriggerPlugin
-            // 
-            this.buttonTriggerPlugin.Location = new System.Drawing.Point(56, 71);
-            this.buttonTriggerPlugin.Name = "buttonTriggerPlugin";
-            this.buttonTriggerPlugin.Size = new System.Drawing.Size(75, 23);
-            this.buttonTriggerPlugin.TabIndex = 5;
-            this.buttonTriggerPlugin.Text = "Trigger plugin!";
-            this.buttonTriggerPlugin.UseVisualStyleBackColor = true;
-            this.buttonTriggerPlugin.Click += new System.EventHandler(this.buttonTriggerPlugin_Click);
-            // 
-            // textBoxPluginPath
-            // 
-            this.textBoxPluginPath.Location = new System.Drawing.Point(9, 73);
-            this.textBoxPluginPath.Name = "textBoxPluginPath";
-            this.textBoxPluginPath.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPluginPath.TabIndex = 3;
-            // 
             // buttonBrowseForPlugin
             // 
             this.buttonBrowseForPlugin.Location = new System.Drawing.Point(34, 99);
@@ -136,19 +89,35 @@
             this.buttonBrowseForPlugin.UseVisualStyleBackColor = true;
             this.buttonBrowseForPlugin.Click += new System.EventHandler(this.buttonBrowseForPlugin_Click);
             // 
+            // textBoxPluginPath
+            // 
+            this.textBoxPluginPath.Location = new System.Drawing.Point(9, 73);
+            this.textBoxPluginPath.Name = "textBoxPluginPath";
+            this.textBoxPluginPath.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPluginPath.TabIndex = 3;
+            // 
+            // buttonStartTheEngine
+            // 
+            this.buttonStartTheEngine.Location = new System.Drawing.Point(139, 13);
+            this.buttonStartTheEngine.Name = "buttonStartTheEngine";
+            this.buttonStartTheEngine.Size = new System.Drawing.Size(130, 156);
+            this.buttonStartTheEngine.TabIndex = 4;
+            this.buttonStartTheEngine.Text = "Start the speech recognition engine!";
+            this.buttonStartTheEngine.TextWrap = true;
+            this.buttonStartTheEngine.Click += new System.EventHandler(this.buttonStartTheEngine_Click);
+            // 
             // AddPluginTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 181);
-            this.Controls.Add(this.groupTriggerPlugin);
+            this.Controls.Add(this.buttonStartTheEngine);
             this.Controls.Add(this.groupBox1);
             this.Name = "AddPluginTestForm";
             this.Text = "ModernSteward";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupTriggerPlugin.ResumeLayout(false);
-            this.groupTriggerPlugin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonStartTheEngine)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -159,12 +128,9 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxKeyword;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBoxPlugins;
-        private System.Windows.Forms.GroupBox groupTriggerPlugin;
-        private System.Windows.Forms.Button buttonTriggerPlugin;
-        private System.Windows.Forms.TextBox textBoxAdditionalCommands;
         private System.Windows.Forms.Button buttonBrowseForPlugin;
         private System.Windows.Forms.TextBox textBoxPluginPath;
+        private Telerik.WinControls.UI.RadButton buttonStartTheEngine;
     }
 }
 

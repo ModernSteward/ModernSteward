@@ -186,6 +186,9 @@ namespace SpeechGrammarBuilderGUI
             lex.AddPronunciation(textBoxWordToAddToTheDictionary.Text, 1033);
         }
 
+
+
+
         private void buttonShowTheTreeInPlainText_Click(object sender, EventArgs e)
         {
             foreach (var node in treeViewCommands.Nodes)
@@ -251,6 +254,11 @@ namespace SpeechGrammarBuilderGUI
             {
                 Recursion(childNode, level+1);
             }
+        }
+
+        private void buttonMakeSolution_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
