@@ -27,28 +27,27 @@ namespace ModernSteward
 
         private Assembly Assembly;
 
+
+        object instanceOfMyType;
+
         public Plugin(string aName, string aKeyword, string aAssemblyPath)
         {
             Name = aName;
             Keyword = aKeyword;
             Assembly = Assembly.LoadFrom(aAssemblyPath);
+            Type type = Assembly.GetType("ModernSteward.CustomPlugin");
+            instanceOfMyType = Activator.CreateInstance(type);
+
+            (instanceOfMyType as PluginFunctionality).Initialize();
         }
 
         public void TriggerPlugin(SemanticValue aSemantics)
         {
-            Type type = Assembly.GetType("ModernSteward.CustomPlugin");
-
-            object instanceOfMyType = Activator.CreateInstance(type);
-
             (instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
         }
 
         public Grammar GetGrammar()
         {
-            Type type = Assembly.GetType("ModernSteward.CustomPlugin");
-
-            object instanceOfMyType = Activator.CreateInstance(type);
-
             return (instanceOfMyType as PluginFunctionality).GetGrammar();
         }
 

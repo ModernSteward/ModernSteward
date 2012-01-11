@@ -209,12 +209,6 @@ namespace PluginWizard
                 closedBracketsInTheGeneratedCode = 0;
                 openedBracketsInTheGeneratedCode = 0;
                 generatedCode += GeneratingTheCode(node, 0, generatedCode);
-                while (closedBracketsInTheGeneratedCode < openedBracketsInTheGeneratedCode)
-                {
-                    generatedCode += ShiftNTabsInTheConsole((openedBracketsInTheGeneratedCode - closedBracketsInTheGeneratedCode) - 1);
-                    generatedCode += "}" + Environment.NewLine;
-                    closedBracketsInTheGeneratedCode++;
-                }
             }
             return generatedCode;
         }
@@ -234,39 +228,37 @@ namespace PluginWizard
         {
             string currentCode = "";
             currentCode += ShiftNTabsInTheConsole(level);
-            currentCode += "if(" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \"" + node.Text.ToString() + "\")";
+            currentCode += "if(" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \"" 
+                + node.Text.ToString() + "\")";
             currentCode += "{" + Environment.NewLine;
             openedBracketsInTheGeneratedCode++;
 
-            if (node.Nodes.Count == 0)
+            if (node.Tag != null)
             {
-                if (node.Tag != null)
+                if (node.Tag.ToString() == Consts.Dictation)
                 {
-                    if (node.Tag.ToString() == Consts.Dictation)
-                    {
-                        currentCode += ShiftNTabsInTheConsole(level + 1);
-                        string dictationFor = node.Text.Replace(" ", "");
-                        currentCode += "string dictationFor" + dictationFor + " = " + semanticsInString + "[" + level.ToString() + "].Value;" + Environment.NewLine;
-                    }
-                    else
-                    {
-                        currentCode += Environment.NewLine + Environment.NewLine;
-                    }
+                    currentCode += ShiftNTabsInTheConsole(level + 1);
+                    string dictationFor = node.Text.Replace(" ", "");
+                    currentCode += "string dictationFor" + dictationFor + " = "
+                        + semanticsInString + "[" + level.ToString() + "].Value;" + Environment.NewLine;
                 }
                 else
                 {
-                    currentCode += Environment.NewLine + Environment.NewLine;
+                    currentCode += Environment.NewLine;
                 }
-
-                currentCode += ShiftNTabsInTheConsole(level);
-                currentCode += "}" + Environment.NewLine;
-                closedBracketsInTheGeneratedCode++;
             }
 
+            int iteration = 0;
             foreach (var childNode in node.Nodes)
             {
+                iteration++;
+                
                 currentCode += GeneratingTheCode(childNode, level + 1, generatedCode);
+
             }
+            currentCode += ShiftNTabsInTheConsole(level);
+            currentCode += "}" + Environment.NewLine;
+            closedBracketsInTheGeneratedCode++;            
             return currentCode;
         }
 
