@@ -9,14 +9,14 @@ namespace ModernSteward
 {
     public class CustomPlugin : PluginFunctionality
     {
-        public override void Trigger(SemanticValue aSemantics)
+        public override void Trigger(List<KeyValuePair<string, string>> aSemantics)
         {
             
         }
 
-        public override Grammar GetGrammar()
+        public override GrammarBuilder GetGrammarBuilder()
         {
-            return new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml"));
+            return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml");
         }
 
         public override void Initialize()

@@ -98,9 +98,9 @@
             // 
             // buttonStartTheEngine
             // 
-            this.buttonStartTheEngine.Location = new System.Drawing.Point(139, 13);
+            this.buttonStartTheEngine.Location = new System.Drawing.Point(139, 12);
             this.buttonStartTheEngine.Name = "buttonStartTheEngine";
-            this.buttonStartTheEngine.Size = new System.Drawing.Size(130, 156);
+            this.buttonStartTheEngine.Size = new System.Drawing.Size(130, 157);
             this.buttonStartTheEngine.TabIndex = 4;
             this.buttonStartTheEngine.Text = "Start the speech recognition engine!";
             this.buttonStartTheEngine.TextWrap = true;

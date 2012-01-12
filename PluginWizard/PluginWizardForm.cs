@@ -19,6 +19,8 @@ namespace PluginWizard
 {
     public partial class PluginWizardForm : Form
     {
+        private int lineToInsertTheGeneratedCode = 16;
+
         public PluginWizardForm()
         {
             InitializeComponent();
@@ -154,8 +156,8 @@ namespace PluginWizard
             string generatedCodeToHandleTheSpeechRecognitionEngineResults = generateCodeToHandleTheSpeechRecognitionEngineResults();
 
             InsertStringIntoAFileAtASpecificLineOfAFile(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPlugin.cs",
-                generatedCodeToHandleTheSpeechRecognitionEngineResults, 19);
-
+                generatedCodeToHandleTheSpeechRecognitionEngineResults, lineToInsertTheGeneratedCode);
+            
             treeViewCommands.SaveXML(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
 
             this.Close();

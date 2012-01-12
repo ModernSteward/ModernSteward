@@ -81,9 +81,9 @@ namespace SpeechGrammarBuilderGUI
             SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
             recognitionEngine.SetInputToDefaultAudioDevice();
 
-            Grammar grammar = new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromTree(treeViewCommands));
+            Grammar grammar = new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromTree(treeViewCommands));
             MessageBox.Show(
-                TreeViewToGrammarBuilderAlgorithm.CreateGrammarFromTree(treeViewCommands).DebugShowPhrases);
+                TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromTree(treeViewCommands).DebugShowPhrases);
             recognitionEngine.LoadGrammar(grammar);
 
             recognitionEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(recognitionEngine_SpeechDetected);

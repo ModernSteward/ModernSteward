@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Speech.Recognition;
 using Telerik.WinControls.UI;
+using System.IO;
 
 namespace ModernSteward
 {
@@ -38,7 +39,7 @@ namespace ModernSteward
             return currentGrammar;
         }
 
-        public static GrammarBuilder CreateGrammarFromTree(RadTreeView treeView)
+        public static GrammarBuilder CreateGrammarBuilderFromTree(RadTreeView treeView)
         {
             GrammarBuilder currentGrammar = new GrammarBuilder();
             Choices wholeGrammar = new Choices();
@@ -51,11 +52,18 @@ namespace ModernSteward
             return wholeGrammar;
         }
 
-        public static GrammarBuilder CreateGrammarFromXML(string path)
+        public static GrammarBuilder CreateGrammarBuilderFromXML(string path)
         {
             RadTreeView XMLTree = new RadTreeView();
             XMLTree.LoadXML(path);
-            return CreateGrammarFromTree(XMLTree);
+            return CreateGrammarBuilderFromTree(XMLTree);
+        }
+
+        public static GrammarBuilder CreateGrammarBuilderFromXML(Stream stream)
+        {
+            RadTreeView XMLTree = new RadTreeView();
+            XMLTree.LoadXML(stream);
+            return CreateGrammarBuilderFromTree(XMLTree);
         }
     }
 }

@@ -8,10 +8,15 @@ namespace ModernSteward
 {
     public abstract class PluginFunctionality
     {
-        public abstract void Trigger(SemanticValue aSemantics);
+        public abstract void Trigger(List<KeyValuePair<string, string>> aSemantics);
 
         public abstract void Initialize();
 
-        public abstract Grammar GetGrammar();
+        public abstract GrammarBuilder GetGrammarBuilder();
+
+        public Grammar GetGrammar()
+        {
+            return new Grammar(GetGrammarBuilder());
+        }
     }
 }

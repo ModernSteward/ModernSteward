@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ModernSteward;
-using ModernSteward;
 using System.Speech.Recognition;
 
 namespace ModernSteward
@@ -58,8 +57,15 @@ namespace ModernSteward
 
             try
             {
-                Grammar grammar = pluginHandler.Plugins[0].GetGrammar();
-                recognitionEngine.LoadGrammar(grammar);
+                Choices pluginsGrammarInChoices = new Choices();
+                foreach (var plugin in pluginHandler.Plugins)
+                {
+                    pluginsGrammarInChoices.Add(plugin.GetGrammarBuilder());
+                }
+                GrammarBuilder grammarBuilder = new GrammarBuilder();
+                grammarBuilder.Append(Consts.NameOfTheGirl);
+                grammarBuilder.Append(pluginsGrammarInChoices);
+                recognitionEngine.LoadGrammar(new Grammar(grammarBuilder));
             }
 
             catch
@@ -67,14 +73,27 @@ namespace ModernSteward
                 MessageBox.Show("Plugin not loaded or grammar is really fucked...");
             }
 
-            recognitionEngine.SpeechRecognized += (s, args) =>
+            recognitionEngine.SpeechRecognized += (send, args) =>
             {
                 Console.WriteLine("\n\t--{0}", args.Result.Text);
                 foreach (var item in args.Result.Semantics)
                 {
                     Console.WriteLine("\n\t-->Value: {0}, Key: {1}", item.Value.Value, item.Key);
                 }
-                pluginHandler.Plugins[0].TriggerPlugin(args.Result.Semantics);
+
+                List<KeyValuePair<string, string>> semanticsToDict = new List<KeyValuePair<string, string>>();
+                foreach (var s in args.Result.Semantics)
+                {
+                    semanticsToDict.Add(new KeyValuePair<string, string>(s.Key.ToString(), s.Value.Value.ToString()));
+                }
+                foreach (var plugin in pluginHandler.Plugins)
+                {
+                    Console.WriteLine("SemanticsToDict.Key = {0}; plugin.Keyword = {1}", semanticsToDict[0].Key, plugin.Keyword);
+                    if (semanticsToDict[0].Key == plugin.Keyword)
+                    {
+                        plugin.TriggerPlugin(semanticsToDict);
+                    }
+                }
             };
 
             recognitionEngine.SpeechRecognitionRejected += (s, args) =>
