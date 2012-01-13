@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ModernSteward;
 using System.Speech.Recognition;
+using PluginWizard;
 
 namespace ModernSteward
 {
@@ -104,6 +105,12 @@ namespace ModernSteward
 
             MessageBox.Show("Recognition engine started!");
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
+        }
+
+        private void buttonPluginWizard_Click(object sender, EventArgs e)
+        {
+            PluginWizardForm pluginWizardForm = new PluginWizardForm();
+            pluginWizardForm.Show();
         }
     }
 }

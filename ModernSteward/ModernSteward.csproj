@@ -60,7 +60,6 @@
     <Compile Include="AddPluginTestForm.Designer.cs">
       <DependentUpon>AddPluginTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddPluginTestForm.resx">
       <DependentUpon>AddPluginTestForm.cs</DependentUpon>
@@ -88,6 +87,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{E465DCA0-BEE6-48E8-A7C1-1DB4DBC5B2D9}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PluginWizard\PluginWizard.csproj">
+      <Project>{55323C9F-BE91-4DD0-9E4B-4CD9B34BC3D6}</Project>
+      <Name>PluginWizard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{54735883-D676-445E-A3F3-855E04AF4A52}</Project>

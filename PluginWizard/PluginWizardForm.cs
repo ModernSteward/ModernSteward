@@ -25,6 +25,8 @@ namespace PluginWizard
         {
             InitializeComponent();
 
+            textBoxSaveFilePath.ReadOnly = false;
+
             treeViewCommands.AllowEdit = true;
             treeViewCommands.AllowRemove = true;
             treeViewCommands.AllowAdd = true;
@@ -151,197 +153,32 @@ namespace PluginWizard
             string masterPluginZip = Environment.CurrentDirectory + @"\CustomPlugin.zip";
             pluginPath = textBoxSaveFilePath.Text;
 
-            Extract(masterPluginZip, pluginPath);
+            ZipManager.Extract(masterPluginZip, pluginPath);
 
-            string generatedCodeToHandleTheSpeechRecognitionEngineResults = generateCodeToHandleTheSpeechRecognitionEngineResults();
+            string generatedCodeToHandleTheSpeechRecognitionEngineResults = 
+                CodeGenerator.generateCodeToHandleTheSpeechRecognitionEngineResults(treeViewCommands);
 
-            InsertStringIntoAFileAtASpecificLineOfAFile(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPlugin.cs",
+            CodeGenerator.InsertStringIntoAFileAtASpecificLineOfAFile(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPlugin.cs",
                 generatedCodeToHandleTheSpeechRecognitionEngineResults, lineToInsertTheGeneratedCode);
             
             treeViewCommands.SaveXML(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
 
+            string windowsRootDirectory = Environment.GetEnvironmentVariable("WINDIR");
+            System.Diagnostics.Process prc = new System.Diagnostics.Process();
+            prc.StartInfo.FileName = windowsRootDirectory + @"\explorer.exe";
+            prc.StartInfo.Arguments = pluginPath;
+            prc.Start();
+
+
             this.Close();
         }
 
-        private void InsertStringIntoAFileAtASpecificLineOfAFile(string aTextFilePath, string aLinesToInsert, int aAtLine)
+        private void buttonBrowse_Click(object sender, EventArgs e)
         {
-            string textFilePath = aTextFilePath;
-            int indexToInsertTheString = aAtLine;
-            string linesToBeInserted = aLinesToInsert;
-
-            #region Reading the file
-            ArrayList lines = new ArrayList();
-            StreamReader reader = new StreamReader(textFilePath);
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            FolderBrowserDialog browseForFolder = new FolderBrowserDialog();
+            if (browseForFolder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                lines.Add(line);
-            }
-            reader.Close();
-            #endregion
-
-            #region Inserting the new lines
-            if (lines.Count > indexToInsertTheString)
-            {
-                lines.Insert(indexToInsertTheString, aLinesToInsert);
-            }
-            else
-            {
-                lines.Add(aLinesToInsert);
-            }
-            #endregion
-
-            #region Writing the new file with the inserted lines
-            StreamWriter writer = new StreamWriter(textFilePath);
-            foreach (string strNewLine in lines)
-            {
-                writer.WriteLine(strNewLine);
-            }
-            writer.Close();
-            #endregion
-        }
-
-        int openedBracketsInTheGeneratedCode = 0;
-        int closedBracketsInTheGeneratedCode = 0;
-        private string generateCodeToHandleTheSpeechRecognitionEngineResults()
-        {
-            string generatedCode = "";
-            foreach (var node in treeViewCommands.Nodes)
-            {
-                closedBracketsInTheGeneratedCode = 0;
-                openedBracketsInTheGeneratedCode = 0;
-                generatedCode += GeneratingTheCode(node, 0, generatedCode);
-            }
-            return generatedCode;
-        }
-
-        private string ShiftNTabsInTheConsole(int n)
-        {
-            string tabs = "";
-            for (int i = 0; i < n+3; i++)
-            {
-                tabs += "\t";
-            }
-            return tabs;
-        }
-
-        const string semanticsInString = "semanticsToDict";
-        private string GeneratingTheCode(RadTreeNode node, int level, string generatedCode)
-        {
-            string currentCode = "";
-            currentCode += ShiftNTabsInTheConsole(level);
-            currentCode += "if(" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \"" 
-                + node.Text.ToString() + "\")";
-            currentCode += "{" + Environment.NewLine;
-            openedBracketsInTheGeneratedCode++;
-
-            if (node.Tag != null)
-            {
-                if (node.Tag.ToString() == Consts.Dictation)
-                {
-                    currentCode += ShiftNTabsInTheConsole(level + 1);
-                    string dictationFor = node.Text.Replace(" ", "");
-                    currentCode += "string dictationFor" + dictationFor + " = "
-                        + semanticsInString + "[" + level.ToString() + "].Value;" + Environment.NewLine;
-                }
-                else
-                {
-                    currentCode += Environment.NewLine;
-                }
-            }
-
-            int iteration = 0;
-            foreach (var childNode in node.Nodes)
-            {
-                iteration++;
-                
-                currentCode += GeneratingTheCode(childNode, level + 1, generatedCode);
-
-            }
-            currentCode += ShiftNTabsInTheConsole(level);
-            currentCode += "}" + Environment.NewLine;
-            closedBracketsInTheGeneratedCode++;            
-            return currentCode;
-        }
-
-        private int Extract(string sourceFile, string destinationPath)
-        {
-            ZipInputStream zinstream = null; // used to read from the zip file
-            int numFileUnzipped = 0; // number of files extracted from the zip file
-
-            try
-            {
-                // create a zip input stream from source zip file
-                zinstream = new ZipInputStream(File.OpenRead(sourceFile));
-
-                // we need to extract to a folder so we must create it if needed
-                if (Directory.Exists(destinationPath) == false)
-                    Directory.CreateDirectory(destinationPath);
-
-                ZipEntry theEntry; // an entry in the zip file which could be a file or directory
-
-                // now, walk through the zip file entries and copy each file/directory
-                while ((theEntry = zinstream.GetNextEntry()) != null)
-                {
-                    string dirname = Path.GetDirectoryName(theEntry.Name); // the file path
-                    string fname = Path.GetFileName(theEntry.Name);      // the file name
-
-                    // if a path name exists we should create the directory in the destination folder
-                    string target = destinationPath + Path.DirectorySeparatorChar + dirname;
-                    if (dirname.Length > 0 && !Directory.Exists(target))
-                        Directory.CreateDirectory(target);
-
-                    // now we know the proper path exists in the destination so copy the file there
-                    if (fname != String.Empty)
-                    {
-                        DecompressAndWriteFile(destinationPath + Path.DirectorySeparatorChar + theEntry.Name, zinstream);
-                        numFileUnzipped++;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                zinstream.Close();
-            }
-            return numFileUnzipped;
-        }
-
-        private static void DecompressAndWriteFile(string destination, ZipInputStream source)
-        {
-            FileStream wstream = null;
-
-            try
-            {
-                // create a stream to write the file to
-                wstream = File.Create(destination);
-
-                const int block = 2048; // number of bytes to decompress for each read from the source
-
-                byte[] data = new byte[block]; // location to decompress the file to
-
-                // now decompress and write each block of data for the zip file entry
-                while (true)
-                {
-                    int size = source.Read(data, 0, data.Length);
-
-                    if (size > 0)
-                        wstream.Write(data, 0, size);
-                    else
-                        break; // no more data
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (wstream != null)
-                    wstream.Close();
+                pluginPath = browseForFolder.SelectedPath;
             }
         }
     }

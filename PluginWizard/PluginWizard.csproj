@@ -54,6 +54,7 @@
     <Reference Include="TelerikCommon, Version=2011.3.11.1219, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGenerator.cs" />
     <Compile Include="PluginWizardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +63,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZipManager.cs" />
     <EmbeddedResource Include="PluginWizardForm.resx">
       <DependentUpon>PluginWizardForm.cs</DependentUpon>
     </EmbeddedResource>

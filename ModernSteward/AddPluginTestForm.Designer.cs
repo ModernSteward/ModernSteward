@@ -35,8 +35,10 @@
             this.buttonBrowseForPlugin = new System.Windows.Forms.Button();
             this.textBoxPluginPath = new System.Windows.Forms.TextBox();
             this.buttonStartTheEngine = new Telerik.WinControls.UI.RadButton();
+            this.buttonPluginWizard = new Telerik.WinControls.UI.RadButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartTheEngine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonPluginWizard)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddPlugin
@@ -106,11 +108,21 @@
             this.buttonStartTheEngine.TextWrap = true;
             this.buttonStartTheEngine.Click += new System.EventHandler(this.buttonStartTheEngine_Click);
             // 
+            // buttonPluginWizard
+            // 
+            this.buttonPluginWizard.Location = new System.Drawing.Point(12, 175);
+            this.buttonPluginWizard.Name = "buttonPluginWizard";
+            this.buttonPluginWizard.Size = new System.Drawing.Size(120, 24);
+            this.buttonPluginWizard.TabIndex = 5;
+            this.buttonPluginWizard.Text = "Plugin wizard";
+            this.buttonPluginWizard.Click += new System.EventHandler(this.buttonPluginWizard_Click);
+            // 
             // AddPluginTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 181);
+            this.ClientSize = new System.Drawing.Size(284, 204);
+            this.Controls.Add(this.buttonPluginWizard);
             this.Controls.Add(this.buttonStartTheEngine);
             this.Controls.Add(this.groupBox1);
             this.Name = "AddPluginTestForm";
@@ -118,6 +130,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartTheEngine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonPluginWizard)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,6 +144,7 @@
         private System.Windows.Forms.Button buttonBrowseForPlugin;
         private System.Windows.Forms.TextBox textBoxPluginPath;
         private Telerik.WinControls.UI.RadButton buttonStartTheEngine;
+        private Telerik.WinControls.UI.RadButton buttonPluginWizard;
     }
 }
 
