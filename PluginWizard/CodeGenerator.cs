@@ -49,21 +49,17 @@ namespace PluginWizard
             #endregion
         }
 
-        int openedBracketsInTheGeneratedCode = 0;
-        int closedBracketsInTheGeneratedCode = 0;
         public static string generateCodeToHandleTheSpeechRecognitionEngineResults(RadTreeView treeView)
         {
             string generatedCode = "";
             foreach (var node in treeView.Nodes)
             {
-                closedBracketsInTheGeneratedCode = 0;
-                openedBracketsInTheGeneratedCode = 0;
                 generatedCode += GeneratingTheCode(node, 0, generatedCode);
             }
             return generatedCode;
         }
 
-        private string ShiftNTabsInTheConsole(int n)
+        private static string ShiftNTabsInTheConsole(int n)
         {
             string tabs = "";
             for (int i = 0; i < n + 3; i++)
@@ -74,14 +70,13 @@ namespace PluginWizard
         }
 
         const string semanticsInString = "semanticsToDict";
-        private string GeneratingTheCode(RadTreeNode node, int level, string generatedCode)
+        private static string GeneratingTheCode(RadTreeNode node, int level, string generatedCode)
         {
             string currentCode = "";
             currentCode += ShiftNTabsInTheConsole(level);
             currentCode += "if(" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \""
                 + node.Text.ToString() + "\")";
             currentCode += "{" + Environment.NewLine;
-            openedBracketsInTheGeneratedCode++;
 
             if (node.Tag != null)
             {
@@ -108,7 +103,6 @@ namespace PluginWizard
             }
             currentCode += ShiftNTabsInTheConsole(level);
             currentCode += "}" + Environment.NewLine;
-            closedBracketsInTheGeneratedCode++;
             return currentCode;
         }
     }

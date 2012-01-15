@@ -60,6 +60,7 @@
     <Compile Include="AddPluginTestForm.Designer.cs">
       <DependentUpon>AddPluginTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddPluginTestForm.resx">
       <DependentUpon>AddPluginTestForm.cs</DependentUpon>
