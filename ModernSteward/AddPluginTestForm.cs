@@ -66,6 +66,9 @@ namespace ModernSteward
                 GrammarBuilder grammarBuilder = new GrammarBuilder();
                 grammarBuilder.Append(Consts.NameOfTheGirl);
                 grammarBuilder.Append(pluginsGrammarInChoices);
+
+                MessageBox.Show(grammarBuilder.DebugShowPhrases);
+
                 recognitionEngine.LoadGrammar(new Grammar(grammarBuilder));
             }
 
@@ -90,10 +93,7 @@ namespace ModernSteward
                 foreach (var plugin in pluginHandler.Plugins)
                 {
                     Console.WriteLine("SemanticsToDict.Key = {0}; plugin.Keyword = {1}", semanticsToDict[0].Key, plugin.Keyword);
-                    if (semanticsToDict[0].Key == plugin.Keyword)
-                    {
-                        plugin.TriggerPlugin(semanticsToDict);
-                    }
+                    plugin.TriggerPlugin(semanticsToDict);
                 }
             };
 
@@ -103,8 +103,10 @@ namespace ModernSteward
                     Console.WriteLine("\nREJECTED\nAlt:{0}\t conf:{1}", alt.Text, alt.Confidence);
             };
 
-            MessageBox.Show("Recognition engine started!");
-            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
+            //MessageBox.Show("Recognition engine started!");
+            recognitionEngine.EmulateRecognizeAsync("Melissa music player stop");
+            //recognitionEngine.EmulateRecognizeAsync("Melissa");
+            //recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
         }
 
         private void buttonPluginWizard_Click(object sender, EventArgs e)

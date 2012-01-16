@@ -27,7 +27,6 @@ namespace ModernSteward
             }
 
             Choices tempGrammar = new Choices();
-
             for (int i = 0; i < currentNode.Nodes.Count; i++)
             {
                 tempGrammar.Add(MakeGrammarBuilderRecursively(currentNode.Nodes[i]));
@@ -47,9 +46,9 @@ namespace ModernSteward
             for (int i = 0; i < treeView.Nodes.Count; ++i)
             {
                 currentGrammar = MakeGrammarBuilderRecursively(treeView.Nodes[i]);
-                wholeGrammar.Add(new Choices(currentGrammar));
+               // wholeGrammar.Add(new Choices(currentGrammar));
             }
-            return wholeGrammar;
+            return new Choices(currentGrammar);
         }
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(string path)

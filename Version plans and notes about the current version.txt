@@ -6,6 +6,10 @@ Create a mobile version?
 Create a web service?
 Market for plugins...
 
+Startup plugins:
+To initialize plugins on startup.
+NOTES: Have to make a checkbox about it, and the plugin should get the variables somewhere from (register keys, temporary files, etc.)
+
 Version 2:
 Text to speech for better experience
 
