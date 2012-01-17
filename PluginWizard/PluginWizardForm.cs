@@ -34,6 +34,13 @@ namespace PluginWizard
 
             treeViewCommands.Nodes.Add("CustomPlugin");
 
+            treeViewCommands.ContextMenu = new System.Windows.Forms.ContextMenu();
+            treeViewCommands.ContextMenu.MenuItems.Add(new MenuItem("New node", 
+                (sender, args) =>
+                {
+                    treeViewCommands.Nodes.Add("New Node");
+                }));
+            
             checkBoxIsTheNodeDictation.IsThreeState = false;
             checkBoxIsTheNodeDictation.Visible = false;
 

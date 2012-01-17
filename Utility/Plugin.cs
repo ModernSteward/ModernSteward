@@ -46,9 +46,9 @@ namespace ModernSteward
             return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
         }
 
-        public void Initialize()
+        public void Initialize(bool onStartup)
         {
-            (instanceOfMyType as PluginFunctionality).Initialize();
+            (instanceOfMyType as PluginFunctionality).Initialize(onStartup);
         }
 
         public override string ToString()
