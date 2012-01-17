@@ -178,6 +178,7 @@ namespace PluginWizard
             FolderBrowserDialog browseForFolder = new FolderBrowserDialog();
             if (browseForFolder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                textBoxSaveFilePath.Text = browseForFolder.SelectedPath;
                 pluginPath = browseForFolder.SelectedPath;
             }
         }
