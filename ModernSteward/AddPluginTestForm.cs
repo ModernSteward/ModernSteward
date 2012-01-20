@@ -104,9 +104,9 @@ namespace ModernSteward
             };
 
             //MessageBox.Show("Recognition engine started!");
-            recognitionEngine.EmulateRecognizeAsync("Melissa music player stop");
+            //recognitionEngine.EmulateRecognizeAsync("Melissa music player stop");
             //recognitionEngine.EmulateRecognizeAsync("Melissa");
-            //recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
+            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
         }
 
         private void buttonPluginWizard_Click(object sender, EventArgs e)

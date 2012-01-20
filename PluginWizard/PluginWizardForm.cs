@@ -27,6 +27,13 @@ namespace PluginWizard
 
             textBoxSaveFilePath.ReadOnly = false;
 
+            pluginWizard.NextButton.Text = "Следващ";
+            pluginWizard.BackButton.Text = "Назад";
+            pluginWizard.CancelButton.Text = "Откажи";
+
+            pluginWizard.HelpButton.Text = "Помощ";
+            pluginWizard.HelpButton.Click += new EventHandler(HelpButton_Click);
+
             treeViewCommands.AllowEdit = true;
             treeViewCommands.AllowRemove = true;
             treeViewCommands.AllowAdd = true;
@@ -62,6 +69,11 @@ namespace PluginWizard
 
             gridViewDictionaryItems.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
 
+        }
+
+        void HelpButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void RenewGridViewDictionaryItems()
@@ -188,6 +200,11 @@ namespace PluginWizard
                 textBoxSaveFilePath.Text = browseForFolder.SelectedPath;
                 pluginPath = browseForFolder.SelectedPath;
             }
+        }
+
+        private void pluginWizard_Cancel(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

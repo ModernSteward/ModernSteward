@@ -48,7 +48,7 @@ namespace ModernSteward
 
         public void Initialize(bool onStartup)
         {
-            (instanceOfMyType as PluginFunctionality).Initialize(onStartup);
+            (instanceOfMyType as PluginFunctionality).Initialize();
         }
 
         public override string ToString()

@@ -10,7 +10,7 @@ namespace ModernSteward
     {
         public abstract void Trigger(List<KeyValuePair<string, string>> aSemantics);
 
-        public abstract void Initialize(bool onStartup);
+        public abstract void Initialize();
 
         public abstract GrammarBuilder GetGrammarBuilder();
 

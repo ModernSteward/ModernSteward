@@ -92,6 +92,7 @@
             this.pluginWizard.TabIndex = 0;
             this.pluginWizard.WelcomePage = this.wizardWelcomePage1;
             this.pluginWizard.Finish += new System.EventHandler(this.pluginWizard_Finish);
+            this.pluginWizard.Cancel += new System.EventHandler(this.pluginWizard_Cancel);
             // 
             // wizardCompletionPage1
             // 
