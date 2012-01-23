@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
+    <Compile Include="GrammarManager.cs" />
+    <Compile Include="GrammarTreeViewTag.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginFunctionality.cs" />
     <Compile Include="TreeViewToGrammarBuilderAlgorithm.cs" />

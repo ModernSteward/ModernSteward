@@ -103,9 +103,6 @@ namespace ModernSteward
                     Console.WriteLine("\nREJECTED\nAlt:{0}\t conf:{1}", alt.Text, alt.Confidence);
             };
 
-            //MessageBox.Show("Recognition engine started!");
-            //recognitionEngine.EmulateRecognizeAsync("Melissa music player stop");
-            //recognitionEngine.EmulateRecognizeAsync("Melissa");
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple); 
         }
 

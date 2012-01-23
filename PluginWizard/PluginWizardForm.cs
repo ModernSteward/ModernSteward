@@ -96,11 +96,17 @@ namespace PluginWizard
 
             if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
             {
-                treeViewCommands.SelectedNode.Tag = Consts.Dictation;
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).IsDictation = true;
+                textBoxContext.Text = (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).DictationContext;
+                textBoxContext.Visible = true;
+                labelContext.Visible = true;
             }
             else if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off)
             {
-                treeViewCommands.SelectedNode.Tag = null;
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).IsDictation = false;
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).DictationContext = "";
+                textBoxContext.Visible = false;
+                labelContext.Visible = false;
             }
         }
 
@@ -111,9 +117,10 @@ namespace PluginWizard
             saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                treeViewCommands.SaveXML(saveFileDialog.FileName);
+                GrammarManager.SaveGrammarToXML(treeViewCommands, saveFileDialog.FileName);
             }
         }
+
 
         private void buttonLoadTree_Click(object sender, EventArgs e)
         {
@@ -124,7 +131,7 @@ namespace PluginWizard
             {
                 try
                 {
-                    treeViewCommands.LoadXML(openFileDialog.FileName);
+                    treeViewCommands = GrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
                     MessageBox.Show("Граматиката заредена успешно!");
                 }
                 catch
@@ -137,31 +144,54 @@ namespace PluginWizard
         void treeViewCommands_SelectedNodeChanged(object s, RadTreeViewEventArgs args)
         {
             checkBoxIsTheNodeDictation.Visible = true;
-            if (args.Node.Tag != null)
+            checkBoxItemOptional.Visible = true;
+            if ((treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).IsDictation)
             {
-                if (args.Node.Tag.ToString() == Consts.Dictation)
-                {
-                    checkBoxIsTheNodeDictation.Checked = true;
-                }
+                textBoxContext.Text = (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).DictationContext;
+                checkBoxIsTheNodeDictation.Checked = true;
+                textBoxContext.Visible = true;
+                labelContext.Visible = true;
             }
             else
             {
                 checkBoxIsTheNodeDictation.Checked = false;
+                textBoxContext.Text = "";
+                textBoxContext.Visible = false;
+                labelContext.Visible = false;
+            }
+
+            if ((treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).Optional)
+            {
+                checkBoxItemOptional.Checked = true;
+            }
+            else
+            {
+                checkBoxItemOptional.Checked = false;
             }
         }
 
         private void buttonAddNewWordToTheMasterDictionary_Click(object sender, EventArgs e)
         {
+            addWordToTheMasterDictionary(textBoxNewWordToAdd.Text);
+        }
+
+        void addWordToTheMasterDictionary(string word)
+        {
             SpLexicon lex = new SpLexicon();
-            lex.AddPronunciation(textBoxNewWordToAdd.Text, 1033);
+            lex.AddPronunciation(word, 1033);
             textBoxNewWordToAdd.Text = "";
             RenewGridViewDictionaryItems();
         }
 
         private void buttonDeleteSelectedWord_Click(object sender, EventArgs e)
         {
+            deleteWordFromTheDictionary(gridViewDictionaryItems.SelectedRows[0].Cells[0].Value.ToString());
+        }
+
+        private void deleteWordFromTheDictionary(string wordToDelete)
+        {
             SpLexicon lex = new SpLexicon();
-            lex.RemovePronunciation(gridViewDictionaryItems.SelectedRows[0].Cells[0].Value.ToString(), 1033);
+            lex.RemovePronunciation(wordToDelete, 1033);
             RenewGridViewDictionaryItems();
         }
 
@@ -180,14 +210,13 @@ namespace PluginWizard
             CodeGenerator.InsertStringIntoAFileAtASpecificLineOfAFile(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPlugin.cs",
                 generatedCodeToHandleTheSpeechRecognitionEngineResults, lineToInsertTheGeneratedCode);
             
-            treeViewCommands.SaveXML(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
+            GrammarManager.SaveGrammarToXML(treeViewCommands, pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
 
             string windowsRootDirectory = Environment.GetEnvironmentVariable("WINDIR");
             System.Diagnostics.Process prc = new System.Diagnostics.Process();
             prc.StartInfo.FileName = windowsRootDirectory + @"\explorer.exe";
             prc.StartInfo.Arguments = pluginPath;
             prc.Start();
-
 
             this.Close();
         }
@@ -205,6 +234,39 @@ namespace PluginWizard
         private void pluginWizard_Cancel(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBoxNewWordToAdd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                addWordToTheMasterDictionary(textBoxNewWordToAdd.Text);
+            }
+        }
+
+        private void textBoxContext_TextChanged(object sender, EventArgs e)
+        {
+            if (checkBoxIsTheNodeDictation.Checked == true)
+            {
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).DictationContext = textBoxContext.Text;
+            }
+        }
+
+        private void checkBoxItemOptional_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
+            {
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).Optional = true;
+            }
+            else if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off)
+            {
+                (treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).Optional = false;
+            }
+        }
+
+        private void treeViewCommands_NodeAdded(object sender, RadTreeViewEventArgs e)
+        {
+            e.Node.Tag = new GrammarTreeViewTag(false, "", false);
         }
     }
 }

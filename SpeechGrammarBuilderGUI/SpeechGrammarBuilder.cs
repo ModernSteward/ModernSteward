@@ -134,7 +134,7 @@ namespace SpeechGrammarBuilderGUI
             saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                treeViewCommands.SaveXML(saveFileDialog.FileName);
+                GrammarManager.SaveGrammarToXML(treeViewCommands, saveFileDialog.FileName);
             }
         }
 
@@ -147,7 +147,7 @@ namespace SpeechGrammarBuilderGUI
             {
                 try
                 {
-                    treeViewCommands.LoadXML(openFileDialog.FileName);
+                    treeViewCommands = GrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
                     MessageBox.Show("Grammar loaded successfully");
                 }
                 catch {

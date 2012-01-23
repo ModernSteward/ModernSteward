@@ -14,16 +14,24 @@ namespace ModernSteward
         private static GrammarBuilder MakeGrammarBuilderRecursively(RadTreeNode currentNode)
         {
             GrammarBuilder currentGrammar = new GrammarBuilder();
-            if (currentNode.Tag == null)
+            if ((currentNode.Tag as GrammarTreeViewTag).Optional != true &&
+                (currentNode.Tag as GrammarTreeViewTag).IsDictation != true)
             {
                 currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, new GrammarBuilder(currentNode.Text)));
             }
-            else if (currentNode.Tag.ToString() == Consts.Dictation) 
+            else if ((currentNode.Tag as GrammarTreeViewTag).Optional && (currentNode.Tag as GrammarTreeViewTag).IsDictation != true)
+            {
+                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, new GrammarBuilder(currentNode.Text)), 0, 1);
+            }
+            else if ((currentNode.Tag as GrammarTreeViewTag).IsDictation)
             {
                 GrammarBuilder fakeDictation = new GrammarBuilder();
                 fakeDictation.AppendDictation();
-                DictationGrammar dictGrammar = new DictationGrammar();
-                currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation));
+                DictationGrammar dictGrammar = new DictationGrammar((currentNode.Tag as GrammarTreeViewTag).DictationContext);
+                if ((currentNode.Tag as GrammarTreeViewTag).Optional)
+                {
+                    currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation), 0, 1);
+                }
             }
 
             Choices tempGrammar = new Choices();
@@ -46,22 +54,19 @@ namespace ModernSteward
             for (int i = 0; i < treeView.Nodes.Count; ++i)
             {
                 currentGrammar = MakeGrammarBuilderRecursively(treeView.Nodes[i]);
-               // wholeGrammar.Add(new Choices(currentGrammar));
             }
             return new Choices(currentGrammar);
         }
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(string path)
         {
-            RadTreeView XMLTree = new RadTreeView();
-            XMLTree.LoadXML(path);
+            RadTreeView XMLTree = GrammarManager.LoadGrammarFromXML(path);
             return CreateGrammarBuilderFromTree(XMLTree);
         }
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(Stream stream)
         {
-            RadTreeView XMLTree = new RadTreeView();
-            XMLTree.LoadXML(stream);
+            RadTreeView XMLTree = GrammarManager.LoadGrammarFromXML(stream);
             return CreateGrammarBuilderFromTree(XMLTree);
         }
     }
