@@ -7,7 +7,7 @@ using System.IO;
 
 namespace ModernSteward
 {
-    public static class GrammarManager
+    public static class RadTreeViewGrammarManager
     {
         public static RadTreeView LoadGrammarFromXML(string filePath)
         {

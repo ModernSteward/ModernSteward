@@ -117,7 +117,7 @@ namespace PluginWizard
             saveFileDialog.Filter = "XML Files|*.xml|All Files|*.*";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                GrammarManager.SaveGrammarToXML(treeViewCommands, saveFileDialog.FileName);
+                RadTreeViewGrammarManager.SaveGrammarToXML(treeViewCommands, saveFileDialog.FileName);
             }
         }
 
@@ -131,7 +131,7 @@ namespace PluginWizard
             {
                 try
                 {
-                    treeViewCommands = GrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
+                    treeViewCommands = RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
                     MessageBox.Show("Граматиката заредена успешно!");
                 }
                 catch
@@ -210,7 +210,7 @@ namespace PluginWizard
             CodeGenerator.InsertStringIntoAFileAtASpecificLineOfAFile(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPlugin.cs",
                 generatedCodeToHandleTheSpeechRecognitionEngineResults, lineToInsertTheGeneratedCode);
             
-            GrammarManager.SaveGrammarToXML(treeViewCommands, pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
+            RadTreeViewGrammarManager.SaveGrammarToXML(treeViewCommands, pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
 
             string windowsRootDirectory = Environment.GetEnvironmentVariable("WINDIR");
             System.Diagnostics.Process prc = new System.Diagnostics.Process();

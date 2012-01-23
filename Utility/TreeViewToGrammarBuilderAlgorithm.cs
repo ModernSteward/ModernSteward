@@ -60,13 +60,13 @@ namespace ModernSteward
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(string path)
         {
-            RadTreeView XMLTree = GrammarManager.LoadGrammarFromXML(path);
+            RadTreeView XMLTree = RadTreeViewGrammarManager.LoadGrammarFromXML(path);
             return CreateGrammarBuilderFromTree(XMLTree);
         }
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(Stream stream)
         {
-            RadTreeView XMLTree = GrammarManager.LoadGrammarFromXML(stream);
+            RadTreeView XMLTree = RadTreeViewGrammarManager.LoadGrammarFromXML(stream);
             return CreateGrammarBuilderFromTree(XMLTree);
         }
     }
