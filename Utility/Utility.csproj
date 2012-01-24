@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
-    <Compile Include="GrammarManager.cs" />
+    <Compile Include="RadTreeViewGrammarManager.cs" />
     <Compile Include="GrammarTreeViewTag.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginFunctionality.cs" />
