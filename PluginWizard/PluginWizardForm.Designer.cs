@@ -40,11 +40,6 @@
             this.textBoxSaveFilePath = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.groupBoxBuiltInDictionary = new Telerik.WinControls.UI.RadGroupBox();
-            this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
-            this.buttonDeleteSelectedWord = new Telerik.WinControls.UI.RadButton();
-            this.textBoxNewWordToAdd = new Telerik.WinControls.UI.RadTextBox();
-            this.buttonAddNewWordToTheMasterDictionary = new Telerik.WinControls.UI.RadButton();
-            this.gridViewDictionaryItems = new Telerik.WinControls.UI.RadGridView();
             this.groupBoxGrammarBuilder = new Telerik.WinControls.UI.RadGroupBox();
             this.textBoxContext = new Telerik.WinControls.UI.RadTextBox();
             this.labelContext = new Telerik.WinControls.UI.RadLabel();
@@ -55,6 +50,7 @@
             this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
             this.wizardWelcomePage1 = new Telerik.WinControls.UI.WizardWelcomePage();
             this.wizardPage1 = new Telerik.WinControls.UI.WizardPage();
+            this.masterDictionaryManager1 = new MasterDictionaryUserControl.MasterDictionaryManager();
             ((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).BeginInit();
             this.pluginWizard.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -66,11 +62,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxBuiltInDictionary)).BeginInit();
             this.groupBoxBuiltInDictionary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonDeleteSelectedWord)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxNewWordToAdd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonAddNewWordToTheMasterDictionary)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewDictionaryItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxGrammarBuilder)).BeginInit();
             this.groupBoxGrammarBuilder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxContext)).BeginInit();
@@ -187,11 +178,7 @@
             // groupBoxBuiltInDictionary
             // 
             this.groupBoxBuiltInDictionary.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.groupBoxBuiltInDictionary.Controls.Add(this.radLabel3);
-            this.groupBoxBuiltInDictionary.Controls.Add(this.buttonDeleteSelectedWord);
-            this.groupBoxBuiltInDictionary.Controls.Add(this.textBoxNewWordToAdd);
-            this.groupBoxBuiltInDictionary.Controls.Add(this.buttonAddNewWordToTheMasterDictionary);
-            this.groupBoxBuiltInDictionary.Controls.Add(this.gridViewDictionaryItems);
+            this.groupBoxBuiltInDictionary.Controls.Add(this.masterDictionaryManager1);
             this.groupBoxBuiltInDictionary.FooterImageIndex = -1;
             this.groupBoxBuiltInDictionary.FooterImageKey = "";
             this.groupBoxBuiltInDictionary.HeaderImageIndex = -1;
@@ -208,48 +195,6 @@
             this.groupBoxBuiltInDictionary.Size = new System.Drawing.Size(306, 405);
             this.groupBoxBuiltInDictionary.TabIndex = 5;
             this.groupBoxBuiltInDictionary.Text = "Вграден речник";
-            // 
-            // radLabel3
-            // 
-            this.radLabel3.Location = new System.Drawing.Point(6, 336);
-            this.radLabel3.Name = "radLabel3";
-            this.radLabel3.Size = new System.Drawing.Size(92, 18);
-            this.radLabel3.TabIndex = 4;
-            this.radLabel3.Text = "Дума или фраза:";
-            // 
-            // buttonDeleteSelectedWord
-            // 
-            this.buttonDeleteSelectedWord.Location = new System.Drawing.Point(194, 376);
-            this.buttonDeleteSelectedWord.Name = "buttonDeleteSelectedWord";
-            this.buttonDeleteSelectedWord.Size = new System.Drawing.Size(107, 24);
-            this.buttonDeleteSelectedWord.TabIndex = 3;
-            this.buttonDeleteSelectedWord.Text = "Изтрий";
-            this.buttonDeleteSelectedWord.Click += new System.EventHandler(this.buttonDeleteSelectedWord_Click);
-            // 
-            // textBoxNewWordToAdd
-            // 
-            this.textBoxNewWordToAdd.Location = new System.Drawing.Point(6, 354);
-            this.textBoxNewWordToAdd.Name = "textBoxNewWordToAdd";
-            this.textBoxNewWordToAdd.Size = new System.Drawing.Size(295, 20);
-            this.textBoxNewWordToAdd.TabIndex = 2;
-            this.textBoxNewWordToAdd.TabStop = false;
-            this.textBoxNewWordToAdd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxNewWordToAdd_KeyDown);
-            // 
-            // buttonAddNewWordToTheMasterDictionary
-            // 
-            this.buttonAddNewWordToTheMasterDictionary.Location = new System.Drawing.Point(6, 376);
-            this.buttonAddNewWordToTheMasterDictionary.Name = "buttonAddNewWordToTheMasterDictionary";
-            this.buttonAddNewWordToTheMasterDictionary.Size = new System.Drawing.Size(181, 24);
-            this.buttonAddNewWordToTheMasterDictionary.TabIndex = 1;
-            this.buttonAddNewWordToTheMasterDictionary.Text = "Добави";
-            this.buttonAddNewWordToTheMasterDictionary.Click += new System.EventHandler(this.buttonAddNewWordToTheMasterDictionary_Click);
-            // 
-            // gridViewDictionaryItems
-            // 
-            this.gridViewDictionaryItems.Location = new System.Drawing.Point(6, 22);
-            this.gridViewDictionaryItems.Name = "gridViewDictionaryItems";
-            this.gridViewDictionaryItems.Size = new System.Drawing.Size(295, 307);
-            this.gridViewDictionaryItems.TabIndex = 0;
             // 
             // groupBoxGrammarBuilder
             // 
@@ -289,7 +234,7 @@
             // 
             // labelContext
             // 
-            this.labelContext.Location = new System.Drawing.Point(157, 336);
+            this.labelContext.Location = new System.Drawing.Point(159, 336);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(54, 18);
             this.labelContext.TabIndex = 5;
@@ -358,6 +303,13 @@
             this.wizardPage1.Title = "Създаване на граматика";
             this.wizardPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
+            // masterDictionaryManager1
+            // 
+            this.masterDictionaryManager1.Location = new System.Drawing.Point(6, 22);
+            this.masterDictionaryManager1.Name = "masterDictionaryManager1";
+            this.masterDictionaryManager1.Size = new System.Drawing.Size(295, 378);
+            this.masterDictionaryManager1.TabIndex = 0;
+            // 
             // PluginWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,12 +331,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxBuiltInDictionary)).EndInit();
             this.groupBoxBuiltInDictionary.ResumeLayout(false);
-            this.groupBoxBuiltInDictionary.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonDeleteSelectedWord)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxNewWordToAdd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonAddNewWordToTheMasterDictionary)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewDictionaryItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxGrammarBuilder)).EndInit();
             this.groupBoxGrammarBuilder.ResumeLayout(false);
             this.groupBoxGrammarBuilder.PerformLayout();
@@ -415,18 +361,14 @@
         private Telerik.WinControls.UI.RadButton buttonExportToXML;
         private Telerik.WinControls.UI.RadTreeView treeViewCommands;
         private Telerik.WinControls.UI.RadGroupBox groupBoxBuiltInDictionary;
-        private Telerik.WinControls.UI.RadButton buttonDeleteSelectedWord;
-        private Telerik.WinControls.UI.RadTextBox textBoxNewWordToAdd;
-        private Telerik.WinControls.UI.RadButton buttonAddNewWordToTheMasterDictionary;
-        private Telerik.WinControls.UI.RadGridView gridViewDictionaryItems;
         private Telerik.WinControls.UI.RadGroupBox groupBoxGrammarBuilder;
         private Telerik.WinControls.UI.RadButton buttonBrowse;
         private Telerik.WinControls.UI.RadTextBox textBoxSaveFilePath;
         private Telerik.WinControls.UI.RadLabel radLabel2;
-        private Telerik.WinControls.UI.RadLabel radLabel3;
         private Telerik.WinControls.UI.RadTextBox textBoxContext;
         private Telerik.WinControls.UI.RadLabel labelContext;
         private Telerik.WinControls.UI.RadCheckBox checkBoxItemOptional;
+        private MasterDictionaryUserControl.MasterDictionaryManager masterDictionaryManager1;
     }
 }
 

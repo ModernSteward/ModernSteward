@@ -7,5 +7,6 @@ namespace ModernSteward
 {
     public class Core
     {
+
     }
 }

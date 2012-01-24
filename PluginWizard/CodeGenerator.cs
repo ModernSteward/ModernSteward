@@ -74,13 +74,19 @@ namespace PluginWizard
         {
             string currentCode = "";
             currentCode += ShiftNTabsInTheConsole(level);
-            currentCode += "if(" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \""
+            currentCode += "if (" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \""
                 + node.Text.ToString() + "\")";
-            currentCode += "{" + Environment.NewLine;
+            currentCode += " {";
+            if ((node.Tag as GrammarTreeViewTag).Optional)
+            {
+                currentCode += " //optional element";
+            }
+
+            currentCode += Environment.NewLine;            
 
             if (node.Tag != null)
             {
-                if (node.Tag.ToString() == Consts.Dictation)
+                if ((node.Tag as GrammarTreeViewTag).IsDictation)
                 {
                     currentCode += ShiftNTabsInTheConsole(level + 1);
                     string dictationFor = node.Text.Replace(" ", "");
@@ -99,7 +105,6 @@ namespace PluginWizard
                 iteration++;
 
                 currentCode += GeneratingTheCode(childNode, level + 1, generatedCode);
-
             }
             currentCode += ShiftNTabsInTheConsole(level);
             currentCode += "}" + Environment.NewLine;

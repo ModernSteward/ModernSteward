@@ -15,7 +15,7 @@ namespace ModernSteward
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddPluginTestForm());
+            Application.Run(new MainForm());
         }
     }
 }

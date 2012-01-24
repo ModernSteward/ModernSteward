@@ -50,45 +50,11 @@ namespace PluginWizard
             
             checkBoxIsTheNodeDictation.IsThreeState = false;
             checkBoxIsTheNodeDictation.Visible = false;
-
-            gridViewDictionaryItems.AllowAddNewRow = false;
-            gridViewDictionaryItems.AllowColumnChooser = false;
-            gridViewDictionaryItems.AllowColumnResize = false;
-            gridViewDictionaryItems.AllowDeleteRow = false;
-            gridViewDictionaryItems.AllowDrop = false;
-            gridViewDictionaryItems.AllowEditRow = false;
-            gridViewDictionaryItems.AllowMultiColumnSorting = false;
-            gridViewDictionaryItems.AllowRowReorder = false;
-            gridViewDictionaryItems.EnableCustomGrouping = false;
-            gridViewDictionaryItems.EnableCustomSorting = false;
-            gridViewDictionaryItems.EnableGrouping = false;
-
-            gridViewDictionaryItems.Columns.Add("Дума");
-
-            RenewGridViewDictionaryItems();
-
-            gridViewDictionaryItems.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-
         }
 
         void HelpButton_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
-        }
-
-        private void RenewGridViewDictionaryItems()
-        {
-            gridViewDictionaryItems.Rows.Clear();
-
-            ISpeechLexiconWords splexWords;
-            SpLexicon lex = new SpLexicon();
-            int generationId = 0;
-            splexWords = lex.GetWords(SpeechLexiconType.SLTUser, out generationId);
-            foreach (ISpeechLexiconWord splexWord in splexWords)
-            {
-                gridViewDictionaryItems.Rows.Add(splexWord.Word);
-            }
-
         }
 
         private void checkBoxIsTheNodeDictation_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
@@ -170,30 +136,7 @@ namespace PluginWizard
             }
         }
 
-        private void buttonAddNewWordToTheMasterDictionary_Click(object sender, EventArgs e)
-        {
-            addWordToTheMasterDictionary(textBoxNewWordToAdd.Text);
-        }
-
-        void addWordToTheMasterDictionary(string word)
-        {
-            SpLexicon lex = new SpLexicon();
-            lex.AddPronunciation(word, 1033);
-            textBoxNewWordToAdd.Text = "";
-            RenewGridViewDictionaryItems();
-        }
-
-        private void buttonDeleteSelectedWord_Click(object sender, EventArgs e)
-        {
-            deleteWordFromTheDictionary(gridViewDictionaryItems.SelectedRows[0].Cells[0].Value.ToString());
-        }
-
-        private void deleteWordFromTheDictionary(string wordToDelete)
-        {
-            SpLexicon lex = new SpLexicon();
-            lex.RemovePronunciation(wordToDelete, 1033);
-            RenewGridViewDictionaryItems();
-        }
+        
 
         private string pluginPath = @"C:\CustomPlugin";
 
@@ -234,14 +177,6 @@ namespace PluginWizard
         private void pluginWizard_Cancel(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void textBoxNewWordToAdd_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Return)
-            {
-                addWordToTheMasterDictionary(textBoxNewWordToAdd.Text);
-            }
         }
 
         private void textBoxContext_TextChanged(object sender, EventArgs e)
