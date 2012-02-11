@@ -24,6 +24,7 @@ namespace ModernSteward
         public Plugin(string aName, string aKeyword, string aAssemblyPath)
         {
             Name = aName;
+
             Keyword = aKeyword;
 
             Assembly = Assembly.LoadFrom(aAssemblyPath);

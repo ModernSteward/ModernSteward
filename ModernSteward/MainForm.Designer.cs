@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn3 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn3 = new Telerik.WinControls.UI.GridViewCommandColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn4 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn4 = new Telerik.WinControls.UI.GridViewCommandColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn1 = new Telerik.WinControls.UI.GridViewCommandColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn2 = new Telerik.WinControls.UI.GridViewCommandColumn();
             this.gridViewNotInitializedPlugins = new Telerik.WinControls.UI.RadGridView();
             this.buttonAddPlugin = new Telerik.WinControls.UI.RadButton();
             this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
@@ -47,8 +47,13 @@
             this.menuItemFile = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemAdvanced = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItemPluginWizard = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenu1 = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMasterDictionary = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemAbout = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemCreators = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemHelp = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenu1 = new Telerik.WinControls.UI.RadMenu();
+            this.labelPluginName = new Telerik.WinControls.UI.RadLabel();
+            this.textBoxPluginName = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewNotInitializedPlugins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddPlugin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
@@ -64,6 +69,8 @@
             this.radGroupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,25 +86,25 @@
             // gridViewNotInitializedPlugins
             // 
             this.gridViewNotInitializedPlugins.MasterTemplate.AllowAddNewRow = false;
-            gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.FieldName = "nameOfThePlugin";
-            gridViewTextBoxColumn3.HeaderText = "Име";
-            gridViewTextBoxColumn3.Name = "nameOfThePlugin";
-            gridViewTextBoxColumn3.ReadOnly = true;
-            gridViewCheckBoxColumn3.EnableExpressionEditor = false;
-            gridViewCheckBoxColumn3.FieldName = "initializePluginOnStartup";
-            gridViewCheckBoxColumn3.HeaderText = "Инициализирай при стартиране";
-            gridViewCheckBoxColumn3.MinWidth = 20;
-            gridViewCheckBoxColumn3.Name = "initializePluginOnStartup";
-            gridViewCheckBoxColumn3.WrapText = true;
-            gridViewCommandColumn3.EnableExpressionEditor = false;
-            gridViewCommandColumn3.FieldName = "initializeThePlugin";
-            gridViewCommandColumn3.Name = "initializeThePlugin";
-            gridViewCommandColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn1.EnableExpressionEditor = false;
+            gridViewTextBoxColumn1.FieldName = "nameOfThePlugin";
+            gridViewTextBoxColumn1.HeaderText = "Име";
+            gridViewTextBoxColumn1.Name = "nameOfThePlugin";
+            gridViewTextBoxColumn1.ReadOnly = true;
+            gridViewCheckBoxColumn1.EnableExpressionEditor = false;
+            gridViewCheckBoxColumn1.FieldName = "initializePluginOnStartup";
+            gridViewCheckBoxColumn1.HeaderText = "Инициализирай при стартиране";
+            gridViewCheckBoxColumn1.MinWidth = 20;
+            gridViewCheckBoxColumn1.Name = "initializePluginOnStartup";
+            gridViewCheckBoxColumn1.WrapText = true;
+            gridViewCommandColumn1.EnableExpressionEditor = false;
+            gridViewCommandColumn1.FieldName = "initializeThePlugin";
+            gridViewCommandColumn1.Name = "initializeThePlugin";
+            gridViewCommandColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.gridViewNotInitializedPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn3,
-            gridViewCheckBoxColumn3,
-            gridViewCommandColumn3});
+            gridViewTextBoxColumn1,
+            gridViewCheckBoxColumn1,
+            gridViewCommandColumn1});
             this.gridViewNotInitializedPlugins.MasterTemplate.EnableGrouping = false;
             this.gridViewNotInitializedPlugins.MasterTemplate.ShowRowHeaderColumn = false;
             this.gridViewNotInitializedPlugins.Name = "gridViewNotInitializedPlugins";
@@ -108,11 +115,12 @@
             // 
             // buttonAddPlugin
             // 
-            this.buttonAddPlugin.Location = new System.Drawing.Point(193, 48);
+            this.buttonAddPlugin.Location = new System.Drawing.Point(194, 72);
             this.buttonAddPlugin.Name = "buttonAddPlugin";
             this.buttonAddPlugin.Size = new System.Drawing.Size(135, 24);
             this.buttonAddPlugin.TabIndex = 1;
             this.buttonAddPlugin.Text = "Добави плъгин";
+            this.buttonAddPlugin.Click += new System.EventHandler(this.buttonAddPlugin_Click);
             // 
             // radGroupBox1
             // 
@@ -168,25 +176,25 @@
             // gridViewInitializedPlugins
             // 
             this.gridViewInitializedPlugins.MasterTemplate.AllowAddNewRow = false;
-            gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.FieldName = "nameOfThePlugin";
-            gridViewTextBoxColumn4.HeaderText = "Име";
-            gridViewTextBoxColumn4.Name = "nameOfThePlugin";
-            gridViewTextBoxColumn4.ReadOnly = true;
-            gridViewCheckBoxColumn4.EnableExpressionEditor = false;
-            gridViewCheckBoxColumn4.FieldName = "initializePluginOnStartup";
-            gridViewCheckBoxColumn4.HeaderText = "Инициализирай при стартиране";
-            gridViewCheckBoxColumn4.MinWidth = 20;
-            gridViewCheckBoxColumn4.Name = "initializePluginOnStartup";
-            gridViewCheckBoxColumn4.WrapText = true;
-            gridViewCommandColumn4.EnableExpressionEditor = false;
-            gridViewCommandColumn4.FieldName = "initializeThePlugin";
-            gridViewCommandColumn4.Name = "initializeThePlugin";
-            gridViewCommandColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn2.EnableExpressionEditor = false;
+            gridViewTextBoxColumn2.FieldName = "nameOfThePlugin";
+            gridViewTextBoxColumn2.HeaderText = "Име";
+            gridViewTextBoxColumn2.Name = "nameOfThePlugin";
+            gridViewTextBoxColumn2.ReadOnly = true;
+            gridViewCheckBoxColumn2.EnableExpressionEditor = false;
+            gridViewCheckBoxColumn2.FieldName = "initializePluginOnStartup";
+            gridViewCheckBoxColumn2.HeaderText = "Инициализирай при стартиране";
+            gridViewCheckBoxColumn2.MinWidth = 20;
+            gridViewCheckBoxColumn2.Name = "initializePluginOnStartup";
+            gridViewCheckBoxColumn2.WrapText = true;
+            gridViewCommandColumn2.EnableExpressionEditor = false;
+            gridViewCommandColumn2.FieldName = "initializeThePlugin";
+            gridViewCommandColumn2.Name = "initializeThePlugin";
+            gridViewCommandColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.gridViewInitializedPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn4,
-            gridViewCheckBoxColumn4,
-            gridViewCommandColumn4});
+            gridViewTextBoxColumn2,
+            gridViewCheckBoxColumn2,
+            gridViewCommandColumn2});
             this.gridViewInitializedPlugins.MasterTemplate.EnableGrouping = false;
             this.gridViewInitializedPlugins.MasterTemplate.ShowRowHeaderColumn = false;
             this.gridViewInitializedPlugins.Name = "gridViewInitializedPlugins";
@@ -198,6 +206,8 @@
             // radGroupBox3
             // 
             this.radGroupBox3.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.radGroupBox3.Controls.Add(this.textBoxPluginName);
+            this.radGroupBox3.Controls.Add(this.labelPluginName);
             this.radGroupBox3.Controls.Add(this.browseEditorAddPlugin);
             this.radGroupBox3.Controls.Add(this.buttonAddPlugin);
             this.radGroupBox3.FooterImageIndex = -1;
@@ -213,7 +223,7 @@
             // 
             // 
             this.radGroupBox3.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox3.Size = new System.Drawing.Size(334, 78);
+            this.radGroupBox3.Size = new System.Drawing.Size(334, 102);
             this.radGroupBox3.TabIndex = 4;
             this.radGroupBox3.Text = "Добави плъгин";
             // 
@@ -226,11 +236,12 @@
             // 
             // buttonStartStop
             // 
-            this.buttonStartStop.Location = new System.Drawing.Point(198, 21);
+            this.buttonStartStop.Location = new System.Drawing.Point(189, 21);
             this.buttonStartStop.Name = "buttonStartStop";
-            this.buttonStartStop.Size = new System.Drawing.Size(130, 51);
+            this.buttonStartStop.Size = new System.Drawing.Size(139, 73);
             this.buttonStartStop.TabIndex = 5;
             this.buttonStartStop.Text = "Стартирай";
+            this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
             // 
             // radGroupBox4
             // 
@@ -250,7 +261,7 @@
             // 
             // 
             this.radGroupBox4.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox4.Size = new System.Drawing.Size(334, 79);
+            this.radGroupBox4.Size = new System.Drawing.Size(334, 102);
             this.radGroupBox4.TabIndex = 7;
             this.radGroupBox4.Text = "Статус";
             // 
@@ -258,7 +269,7 @@
             // 
             this.labelStartStop.Font = new System.Drawing.Font("Segoe UI", 18F);
             this.labelStartStop.ForeColor = System.Drawing.Color.Maroon;
-            this.labelStartStop.Location = new System.Drawing.Point(19, 27);
+            this.labelStartStop.Location = new System.Drawing.Point(19, 41);
             this.labelStartStop.Name = "labelStartStop";
             this.labelStartStop.Size = new System.Drawing.Size(164, 37);
             this.labelStartStop.TabIndex = 7;
@@ -292,17 +303,6 @@
             this.radMenuItemPluginWizard.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.radMenuItemPluginWizard.Click += new System.EventHandler(this.radMenuItemPluginWizard_Click);
             // 
-            // radMenu1
-            // 
-            this.radMenu1.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.menuItemFile,
-            this.menuItemAdvanced});
-            this.radMenu1.Location = new System.Drawing.Point(0, 0);
-            this.radMenu1.Name = "radMenu1";
-            this.radMenu1.Size = new System.Drawing.Size(698, 20);
-            this.radMenu1.TabIndex = 8;
-            this.radMenu1.Text = "radMenu1";
-            // 
             // menuItemMasterDictionary
             // 
             this.menuItemMasterDictionary.AccessibleDescription = "Главен речник";
@@ -310,12 +310,70 @@
             this.menuItemMasterDictionary.Name = "menuItemMasterDictionary";
             this.menuItemMasterDictionary.Text = "Главен речник";
             this.menuItemMasterDictionary.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemMasterDictionary.Click += new System.EventHandler(this.menuItemMasterDictionary_Click);
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.AccessibleDescription = "За програмата";
+            this.menuItemAbout.AccessibleName = "За програмата";
+            this.menuItemAbout.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.menuItemCreators,
+            this.menuItemHelp});
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Text = "За програмата";
+            this.menuItemAbout.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // menuItemCreators
+            // 
+            this.menuItemCreators.AccessibleDescription = "Създатели";
+            this.menuItemCreators.AccessibleName = "Създатели";
+            this.menuItemCreators.Name = "menuItemCreators";
+            this.menuItemCreators.Text = "Създатели";
+            this.menuItemCreators.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemCreators.Click += new System.EventHandler(this.menuItemCreators_Click);
+            // 
+            // menuItemHelp
+            // 
+            this.menuItemHelp.AccessibleDescription = "Помощ";
+            this.menuItemHelp.AccessibleName = "Помощ";
+            this.menuItemHelp.Name = "menuItemHelp";
+            this.menuItemHelp.Text = "Помощ";
+            this.menuItemHelp.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemHelp.Click += new System.EventHandler(this.menuItemHelp_Click);
+            // 
+            // radMenu1
+            // 
+            this.radMenu1.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.menuItemFile,
+            this.menuItemAdvanced,
+            this.menuItemAbout});
+            this.radMenu1.Location = new System.Drawing.Point(0, 0);
+            this.radMenu1.Name = "radMenu1";
+            this.radMenu1.Size = new System.Drawing.Size(698, 20);
+            this.radMenu1.TabIndex = 8;
+            this.radMenu1.Text = "radMenu1";
+            // 
+            // labelPluginName
+            // 
+            this.labelPluginName.Location = new System.Drawing.Point(7, 49);
+            this.labelPluginName.Name = "labelPluginName";
+            this.labelPluginName.Size = new System.Drawing.Size(31, 18);
+            this.labelPluginName.TabIndex = 3;
+            this.labelPluginName.Text = "Име:";
+            // 
+            // textBoxPluginName
+            // 
+            this.textBoxPluginName.Location = new System.Drawing.Point(45, 46);
+            this.textBoxPluginName.Name = "textBoxPluginName";
+            this.textBoxPluginName.Size = new System.Drawing.Size(283, 20);
+            this.textBoxPluginName.TabIndex = 4;
+            this.textBoxPluginName.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 385);
+            this.ClientSize = new System.Drawing.Size(698, 400);
             this.Controls.Add(this.radMenu1);
             this.Controls.Add(this.radGroupBox4);
             this.Controls.Add(this.radGroupBox3);
@@ -337,6 +395,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewInitializedPlugins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).EndInit();
             this.radGroupBox3.ResumeLayout(false);
+            this.radGroupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.browseEditorAddPlugin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox4)).EndInit();
@@ -344,6 +403,8 @@
             this.radGroupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -365,8 +426,13 @@
         private Telerik.WinControls.UI.RadMenuItem menuItemFile;
         private Telerik.WinControls.UI.RadMenuItem menuItemAdvanced;
         private Telerik.WinControls.UI.RadMenuItem radMenuItemPluginWizard;
-        private Telerik.WinControls.UI.RadMenu radMenu1;
         private Telerik.WinControls.UI.RadMenuItem menuItemMasterDictionary;
+        private Telerik.WinControls.UI.RadMenuItem menuItemAbout;
+        private Telerik.WinControls.UI.RadMenuItem menuItemCreators;
+        private Telerik.WinControls.UI.RadMenuItem menuItemHelp;
+        private Telerik.WinControls.UI.RadMenu radMenu1;
+        private Telerik.WinControls.UI.RadTextBox textBoxPluginName;
+        private Telerik.WinControls.UI.RadLabel labelPluginName;
 
     }
 }

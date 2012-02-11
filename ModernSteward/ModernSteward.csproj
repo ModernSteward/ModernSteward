@@ -55,6 +55,12 @@
     <Reference Include="TelerikCommon, Version=2011.3.11.1219, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutTheCreators.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutTheCreators.Designer.cs">
+      <DependentUpon>AboutTheCreators.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPluginTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,13 +73,25 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterDictionaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterDictionaryForm.Designer.cs">
+      <DependentUpon>MasterDictionaryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutTheCreators.resx">
+      <DependentUpon>AboutTheCreators.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddPluginTestForm.resx">
       <DependentUpon>AddPluginTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterDictionaryForm.resx">
+      <DependentUpon>MasterDictionaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,6 +116,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{E465DCA0-BEE6-48E8-A7C1-1DB4DBC5B2D9}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MasterDictionaryUserControl\MasterDictionaryUserControl.csproj">
+      <Project>{B5549520-B124-41C4-9FB0-B2F1D92169B0}</Project>
+      <Name>MasterDictionaryUserControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\PluginWizard\PluginWizard.csproj">
       <Project>{55323C9F-BE91-4DD0-9E4B-4CD9B34BC3D6}</Project>

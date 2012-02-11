@@ -25,7 +25,7 @@
 8! 6. Skype controller
 
 9! 11. Torrent client manager
-	good luck... how exactly are we gonna browse for the .torrent file?
+	good luck... how exactly are we supposed to browse for the .torrent file?
 
 10! 7. Camera control
 
