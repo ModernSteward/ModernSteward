@@ -60,6 +60,7 @@
     <Compile Include="GrammarTreeViewTag.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginFunctionality.cs" />
+    <Compile Include="SemanticsToDict.cs" />
     <Compile Include="TreeViewToGrammarBuilderAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
