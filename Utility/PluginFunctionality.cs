@@ -10,7 +10,11 @@ namespace ModernSteward
     {
         public abstract void Trigger(List<KeyValuePair<string, string>> aSemantics);
 
-        public abstract void Initialize();
+        /// <summary>
+        /// Initializes the plugin
+        /// </summary>
+        /// <returns>Bool value if the initialization was successfull</returns>
+        public abstract bool Initialize();
 
         public abstract GrammarBuilder GetGrammarBuilder();
 

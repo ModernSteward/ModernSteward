@@ -15,17 +15,13 @@ namespace ModernSteward
     {
         public string Name;
 
-        public string Keyword;
-
         private Assembly Assembly;
 
         object instanceOfMyType;
 
-        public Plugin(string aName, string aKeyword, string aAssemblyPath)
+        public Plugin(string aName, string aAssemblyPath)
         {
             Name = aName;
-
-            Keyword = aKeyword;
 
             Assembly = Assembly.LoadFrom(aAssemblyPath);
             Type type = Assembly.GetType("ModernSteward.CustomPlugin");
@@ -47,9 +43,9 @@ namespace ModernSteward
             return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
         }
 
-        public void Initialize(bool onStartup)
+        public bool Initialize()
         {
-            (instanceOfMyType as PluginFunctionality).Initialize();
+            return (instanceOfMyType as PluginFunctionality).Initialize();
         }
 
         public override string ToString()

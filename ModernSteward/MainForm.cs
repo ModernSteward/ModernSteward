@@ -24,35 +24,51 @@ namespace ModernSteward
         {
             InitializeComponent();
 
-            gridViewNotInitializedPlugins.AllowAutoSizeColumns = true;
-            gridViewNotInitializedPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            gridViewPlugins.AllowAutoSizeColumns = true;
+            gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
 
-            gridViewInitializedPlugins.AllowAutoSizeColumns = true;
-            gridViewInitializedPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            gridViewPlugins.AllowAutoSizeColumns = true;
+            gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
 
-            gridViewNotInitializedPlugins.Rows.Add("LightsManagerPlugin", false, "Инициализирай!");
-
-            gridViewNotInitializedPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewNotInitializedPlugins_CommandCellClick);
-            gridViewInitializedPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewInitializedPlugins_CommandCellClick);
-
-            gridViewNotInitializedPlugins.Rows[0].Cells[0].Style.BackColor = Color.Red;
-
-            //(gridViewPlugins.Columns[2] as GridViewCommandColumn).HeaderTextAlignment = ContentAlignment.MiddleCenter;
-            
+            gridViewPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewPlugins_CommandCellClick);
         }
 
-        void gridViewInitializedPlugins_CommandCellClick(object sender, EventArgs e)
+        void gridViewPlugins_CommandCellClick(object sender, EventArgs e)
         {
-            var cell = (sender as GridCommandCellElement);
-            gridViewNotInitializedPlugins.Rows.Add(cell.RowInfo.Cells[0].Value, cell.RowInfo.Cells[1].Value, "Инициализирай!");
-            gridViewInitializedPlugins.Rows.Remove((sender as GridCommandCellElement).RowInfo);
-        }
+            var buttonCell = (sender as GridCommandCellElement);
+            var row = buttonCell.RowInfo;
 
-        void gridViewNotInitializedPlugins_CommandCellClick(object sender, EventArgs e)
-        {
-            var cell = (sender as GridCommandCellElement);
-            gridViewInitializedPlugins.Rows.Add(cell.RowInfo.Cells[0].Value, cell.RowInfo.Cells[1].Value, "Деинициализирай!");
-            gridViewNotInitializedPlugins.Rows.Remove((sender as GridCommandCellElement).RowInfo);
+            if (((bool)row.Cells["Checkbox"].Value) == false)
+            {
+                Plugin newPlugin = new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString());
+                if (newPlugin.Initialize())
+                {
+                    mPluginHandler.Plugins.Add(newPlugin);
+                    row.Cells["Checkbox"].Value = true;
+                    row.Cells["Button"].Value = "Деинициализирай!";
+                }
+                else
+                {
+                    RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се с създателя на плъгина.");
+                }
+            }
+            else
+            {
+                foreach (var plugin in mPluginHandler.Plugins)
+                {
+                    if (plugin.Name == row.Cells["Name"].Value.ToString())
+                    {
+                        mPluginHandler.Plugins.Remove(plugin);
+
+                        row.Cells["Checkbox"].Value = false;
+                        row.Cells["Button"].Value = "Инициализирай!";
+                        break;
+                    }
+                }
+            }
+
+            //gridViewInitializedPlugins.Rows.Add(cell.RowInfo.Cells[0].Value, cell.RowInfo.Cells[1].Value, "Деинициализирай!");
+            //gridViewNotInitializedPlugins.Rows.Remove((sender as GridCommandCellElement).RowInfo);
         }
 
         private void radMenuItemPluginWizard_Click(object sender, EventArgs e)
@@ -81,17 +97,23 @@ namespace ModernSteward
 
         private void buttonAddPlugin_Click(object sender, EventArgs e)
         {
-            if (browseEditorAddPlugin.Text != "" && Regex.IsMatch(textBoxPluginName.Text, @"^[\w]+$")) //regex expression matches if the textBoxPluginName.Text contains only letters, or underscores
+            try
             {
                 try
                 {
-                    mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginName.Text, browseEditorAddPlugin.Text));
+                    // Little hack to check if the program will later be able to load the plugin successfully
+                    PluginHandler testPluginHandler = new PluginHandler();
+                    testPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, browseEditorAddPlugin.Value));
+
+                    gridViewPlugins.Rows.Add(false, textBoxPluginName.Text, "Инициализирай!");
+                    gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = browseEditorAddPlugin.Value;
                 }
-                catch
+                catch (Exception ex)
                 {
                     RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!");
                 }
             }
+            catch { }
         }
 
 
@@ -99,24 +121,42 @@ namespace ModernSteward
         {
             if (!recognitionEngineRunning)
             {
-                mCore.LoadPlugins(mPluginHandler);
+                if (mPluginHandler.Plugins.Count != 0)
+                {
+                    mCore.LoadPlugins(mPluginHandler);
+                    try
+                    {
+                        mCore.StartAsyncRecognition();
+                    }
+                    catch
+                    {
+                        RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.");
+                    }
 
-                mCore.StartAsyncRecognition();
-                buttonStartStop.Text = "Изключи";
-                labelStartStop.Text = "ВКЛЮЧЕНО";
-                labelStartStop.ForeColor = Color.Green;
+                    buttonStartStop.Text = "Изключи";
+                    labelStartStop.Text = "ВКЛЮЧЕНО";
+                    labelStartStop.ForeColor = Color.Green;
 
-                recognitionEngineRunning = true;
+                    recognitionEngineRunning = true;
+
+                    gridViewPlugins.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.");
+                }
             }
             else
             {
                 mCore.StopAsyncRecognition();
+
                 buttonStartStop.Text = "Включи";
                 labelStartStop.Text = "ИЗКЛЮЧЕНО";
                 labelStartStop.ForeColor = Color.Red;
 
                 recognitionEngineRunning = false;
-                
+
+                gridViewPlugins.Enabled = true;
             }
         }
     }

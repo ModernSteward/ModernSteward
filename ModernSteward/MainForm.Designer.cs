@@ -28,21 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn1 = new Telerik.WinControls.UI.GridViewCommandColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn2 = new Telerik.WinControls.UI.GridViewCommandColumn();
-            this.gridViewNotInitializedPlugins = new Telerik.WinControls.UI.RadGridView();
+            this.gridViewPlugins = new Telerik.WinControls.UI.RadGridView();
             this.buttonAddPlugin = new Telerik.WinControls.UI.RadButton();
-            this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
-            this.radGroupBox2 = new Telerik.WinControls.UI.RadGroupBox();
-            this.gridViewInitializedPlugins = new Telerik.WinControls.UI.RadGridView();
-            this.radGroupBox3 = new Telerik.WinControls.UI.RadGroupBox();
+            this.groupBoxPlugins = new Telerik.WinControls.UI.RadGroupBox();
+            this.groupBoxAddPlugin = new Telerik.WinControls.UI.RadGroupBox();
+            this.textBoxPluginName = new Telerik.WinControls.UI.RadTextBox();
+            this.labelPluginName = new Telerik.WinControls.UI.RadLabel();
             this.browseEditorAddPlugin = new Telerik.WinControls.UI.RadBrowseEditor();
             this.buttonStartStop = new Telerik.WinControls.UI.RadButton();
-            this.radGroupBox4 = new Telerik.WinControls.UI.RadGroupBox();
+            this.groupBoxStatus = new Telerik.WinControls.UI.RadGroupBox();
             this.labelStartStop = new Telerik.WinControls.UI.RadLabel();
             this.menuItemFile = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemAdvanced = new Telerik.WinControls.UI.RadMenuItem();
@@ -51,67 +48,66 @@
             this.menuItemAbout = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemCreators = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemHelp = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenu1 = new Telerik.WinControls.UI.RadMenu();
-            this.labelPluginName = new Telerik.WinControls.UI.RadLabel();
-            this.textBoxPluginName = new Telerik.WinControls.UI.RadTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewNotInitializedPlugins)).BeginInit();
+            this.menuMain = new Telerik.WinControls.UI.RadMenu();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPlugins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddPlugin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
-            this.radGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).BeginInit();
-            this.radGroupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewInitializedPlugins)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).BeginInit();
-            this.radGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxPlugins)).BeginInit();
+            this.groupBoxPlugins.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxAddPlugin)).BeginInit();
+            this.groupBoxAddPlugin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.browseEditorAddPlugin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox4)).BeginInit();
-            this.radGroupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).BeginInit();
+            this.groupBoxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridViewNotInitializedPlugins
+            // gridViewPlugins
             // 
-            this.gridViewNotInitializedPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-            this.gridViewNotInitializedPlugins.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gridViewNotInitializedPlugins.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.gridViewNotInitializedPlugins.ForeColor = System.Drawing.Color.Black;
-            this.gridViewNotInitializedPlugins.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewNotInitializedPlugins.Location = new System.Drawing.Point(7, 21);
+            this.gridViewPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+            this.gridViewPlugins.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gridViewPlugins.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.gridViewPlugins.ForeColor = System.Drawing.Color.Black;
+            this.gridViewPlugins.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.gridViewPlugins.Location = new System.Drawing.Point(7, 21);
             // 
-            // gridViewNotInitializedPlugins
+            // gridViewPlugins
             // 
-            this.gridViewNotInitializedPlugins.MasterTemplate.AllowAddNewRow = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.FieldName = "nameOfThePlugin";
-            gridViewTextBoxColumn1.HeaderText = "Име";
-            gridViewTextBoxColumn1.Name = "nameOfThePlugin";
-            gridViewTextBoxColumn1.ReadOnly = true;
-            gridViewCheckBoxColumn1.EnableExpressionEditor = false;
-            gridViewCheckBoxColumn1.FieldName = "initializePluginOnStartup";
-            gridViewCheckBoxColumn1.HeaderText = "Инициализирай при стартиране";
-            gridViewCheckBoxColumn1.MinWidth = 20;
-            gridViewCheckBoxColumn1.Name = "initializePluginOnStartup";
-            gridViewCheckBoxColumn1.WrapText = true;
-            gridViewCommandColumn1.EnableExpressionEditor = false;
-            gridViewCommandColumn1.FieldName = "initializeThePlugin";
-            gridViewCommandColumn1.Name = "initializeThePlugin";
-            gridViewCommandColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.gridViewNotInitializedPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewCheckBoxColumn1,
-            gridViewCommandColumn1});
-            this.gridViewNotInitializedPlugins.MasterTemplate.EnableGrouping = false;
-            this.gridViewNotInitializedPlugins.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridViewNotInitializedPlugins.Name = "gridViewNotInitializedPlugins";
-            this.gridViewNotInitializedPlugins.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewNotInitializedPlugins.ShowGroupPanel = false;
-            this.gridViewNotInitializedPlugins.Size = new System.Drawing.Size(321, 233);
-            this.gridViewNotInitializedPlugins.TabIndex = 0;
+            this.gridViewPlugins.MasterTemplate.AllowAddNewRow = false;
+            gridViewCheckBoxColumn2.FieldName = "Checkbox";
+            gridViewCheckBoxColumn2.HeaderText = "";
+            gridViewCheckBoxColumn2.MaxWidth = 20;
+            gridViewCheckBoxColumn2.Name = "Checkbox";
+            gridViewCheckBoxColumn2.ReadOnly = true;
+            gridViewCheckBoxColumn2.Width = 20;
+            gridViewTextBoxColumn2.EnableExpressionEditor = false;
+            gridViewTextBoxColumn2.FieldName = "Name";
+            gridViewTextBoxColumn2.HeaderText = "Име";
+            gridViewTextBoxColumn2.Name = "Name";
+            gridViewTextBoxColumn2.ReadOnly = true;
+            gridViewCommandColumn2.EnableExpressionEditor = false;
+            gridViewCommandColumn2.FieldName = "Button";
+            gridViewCommandColumn2.MaxWidth = 130;
+            gridViewCommandColumn2.MinWidth = 130;
+            gridViewCommandColumn2.Name = "Button";
+            gridViewCommandColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCommandColumn2.Width = 130;
+            this.gridViewPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
+            gridViewCheckBoxColumn2,
+            gridViewTextBoxColumn2,
+            gridViewCommandColumn2});
+            this.gridViewPlugins.MasterTemplate.EnableGrouping = false;
+            this.gridViewPlugins.MasterTemplate.ShowRowHeaderColumn = false;
+            this.gridViewPlugins.Name = "gridViewPlugins";
+            this.gridViewPlugins.ReadOnly = true;
+            this.gridViewPlugins.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.gridViewPlugins.ShowGroupPanel = false;
+            this.gridViewPlugins.Size = new System.Drawing.Size(661, 233);
+            this.gridViewPlugins.TabIndex = 0;
             // 
             // buttonAddPlugin
             // 
@@ -122,110 +118,67 @@
             this.buttonAddPlugin.Text = "Добави плъгин";
             this.buttonAddPlugin.Click += new System.EventHandler(this.buttonAddPlugin_Click);
             // 
-            // radGroupBox1
+            // groupBoxPlugins
             // 
-            this.radGroupBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox1.Controls.Add(this.gridViewNotInitializedPlugins);
-            this.radGroupBox1.FooterImageIndex = -1;
-            this.radGroupBox1.FooterImageKey = "";
-            this.radGroupBox1.HeaderImageIndex = -1;
-            this.radGroupBox1.HeaderImageKey = "";
-            this.radGroupBox1.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.radGroupBox1.HeaderText = "Неинициализирани";
-            this.radGroupBox1.Location = new System.Drawing.Point(12, 26);
-            this.radGroupBox1.Name = "radGroupBox1";
-            this.radGroupBox1.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            // 
-            // 
-            // 
-            this.radGroupBox1.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox1.Size = new System.Drawing.Size(334, 261);
-            this.radGroupBox1.TabIndex = 2;
-            this.radGroupBox1.Text = "Неинициализирани";
-            // 
-            // radGroupBox2
-            // 
-            this.radGroupBox2.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox2.Controls.Add(this.gridViewInitializedPlugins);
-            this.radGroupBox2.FooterImageIndex = -1;
-            this.radGroupBox2.FooterImageKey = "";
-            this.radGroupBox2.HeaderImageIndex = -1;
-            this.radGroupBox2.HeaderImageKey = "";
-            this.radGroupBox2.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.radGroupBox2.HeaderText = "Инициализирани";
-            this.radGroupBox2.Location = new System.Drawing.Point(352, 26);
-            this.radGroupBox2.Name = "radGroupBox2";
-            this.radGroupBox2.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxPlugins.AccessibleName = "";
+            this.groupBoxPlugins.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.groupBoxPlugins.Controls.Add(this.gridViewPlugins);
+            this.groupBoxPlugins.FooterImageIndex = -1;
+            this.groupBoxPlugins.FooterImageKey = "";
+            this.groupBoxPlugins.HeaderImageIndex = -1;
+            this.groupBoxPlugins.HeaderImageKey = "";
+            this.groupBoxPlugins.HeaderMargin = new System.Windows.Forms.Padding(0);
+            this.groupBoxPlugins.HeaderText = "Плъгини";
+            this.groupBoxPlugins.Location = new System.Drawing.Point(12, 26);
+            this.groupBoxPlugins.Name = "groupBoxPlugins";
+            this.groupBoxPlugins.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             // 
             // 
             // 
-            this.radGroupBox2.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox2.Size = new System.Drawing.Size(334, 261);
-            this.radGroupBox2.TabIndex = 3;
-            this.radGroupBox2.Text = "Инициализирани";
+            this.groupBoxPlugins.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxPlugins.Size = new System.Drawing.Size(674, 261);
+            this.groupBoxPlugins.TabIndex = 2;
+            this.groupBoxPlugins.Text = "Плъгини";
             // 
-            // gridViewInitializedPlugins
+            // groupBoxAddPlugin
             // 
-            this.gridViewInitializedPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-            this.gridViewInitializedPlugins.Cursor = System.Windows.Forms.Cursors.Default;
-            this.gridViewInitializedPlugins.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.gridViewInitializedPlugins.ForeColor = System.Drawing.Color.Black;
-            this.gridViewInitializedPlugins.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewInitializedPlugins.Location = new System.Drawing.Point(7, 21);
-            // 
-            // gridViewInitializedPlugins
-            // 
-            this.gridViewInitializedPlugins.MasterTemplate.AllowAddNewRow = false;
-            gridViewTextBoxColumn2.EnableExpressionEditor = false;
-            gridViewTextBoxColumn2.FieldName = "nameOfThePlugin";
-            gridViewTextBoxColumn2.HeaderText = "Име";
-            gridViewTextBoxColumn2.Name = "nameOfThePlugin";
-            gridViewTextBoxColumn2.ReadOnly = true;
-            gridViewCheckBoxColumn2.EnableExpressionEditor = false;
-            gridViewCheckBoxColumn2.FieldName = "initializePluginOnStartup";
-            gridViewCheckBoxColumn2.HeaderText = "Инициализирай при стартиране";
-            gridViewCheckBoxColumn2.MinWidth = 20;
-            gridViewCheckBoxColumn2.Name = "initializePluginOnStartup";
-            gridViewCheckBoxColumn2.WrapText = true;
-            gridViewCommandColumn2.EnableExpressionEditor = false;
-            gridViewCommandColumn2.FieldName = "initializeThePlugin";
-            gridViewCommandColumn2.Name = "initializeThePlugin";
-            gridViewCommandColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.gridViewInitializedPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn2,
-            gridViewCheckBoxColumn2,
-            gridViewCommandColumn2});
-            this.gridViewInitializedPlugins.MasterTemplate.EnableGrouping = false;
-            this.gridViewInitializedPlugins.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridViewInitializedPlugins.Name = "gridViewInitializedPlugins";
-            this.gridViewInitializedPlugins.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewInitializedPlugins.ShowGroupPanel = false;
-            this.gridViewInitializedPlugins.Size = new System.Drawing.Size(321, 233);
-            this.gridViewInitializedPlugins.TabIndex = 0;
-            // 
-            // radGroupBox3
-            // 
-            this.radGroupBox3.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox3.Controls.Add(this.textBoxPluginName);
-            this.radGroupBox3.Controls.Add(this.labelPluginName);
-            this.radGroupBox3.Controls.Add(this.browseEditorAddPlugin);
-            this.radGroupBox3.Controls.Add(this.buttonAddPlugin);
-            this.radGroupBox3.FooterImageIndex = -1;
-            this.radGroupBox3.FooterImageKey = "";
-            this.radGroupBox3.HeaderImageIndex = -1;
-            this.radGroupBox3.HeaderImageKey = "";
-            this.radGroupBox3.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.radGroupBox3.HeaderText = "Добави плъгин";
-            this.radGroupBox3.Location = new System.Drawing.Point(12, 294);
-            this.radGroupBox3.Name = "radGroupBox3";
-            this.radGroupBox3.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxAddPlugin.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.groupBoxAddPlugin.Controls.Add(this.textBoxPluginName);
+            this.groupBoxAddPlugin.Controls.Add(this.labelPluginName);
+            this.groupBoxAddPlugin.Controls.Add(this.browseEditorAddPlugin);
+            this.groupBoxAddPlugin.Controls.Add(this.buttonAddPlugin);
+            this.groupBoxAddPlugin.FooterImageIndex = -1;
+            this.groupBoxAddPlugin.FooterImageKey = "";
+            this.groupBoxAddPlugin.HeaderImageIndex = -1;
+            this.groupBoxAddPlugin.HeaderImageKey = "";
+            this.groupBoxAddPlugin.HeaderMargin = new System.Windows.Forms.Padding(0);
+            this.groupBoxAddPlugin.HeaderText = "Добави плъгин";
+            this.groupBoxAddPlugin.Location = new System.Drawing.Point(12, 294);
+            this.groupBoxAddPlugin.Name = "groupBoxAddPlugin";
+            this.groupBoxAddPlugin.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             // 
             // 
             // 
-            this.radGroupBox3.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox3.Size = new System.Drawing.Size(334, 102);
-            this.radGroupBox3.TabIndex = 4;
-            this.radGroupBox3.Text = "Добави плъгин";
+            this.groupBoxAddPlugin.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxAddPlugin.Size = new System.Drawing.Size(334, 102);
+            this.groupBoxAddPlugin.TabIndex = 4;
+            this.groupBoxAddPlugin.Text = "Добави плъгин";
+            // 
+            // textBoxPluginName
+            // 
+            this.textBoxPluginName.Location = new System.Drawing.Point(45, 46);
+            this.textBoxPluginName.Name = "textBoxPluginName";
+            this.textBoxPluginName.Size = new System.Drawing.Size(283, 20);
+            this.textBoxPluginName.TabIndex = 4;
+            this.textBoxPluginName.TabStop = false;
+            // 
+            // labelPluginName
+            // 
+            this.labelPluginName.Location = new System.Drawing.Point(7, 49);
+            this.labelPluginName.Name = "labelPluginName";
+            this.labelPluginName.Size = new System.Drawing.Size(31, 18);
+            this.labelPluginName.TabIndex = 3;
+            this.labelPluginName.Text = "Име:";
             // 
             // browseEditorAddPlugin
             // 
@@ -243,27 +196,27 @@
             this.buttonStartStop.Text = "Стартирай";
             this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
             // 
-            // radGroupBox4
+            // groupBoxStatus
             // 
-            this.radGroupBox4.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox4.Controls.Add(this.labelStartStop);
-            this.radGroupBox4.Controls.Add(this.buttonStartStop);
-            this.radGroupBox4.FooterImageIndex = -1;
-            this.radGroupBox4.FooterImageKey = "";
-            this.radGroupBox4.HeaderImageIndex = -1;
-            this.radGroupBox4.HeaderImageKey = "";
-            this.radGroupBox4.HeaderMargin = new System.Windows.Forms.Padding(0);
-            this.radGroupBox4.HeaderText = "Статус";
-            this.radGroupBox4.Location = new System.Drawing.Point(352, 294);
-            this.radGroupBox4.Name = "radGroupBox4";
-            this.radGroupBox4.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxStatus.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.groupBoxStatus.Controls.Add(this.labelStartStop);
+            this.groupBoxStatus.Controls.Add(this.buttonStartStop);
+            this.groupBoxStatus.FooterImageIndex = -1;
+            this.groupBoxStatus.FooterImageKey = "";
+            this.groupBoxStatus.HeaderImageIndex = -1;
+            this.groupBoxStatus.HeaderImageKey = "";
+            this.groupBoxStatus.HeaderMargin = new System.Windows.Forms.Padding(0);
+            this.groupBoxStatus.HeaderText = "Статус";
+            this.groupBoxStatus.Location = new System.Drawing.Point(352, 294);
+            this.groupBoxStatus.Name = "groupBoxStatus";
+            this.groupBoxStatus.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
             // 
             // 
             // 
-            this.radGroupBox4.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
-            this.radGroupBox4.Size = new System.Drawing.Size(334, 102);
-            this.radGroupBox4.TabIndex = 7;
-            this.radGroupBox4.Text = "Статус";
+            this.groupBoxStatus.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
+            this.groupBoxStatus.Size = new System.Drawing.Size(334, 102);
+            this.groupBoxStatus.TabIndex = 7;
+            this.groupBoxStatus.Text = "Статус";
             // 
             // labelStartStop
             // 
@@ -341,44 +294,27 @@
             this.menuItemHelp.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.menuItemHelp.Click += new System.EventHandler(this.menuItemHelp_Click);
             // 
-            // radMenu1
+            // menuMain
             // 
-            this.radMenu1.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.menuMain.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.menuItemFile,
             this.menuItemAdvanced,
             this.menuItemAbout});
-            this.radMenu1.Location = new System.Drawing.Point(0, 0);
-            this.radMenu1.Name = "radMenu1";
-            this.radMenu1.Size = new System.Drawing.Size(698, 20);
-            this.radMenu1.TabIndex = 8;
-            this.radMenu1.Text = "radMenu1";
-            // 
-            // labelPluginName
-            // 
-            this.labelPluginName.Location = new System.Drawing.Point(7, 49);
-            this.labelPluginName.Name = "labelPluginName";
-            this.labelPluginName.Size = new System.Drawing.Size(31, 18);
-            this.labelPluginName.TabIndex = 3;
-            this.labelPluginName.Text = "Име:";
-            // 
-            // textBoxPluginName
-            // 
-            this.textBoxPluginName.Location = new System.Drawing.Point(45, 46);
-            this.textBoxPluginName.Name = "textBoxPluginName";
-            this.textBoxPluginName.Size = new System.Drawing.Size(283, 20);
-            this.textBoxPluginName.TabIndex = 4;
-            this.textBoxPluginName.TabStop = false;
+            this.menuMain.Location = new System.Drawing.Point(0, 0);
+            this.menuMain.Name = "menuMain";
+            this.menuMain.Size = new System.Drawing.Size(698, 20);
+            this.menuMain.TabIndex = 0;
+            this.menuMain.Text = "radMenu1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 400);
-            this.Controls.Add(this.radMenu1);
-            this.Controls.Add(this.radGroupBox4);
-            this.Controls.Add(this.radGroupBox3);
-            this.Controls.Add(this.radGroupBox2);
-            this.Controls.Add(this.radGroupBox1);
+            this.ClientSize = new System.Drawing.Size(698, 401);
+            this.Controls.Add(this.menuMain);
+            this.Controls.Add(this.groupBoxStatus);
+            this.Controls.Add(this.groupBoxAddPlugin);
+            this.Controls.Add(this.groupBoxPlugins);
             this.Name = "MainForm";
             // 
             // 
@@ -386,25 +322,22 @@
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "MainForm";
             this.ThemeName = "ControlDefault";
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewNotInitializedPlugins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPlugins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddPlugin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
-            this.radGroupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).EndInit();
-            this.radGroupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewInitializedPlugins)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).EndInit();
-            this.radGroupBox3.ResumeLayout(false);
-            this.radGroupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxPlugins)).EndInit();
+            this.groupBoxPlugins.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxAddPlugin)).EndInit();
+            this.groupBoxAddPlugin.ResumeLayout(false);
+            this.groupBoxAddPlugin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.browseEditorAddPlugin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox4)).EndInit();
-            this.radGroupBox4.ResumeLayout(false);
-            this.radGroupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).EndInit();
+            this.groupBoxStatus.ResumeLayout(false);
+            this.groupBoxStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -413,15 +346,13 @@
 
         #endregion
 
-        private Telerik.WinControls.UI.RadGridView gridViewNotInitializedPlugins;
+        private Telerik.WinControls.UI.RadGridView gridViewPlugins;
         private Telerik.WinControls.UI.RadButton buttonAddPlugin;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox1;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox2;
-        private Telerik.WinControls.UI.RadGridView gridViewInitializedPlugins;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox3;
+        private Telerik.WinControls.UI.RadGroupBox groupBoxPlugins;
+        private Telerik.WinControls.UI.RadGroupBox groupBoxAddPlugin;
         private Telerik.WinControls.UI.RadBrowseEditor browseEditorAddPlugin;
         private Telerik.WinControls.UI.RadButton buttonStartStop;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox4;
+        private Telerik.WinControls.UI.RadGroupBox groupBoxStatus;
         private Telerik.WinControls.UI.RadLabel labelStartStop;
         private Telerik.WinControls.UI.RadMenuItem menuItemFile;
         private Telerik.WinControls.UI.RadMenuItem menuItemAdvanced;
@@ -430,7 +361,7 @@
         private Telerik.WinControls.UI.RadMenuItem menuItemAbout;
         private Telerik.WinControls.UI.RadMenuItem menuItemCreators;
         private Telerik.WinControls.UI.RadMenuItem menuItemHelp;
-        private Telerik.WinControls.UI.RadMenu radMenu1;
+        private Telerik.WinControls.UI.RadMenu menuMain;
         private Telerik.WinControls.UI.RadTextBox textBoxPluginName;
         private Telerik.WinControls.UI.RadLabel labelPluginName;
 

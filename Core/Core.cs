@@ -76,9 +76,7 @@ namespace ModernSteward
         /// </summary>
         public void StopAsyncRecognition()
         {
-            mRecognitionEngine.RecognizeAsyncStop(); 
+            mRecognitionEngine.RecognizeAsyncStop();
         }
-
-
     }
 }

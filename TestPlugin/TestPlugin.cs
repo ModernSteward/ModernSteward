@@ -19,9 +19,9 @@ namespace ModernSteward
             return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml");
         }
 
-        public override void Initialize()
+        public override bool Initialize()
         {
-            
+            return true;
         }
     }
 }

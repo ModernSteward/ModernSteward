@@ -23,7 +23,7 @@ namespace ModernSteward
 
         private void buttonAddPlugin_Click(object sender, EventArgs e)
         {
-            pluginHandler.Plugins.Add(new Plugin(textBoxName.Text, textBoxKeyword.Text, textBoxPluginPath.Text));
+            pluginHandler.Plugins.Add(new Plugin(textBoxName.Text, textBoxPluginPath.Text));
             textBoxName.Text = "";
             textBoxKeyword.Text = "";
             MessageBox.Show("Plugin loaded");
@@ -92,7 +92,7 @@ namespace ModernSteward
                 }
                 foreach (var plugin in pluginHandler.Plugins)
                 {
-                    Console.WriteLine("SemanticsToDict.Key = {0}; plugin.Keyword = {1}", semanticsToDict[0].Key, plugin.Keyword);
+                    Console.WriteLine("SemanticsToDict.Key = {0}; plugin.Name = {1}", semanticsToDict[0].Key, plugin.Name);
                     plugin.TriggerPlugin(semanticsToDict);
                 }
             };
