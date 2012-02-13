@@ -27,7 +27,15 @@ namespace ModernSteward
             {
                 GrammarBuilder fakeDictation = new GrammarBuilder();
                 fakeDictation.AppendDictation();
-                DictationGrammar dictGrammar = new DictationGrammar((currentNode.Tag as GrammarTreeViewTag).DictationContext);
+                string dictation = (currentNode.Tag as GrammarTreeViewTag).DictationContext;
+                try
+                {
+                    DictationGrammar dictGrammar = new DictationGrammar(dictation);
+                }
+                catch (Exception e)
+                {
+                    DictationGrammar dictGrammar = new DictationGrammar("grammar:dictation#" + dictation);
+                }
                 if ((currentNode.Tag as GrammarTreeViewTag).Optional)
                 {
                     currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation), 0, 1);

@@ -56,7 +56,7 @@ namespace ModernSteward
                     mRecognitionEngine.LoadGrammar(pluginGrammar);
                 }
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }

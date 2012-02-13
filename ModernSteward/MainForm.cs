@@ -128,9 +128,10 @@ namespace ModernSteward
                     {
                         mCore.StartAsyncRecognition();
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.");
+                        MessageBox.Show(ex.Message);
                     }
 
                     buttonStartStop.Text = "Изключи";
@@ -143,7 +144,7 @@ namespace ModernSteward
                 }
                 else
                 {
-                    MessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.");
+                    RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.");
                 }
             }
             else
