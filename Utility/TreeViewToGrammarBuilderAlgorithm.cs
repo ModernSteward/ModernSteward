@@ -68,7 +68,8 @@ namespace ModernSteward
 
         public static GrammarBuilder CreateGrammarBuilderFromXML(string path)
         {
-            RadTreeView XMLTree = RadTreeViewGrammarManager.LoadGrammarFromXML(path);
+            RadTreeView XMLTree = new RadTreeView();
+            RadTreeViewGrammarManager.LoadGrammarFromXML(path, ref XMLTree);
             return CreateGrammarBuilderFromTree(XMLTree);
         }
 

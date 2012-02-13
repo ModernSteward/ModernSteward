@@ -147,7 +147,7 @@ namespace SpeechGrammarBuilderGUI
             {
                 try
                 {
-                    treeViewCommands = RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
+                    RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName, ref treeViewCommands);
                     MessageBox.Show("Grammar loaded successfully");
                 }
                 catch {

@@ -37,7 +37,6 @@
             this.groupBoxAddPlugin = new Telerik.WinControls.UI.RadGroupBox();
             this.textBoxPluginName = new Telerik.WinControls.UI.RadTextBox();
             this.labelPluginName = new Telerik.WinControls.UI.RadLabel();
-            this.browseEditorAddPlugin = new Telerik.WinControls.UI.RadBrowseEditor();
             this.buttonStartStop = new Telerik.WinControls.UI.RadButton();
             this.groupBoxStatus = new Telerik.WinControls.UI.RadGroupBox();
             this.labelStartStop = new Telerik.WinControls.UI.RadLabel();
@@ -49,6 +48,8 @@
             this.menuItemCreators = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemHelp = new Telerik.WinControls.UI.RadMenuItem();
             this.menuMain = new Telerik.WinControls.UI.RadMenu();
+            this.buttonBrowseForPlugin = new Telerik.WinControls.UI.RadButton();
+            this.textBoxPluginPath = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPlugins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonAddPlugin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxPlugins)).BeginInit();
@@ -57,12 +58,13 @@
             this.groupBoxAddPlugin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseEditorAddPlugin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).BeginInit();
             this.groupBoxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBrowseForPlugin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,9 +145,10 @@
             // groupBoxAddPlugin
             // 
             this.groupBoxAddPlugin.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.groupBoxAddPlugin.Controls.Add(this.textBoxPluginPath);
+            this.groupBoxAddPlugin.Controls.Add(this.buttonBrowseForPlugin);
             this.groupBoxAddPlugin.Controls.Add(this.textBoxPluginName);
             this.groupBoxAddPlugin.Controls.Add(this.labelPluginName);
-            this.groupBoxAddPlugin.Controls.Add(this.browseEditorAddPlugin);
             this.groupBoxAddPlugin.Controls.Add(this.buttonAddPlugin);
             this.groupBoxAddPlugin.FooterImageIndex = -1;
             this.groupBoxAddPlugin.FooterImageKey = "";
@@ -179,13 +182,6 @@
             this.labelPluginName.Size = new System.Drawing.Size(31, 18);
             this.labelPluginName.TabIndex = 3;
             this.labelPluginName.Text = "Име:";
-            // 
-            // browseEditorAddPlugin
-            // 
-            this.browseEditorAddPlugin.Location = new System.Drawing.Point(7, 22);
-            this.browseEditorAddPlugin.Name = "browseEditorAddPlugin";
-            this.browseEditorAddPlugin.Size = new System.Drawing.Size(321, 20);
-            this.browseEditorAddPlugin.TabIndex = 2;
             // 
             // buttonStartStop
             // 
@@ -306,6 +302,23 @@
             this.menuMain.TabIndex = 0;
             this.menuMain.Text = "radMenu1";
             // 
+            // buttonBrowseForPlugin
+            // 
+            this.buttonBrowseForPlugin.Location = new System.Drawing.Point(304, 21);
+            this.buttonBrowseForPlugin.Name = "buttonBrowseForPlugin";
+            this.buttonBrowseForPlugin.Size = new System.Drawing.Size(24, 21);
+            this.buttonBrowseForPlugin.TabIndex = 5;
+            this.buttonBrowseForPlugin.Text = "...";
+            this.buttonBrowseForPlugin.Click += new System.EventHandler(this.buttonBrowseForPlugin_Click);
+            // 
+            // textBoxPluginPath
+            // 
+            this.textBoxPluginPath.Location = new System.Drawing.Point(7, 21);
+            this.textBoxPluginPath.Name = "textBoxPluginPath";
+            this.textBoxPluginPath.Size = new System.Drawing.Size(291, 20);
+            this.textBoxPluginPath.TabIndex = 6;
+            this.textBoxPluginPath.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,13 +344,14 @@
             this.groupBoxAddPlugin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseEditorAddPlugin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).EndInit();
             this.groupBoxStatus.ResumeLayout(false);
             this.groupBoxStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonBrowseForPlugin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxPluginPath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -350,7 +364,6 @@
         private Telerik.WinControls.UI.RadButton buttonAddPlugin;
         private Telerik.WinControls.UI.RadGroupBox groupBoxPlugins;
         private Telerik.WinControls.UI.RadGroupBox groupBoxAddPlugin;
-        private Telerik.WinControls.UI.RadBrowseEditor browseEditorAddPlugin;
         private Telerik.WinControls.UI.RadButton buttonStartStop;
         private Telerik.WinControls.UI.RadGroupBox groupBoxStatus;
         private Telerik.WinControls.UI.RadLabel labelStartStop;
@@ -364,6 +377,8 @@
         private Telerik.WinControls.UI.RadMenu menuMain;
         private Telerik.WinControls.UI.RadTextBox textBoxPluginName;
         private Telerik.WinControls.UI.RadLabel labelPluginName;
+        private Telerik.WinControls.UI.RadTextBox textBoxPluginPath;
+        private Telerik.WinControls.UI.RadButton buttonBrowseForPlugin;
 
     }
 }

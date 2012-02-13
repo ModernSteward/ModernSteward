@@ -27,6 +27,7 @@ namespace ModernSteward
 
         void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
+            System.Windows.Forms.MessageBox.Show(e.Result.Text.ToString());
             foreach (var plugin in mPluginHandler.Plugins)
             {
                 if (e.Result.Grammar.Name == plugin.Name)
@@ -52,11 +53,12 @@ namespace ModernSteward
                 foreach (var plugin in aPluginHandler.Plugins)
                 {
                     Grammar pluginGrammar = plugin.GetGrammar();
+                    System.Windows.Forms.MessageBox.Show(plugin.GetGrammarBuilder().DebugShowPhrases);
                     pluginGrammar.Name = plugin.Name;
                     mRecognitionEngine.LoadGrammar(pluginGrammar);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

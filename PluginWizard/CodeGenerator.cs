@@ -74,21 +74,25 @@ namespace PluginWizard
         {
             string currentCode = "";
             currentCode += ShiftNTabsInTheConsole(level);
-            currentCode += "if (" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \""
-                + node.Text.ToString() + "\")";
-            currentCode += " {";
+            currentCode += "try {" + Environment.NewLine;
+
+            currentCode += ShiftNTabsInTheConsole(level+1);
+            currentCode += "if (" + semanticsInString.ToString() + "[" + level.ToString() + "].Key == \"" + node.Text.ToString() + "\")";
+
+            currentCode += "{";
+
             if ((node.Tag as GrammarTreeViewTag).Optional)
             {
                 currentCode += " //optional element";
             }
 
-            currentCode += Environment.NewLine;            
+            currentCode += Environment.NewLine;
 
             if (node.Tag != null)
             {
                 if ((node.Tag as GrammarTreeViewTag).IsDictation)
                 {
-                    currentCode += ShiftNTabsInTheConsole(level + 1);
+                    currentCode += ShiftNTabsInTheConsole(level + 2);
                     string dictationFor = node.Text.Replace(" ", "");
                     currentCode += "string dictationFor" + dictationFor + " = "
                         + semanticsInString + "[" + level.ToString() + "].Value;" + Environment.NewLine;
@@ -104,10 +108,17 @@ namespace PluginWizard
             {
                 iteration++;
 
-                currentCode += GeneratingTheCode(childNode, level + 1, generatedCode);
+                currentCode += GeneratingTheCode(childNode, level + 2, generatedCode);
             }
+            currentCode += ShiftNTabsInTheConsole(level+1);
+            currentCode += "}" + Environment.NewLine;
+
+
             currentCode += ShiftNTabsInTheConsole(level);
             currentCode += "}" + Environment.NewLine;
+            currentCode += ShiftNTabsInTheConsole(level);
+            currentCode += "catch (Exception e) { }"  + Environment.NewLine + Environment.NewLine;
+
             return currentCode;
         }
     }

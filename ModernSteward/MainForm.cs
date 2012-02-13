@@ -101,15 +101,38 @@ namespace ModernSteward
             {
                 try
                 {
-                    // Little hack to check if the program will later be able to load the plugin successfully
-                    PluginHandler testPluginHandler = new PluginHandler();
-                    testPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, browseEditorAddPlugin.Value));
+                    if (textBoxPluginName.Text != "" && textBoxPluginPath.Text != "")
+                    {
+                        bool nameAlreadyTaken = false;
+                        foreach (var row in gridViewPlugins.Rows)
+                        {
+                            string name = row.Cells["Name"].Value.ToString();
+                            if (name == textBoxPluginName.Text)
+                            {
+                                
+                                nameAlreadyTaken = true;
+                            }
+                        }
 
-                    gridViewPlugins.Rows.Add(false, textBoxPluginName.Text, "Инициализирай!");
-                    gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = browseEditorAddPlugin.Value;
+                        if (!nameAlreadyTaken)
+                        {
+                            // Little hack to check if the program will later be able to load the plugin successfully
+                            PluginHandler testPluginHandler = new PluginHandler();
+                            testPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+
+                            gridViewPlugins.Rows.Add(false, textBoxPluginName.Text, "Инициализирай!");
+                            gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = textBoxPluginPath.Text;
+
+                            textBoxPluginPath.Text = "";
+                            textBoxPluginName.Text = "";
+                        }
+                        else
+                        {
+                            RadMessageBox.Show("Вече има плъгин с това име!");
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
+                catch{
                     RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!");
                 }
             }
@@ -128,10 +151,9 @@ namespace ModernSteward
                     {
                         mCore.StartAsyncRecognition();
                     }
-                    catch(Exception ex)
+                    catch
                     {
                         RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.");
-                        MessageBox.Show(ex.Message);
                     }
 
                     buttonStartStop.Text = "Изключи";
@@ -159,6 +181,17 @@ namespace ModernSteward
 
                 gridViewPlugins.Enabled = true;
             }
+        }
+
+        private void buttonBrowseForPlugin_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openPluginAssemblyFileDialog = new OpenFileDialog();
+            openPluginAssemblyFileDialog.Filter = "*.dll|*.dll";
+            if (openPluginAssemblyFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxPluginPath.Text = openPluginAssemblyFileDialog.FileName;
+            }
+
         }
     }
 }

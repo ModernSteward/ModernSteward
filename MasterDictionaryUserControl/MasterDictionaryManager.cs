@@ -59,15 +59,23 @@ namespace MasterDictionaryUserControl
 
         void addWordToTheMasterDictionary(string word)
         {
-            SpLexicon lex = new SpLexicon();
-            lex.AddPronunciation(word, 1033);
-            textBoxNewWordToAdd.Text = "";
-            RenewGridViewDictionaryItems();
+            try
+            {
+                SpLexicon lex = new SpLexicon();
+                lex.AddPronunciation(word, 1033);
+                textBoxNewWordToAdd.Text = "";
+                RenewGridViewDictionaryItems();
+            }
+            catch { }
         }
 
         private void buttonDeleteSelectedWord_Click(object sender, EventArgs e)
         {
-            deleteWordFromTheDictionary(gridViewDictionaryItems.SelectedRows[0].Cells[0].Value.ToString());
+            try
+            {
+                deleteWordFromTheDictionary(gridViewDictionaryItems.SelectedRows[0].Cells[0].Value.ToString());
+            }
+            catch { }
         }
 
         private void deleteWordFromTheDictionary(string wordToDelete)

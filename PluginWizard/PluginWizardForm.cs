@@ -50,6 +50,10 @@ namespace PluginWizard
             
             checkBoxIsTheNodeDictation.IsThreeState = false;
             checkBoxIsTheNodeDictation.Visible = false;
+
+            textBoxContext.Visible = false;
+            labelContext.Visible = false;
+            checkBoxItemOptional.Visible = false;
         }
 
         void HelpButton_Click(object sender, EventArgs e)
@@ -97,12 +101,12 @@ namespace PluginWizard
             {
                 try
                 {
-                    treeViewCommands = RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName);
-                    MessageBox.Show("Граматиката заредена успешно!");
+                    RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName, ref treeViewCommands);
+                    RadMessageBox.Show("Граматиката заредена успешно!");
                 }
                 catch
                 {
-                    MessageBox.Show("Невалиден формат на файла!", "Грешка");
+                    RadMessageBox.Show("Невалиден формат на файла!", "Грешка");
                 }
             }
         }

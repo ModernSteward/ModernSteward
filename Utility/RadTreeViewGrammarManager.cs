@@ -9,11 +9,9 @@ namespace ModernSteward
 {
     public static class RadTreeViewGrammarManager
     {
-        public static RadTreeView LoadGrammarFromXML(string filePath)
+        public static void LoadGrammarFromXML(string filePath, ref RadTreeView tree)
         {
-            RadTreeView tree = new RadTreeView();
             tree.LoadXML(filePath, typeof(GrammarTreeViewTag));
-            return tree;
         }
 
         public static RadTreeView LoadGrammarFromXML(Stream stream)
