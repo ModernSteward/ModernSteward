@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ModernSteward
 {
-    static class Program
+    static class ModernSteward
     {
         /// <summary>
         /// The main entry point for the application.
@@ -15,7 +15,14 @@ namespace ModernSteward
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-        }
+			try
+			{
+				Application.Run(new MainForm());
+			}
+			catch (ObjectDisposedException)
+			{
+
+			}
+		}
     }
 }

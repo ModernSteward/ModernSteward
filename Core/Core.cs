@@ -12,7 +12,15 @@ namespace ModernSteward
         /// Represents the recognition engine of the application
         /// </summary>
         private SpeechRecognitionEngine mRecognitionEngine;
+
+		/// <summary>
+		/// Stores the loaded plugins
+		/// </summary>
         private PluginHandler mPluginHandler = new PluginHandler();
+
+		public delegate void SpeechRecognizedCoreEventHandler(Plugin pluginTriggered);
+
+		public event SpeechRecognizedCoreEventHandler SpeechRecognizedCoreEvent;
 
         /// <summary>
         /// Initializes the RecognitionEngine
@@ -27,11 +35,11 @@ namespace ModernSteward
 
         void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show(e.Result.Text.ToString());
             foreach (var plugin in mPluginHandler.Plugins)
             {
                 if (e.Result.Grammar.Name == plugin.Name)
                 {
+					SpeechRecognizedCoreEvent.Invoke(plugin);
                     plugin.TriggerPlugin(ModernSteward.SemanticsToDict.Convert(e.Result.Semantics));
                 }
             }
@@ -53,7 +61,6 @@ namespace ModernSteward
                 foreach (var plugin in aPluginHandler.Plugins)
                 {
                     Grammar pluginGrammar = plugin.GetGrammar();
-                    System.Windows.Forms.MessageBox.Show(plugin.GetGrammarBuilder().DebugShowPhrases);
                     pluginGrammar.Name = plugin.Name;
                     mRecognitionEngine.LoadGrammar(pluginGrammar);
                 }
@@ -64,6 +71,8 @@ namespace ModernSteward
             }
             return true;
         }
+
+        
 
         /// <summary>
         /// Starts the speech recognition engine async.

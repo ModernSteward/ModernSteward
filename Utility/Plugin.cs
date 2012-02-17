@@ -11,9 +11,12 @@ using ModernSteward;
 
 namespace ModernSteward
 {
+	[Serializable()]
     public class Plugin
     {
         public string Name;
+
+		public string AssemblyPath;
 
         private Assembly Assembly;
 
@@ -22,6 +25,7 @@ namespace ModernSteward
         public Plugin(string aName, string aAssemblyPath)
         {
             Name = aName;
+			AssemblyPath = aAssemblyPath;
 
             Assembly = Assembly.LoadFrom(aAssemblyPath);
             Type type = Assembly.GetType("ModernSteward.CustomPlugin");

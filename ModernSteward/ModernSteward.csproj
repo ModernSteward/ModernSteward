@@ -87,7 +87,7 @@
     <Compile Include="MasterDictionaryForm.Designer.cs">
       <DependentUpon>MasterDictionaryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ModernSteward.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutTheCreators.resx">
       <DependentUpon>AboutTheCreators.cs</DependentUpon>
