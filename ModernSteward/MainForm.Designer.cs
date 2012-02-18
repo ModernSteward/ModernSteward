@@ -343,7 +343,7 @@
 			this.statusStrip.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.labelStatusInStatusStrip});
 			this.statusStrip.LayoutStyle = Telerik.WinControls.UI.RadStatusBarLayoutStyle.Stack;
-			this.statusStrip.Location = new System.Drawing.Point(0, 414);
+			this.statusStrip.Location = new System.Drawing.Point(0, 401);
 			this.statusStrip.Name = "statusStrip";
 			this.statusStrip.Size = new System.Drawing.Size(698, 24);
 			this.statusStrip.TabIndex = 8;
@@ -375,7 +375,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(698, 438);
+			this.ClientSize = new System.Drawing.Size(698, 425);
 			this.Controls.Add(this.statusStrip);
 			this.Controls.Add(this.menuMain);
 			this.Controls.Add(this.groupBoxStatus);

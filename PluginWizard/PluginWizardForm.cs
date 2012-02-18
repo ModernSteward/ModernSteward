@@ -25,6 +25,9 @@ namespace PluginWizard
         {
             InitializeComponent();
 
+			this.MaximumSize = this.Size;
+			this.MinimumSize = this.Size;
+
             textBoxSaveFilePath.ReadOnly = false;
 
             pluginWizard.NextButton.Text = "Следващ";

@@ -39,6 +39,9 @@ namespace ModernSteward
 				this.Close();
 			}
 
+			this.MaximumSize = this.Size;
+			this.MinimumSize = this.Size;
+
 			gridViewPlugins.AllowAutoSizeColumns = true;
 			gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
 

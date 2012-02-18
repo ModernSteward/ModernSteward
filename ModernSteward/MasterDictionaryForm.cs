@@ -14,6 +14,9 @@ namespace ModernSteward
         public MasterDictionaryForm()
         {
             InitializeComponent();
+
+			this.MaximumSize = this.Size;
+			this.MinimumSize = this.Size;
         }
     }
 }
