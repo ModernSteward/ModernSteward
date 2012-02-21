@@ -28,32 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.masterDictionaryManager = new MasterDictionaryUserControl.MasterDictionaryManager();
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // masterDictionaryManager
-            // 
-            this.masterDictionaryManager.Location = new System.Drawing.Point(13, 13);
-            this.masterDictionaryManager.Name = "masterDictionaryManager";
-            this.masterDictionaryManager.Size = new System.Drawing.Size(295, 381);
-            this.masterDictionaryManager.TabIndex = 0;
-            // 
-            // MasterDictionaryForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 401);
-            this.Controls.Add(this.masterDictionaryManager);
-            this.Name = "MasterDictionaryForm";
-            // 
-            // 
-            // 
-            this.RootElement.ApplyShapeToControl = true;
-            this.Text = "Главен речник";
-            this.ThemeName = "ControlDefault";
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterDictionaryForm));
+			this.masterDictionaryManager = new MasterDictionaryUserControl.MasterDictionaryManager();
+			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// masterDictionaryManager
+			// 
+			this.masterDictionaryManager.Location = new System.Drawing.Point(13, 13);
+			this.masterDictionaryManager.Name = "masterDictionaryManager";
+			this.masterDictionaryManager.Size = new System.Drawing.Size(295, 381);
+			this.masterDictionaryManager.TabIndex = 0;
+			// 
+			// MasterDictionaryForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(319, 401);
+			this.Controls.Add(this.masterDictionaryManager);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "MasterDictionaryForm";
+			// 
+			// 
+			// 
+			this.RootElement.ApplyShapeToControl = true;
+			this.Text = "Главен речник";
+			this.ThemeName = "ControlDefault";
+			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+			this.ResumeLayout(false);
 
         }
 

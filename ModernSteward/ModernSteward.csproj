@@ -69,12 +69,6 @@
     <Compile Include="AboutTheCreators.Designer.cs">
       <DependentUpon>AboutTheCreators.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddPluginTestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddPluginTestForm.Designer.cs">
-      <DependentUpon>AddPluginTestForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,9 +86,6 @@
     <EmbeddedResource Include="AboutTheCreators.resx">
       <DependentUpon>AboutTheCreators.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddPluginTestForm.resx">
-      <DependentUpon>AddPluginTestForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +100,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -148,6 +140,30 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconCreators.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconDictionary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wizardIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconHelp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconRun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pluginIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

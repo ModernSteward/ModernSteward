@@ -57,12 +57,13 @@ namespace ModernSteward
         public static GrammarBuilder CreateGrammarBuilderFromTree(RadTreeView treeView)
         {
             GrammarBuilder currentGrammar = new GrammarBuilder();
-            Choices wholeGrammar = new Choices();
+			currentGrammar.Append(new GrammarBuilder(Consts.NameOfTheGirl));
 
-            for (int i = 0; i < treeView.Nodes.Count; ++i)
-            {
-                currentGrammar = MakeGrammarBuilderRecursively(treeView.Nodes[i]);
-            }
+            Choices wholeGrammar = new Choices();
+			for (int i = 0; i < treeView.Nodes.Count; ++i)
+			{
+				currentGrammar.Append(MakeGrammarBuilderRecursively(treeView.Nodes[i]));
+			}
             return new Choices(currentGrammar);
         }
 

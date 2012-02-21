@@ -35,12 +35,17 @@ namespace ModernSteward
 
         void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
+			System.Windows.Forms.MessageBox.Show(e.Result.Text);
             foreach (var plugin in mPluginHandler.Plugins)
             {
                 if (e.Result.Grammar.Name == plugin.Name)
                 {
 					SpeechRecognizedCoreEvent.Invoke(plugin);
-                    plugin.TriggerPlugin(ModernSteward.SemanticsToDict.Convert(e.Result.Semantics));
+					
+					var semantics = ModernSteward.SemanticsToDict.Convert(e.Result.Semantics);
+
+					plugin.TriggerPlugin(semantics);
+					
                 }
             }
             

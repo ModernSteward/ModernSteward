@@ -18,7 +18,6 @@ namespace ModernSteward
 {
 	public partial class MainForm : Telerik.WinControls.UI.RadForm
 	{
-
 		private PluginHandler mPluginHandler = new PluginHandler();
 		private Core mCore;
 
@@ -35,7 +34,7 @@ namespace ModernSteward
 			}
 			catch (InvalidOperationException)
 			{
-				RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!");
+				RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!", "Грешка");
 				this.Close();
 			}
 
@@ -99,7 +98,7 @@ namespace ModernSteward
 				}
 				else
 				{
-					RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.");
+					RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
 				}
 			}
 			else
@@ -108,6 +107,7 @@ namespace ModernSteward
 				{
 					if (plugin.Name == row.Cells["Name"].Value.ToString())
 					{
+						labelStatusInStatusStrip.Text = plugin.Name + " бе деинициализиран успешно.";
 						mPluginHandler.Plugins.Remove(plugin);
 
 						row.Cells["Checkbox"].Value = false;
@@ -169,6 +169,8 @@ namespace ModernSteward
 
 							AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
 
+							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+
 							labelStatusInStatusStrip.Text = textBoxPluginName.Text + " бе добавен.";
 
 							textBoxPluginPath.Text = "";
@@ -176,13 +178,13 @@ namespace ModernSteward
 						}
 						else
 						{
-							RadMessageBox.Show("Вече има плъгин с това име!");
+							RadMessageBox.Show("Вече има плъгин с това име!", "Грешка");
 						}
 					}
 				}
 				catch
 				{
-					RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!");
+					RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!", "Грешка");
 				}
 			}
 			catch { }
@@ -208,7 +210,7 @@ namespace ModernSteward
 					}
 					catch
 					{
-						RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.");
+						RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
 					}
 
 					buttonStartStop.Text = "Изключи";
@@ -221,7 +223,7 @@ namespace ModernSteward
 				}
 				else
 				{
-					RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.");
+					RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.", "Грешка");
 				}
 			}
 			else
@@ -251,21 +253,27 @@ namespace ModernSteward
 		private void MenuItemSave_Click(object sender, EventArgs e)
 		{
 
-			gridViewPlugins.XmlSerializationInfo.DisregardOriginalSerializationVisibility = true;
-
-			gridViewPlugins.XmlSerializationInfo.SerializationMetadata.Add(
-					typeof(RadGridView),
-					"MasterTemplate",
-					DesignerSerializationVisibilityAttribute.Content);
-
 			SaveFileDialog saveUserProfileFileDialog = new SaveFileDialog();
 			saveUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
 
 			if (saveUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				using (XmlWriter xmlWriter = XmlWriter.Create(saveUserProfileFileDialog.FileName))
+				var stream = new FileStream(saveUserProfileFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+				try
 				{
-					gridViewPlugins.SaveLayout(xmlWriter);
+					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
+					xmlSerializer.Serialize(stream, mPluginHandler);
+
+					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
+				}
+				catch (Exception ex)
+				{
+					RadMessageBox.Show("Възникна проблем при запазването на профила. Моля, свържете се с администратор", "Грешка");
+				}
+				finally
+				{
+					stream.Flush();
+					stream.Close();
 				}
 			}
 		}
@@ -276,10 +284,31 @@ namespace ModernSteward
 			openUserProfileFileDialog.Filter = "*ModernSteward user profile|*.msu|All files|*.*";
 			if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				using (XmlReader xmlReader = XmlReader.Create(openUserProfileFileDialog.FileName))
+				Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
+				try
 				{
-					xmlReader.Read();
-					gridViewPlugins.LoadLayout(xmlReader);
+					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
+					mPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
+
+					gridViewPlugins.Rows.Clear();
+
+					foreach (var plugin in mPluginHandler.Plugins)
+					{
+						AddPluginToTheGridView(plugin.Name, plugin.AssemblyPath);
+					}
+
+					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+				}
+				catch (Exception ex)
+				{
+					RadMessageBox.Show("Възникна проблем при отварянето на профила. Най-вероятно файлът е развален. \nМоля, свържете се с администратор", "Грешка");
+				}
+				finally
+				{
+					if (stream != null)
+					{
+						stream.Close();
+					}
 				}
 			}
 		}

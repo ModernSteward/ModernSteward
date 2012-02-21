@@ -11,7 +11,7 @@ using ModernSteward;
 
 namespace ModernSteward
 {
-	[Serializable()]
+	[Serializable]
     public class Plugin
     {
         public string Name;
@@ -20,7 +20,10 @@ namespace ModernSteward
 
         private Assembly Assembly;
 
+		[NonSerialized]
         object instanceOfMyType;
+
+		public Plugin() { }
 
         public Plugin(string aName, string aAssemblyPath)
         {

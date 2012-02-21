@@ -33,6 +33,7 @@ namespace PluginWizard
             pluginWizard.NextButton.Text = "Следващ";
             pluginWizard.BackButton.Text = "Назад";
             pluginWizard.CancelButton.Text = "Откажи";
+			pluginWizard.FinishButton.Text = "Завърши";
 
             pluginWizard.HelpButton.Text = "Помощ";
             pluginWizard.HelpButton.Click += new EventHandler(HelpButton_Click);

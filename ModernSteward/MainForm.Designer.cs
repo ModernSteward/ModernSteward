@@ -31,7 +31,6 @@
 			Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
 			Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
 			Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn1 = new Telerik.WinControls.UI.GridViewCommandColumn();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.gridViewPlugins = new Telerik.WinControls.UI.RadGridView();
 			this.buttonAddPlugin = new Telerik.WinControls.UI.RadButton();
 			this.groupBoxPlugins = new Telerik.WinControls.UI.RadGroupBox();
@@ -40,21 +39,21 @@
 			this.buttonBrowseForPlugin = new Telerik.WinControls.UI.RadButton();
 			this.textBoxPluginName = new Telerik.WinControls.UI.RadTextBox();
 			this.labelPluginName = new Telerik.WinControls.UI.RadLabel();
-			this.buttonStartStop = new Telerik.WinControls.UI.RadButton();
 			this.groupBoxStatus = new Telerik.WinControls.UI.RadGroupBox();
 			this.labelStartStop = new Telerik.WinControls.UI.RadLabel();
 			this.menuItemFile = new Telerik.WinControls.UI.RadMenuItem();
-			this.menuItemOpenFile = new Telerik.WinControls.UI.RadMenuItem();
-			this.MenuItemSave = new Telerik.WinControls.UI.RadMenuItem();
 			this.menuItemAdvanced = new Telerik.WinControls.UI.RadMenuItem();
-			this.radMenuItemPluginWizard = new Telerik.WinControls.UI.RadMenuItem();
-			this.menuItemMasterDictionary = new Telerik.WinControls.UI.RadMenuItem();
 			this.menuItemAbout = new Telerik.WinControls.UI.RadMenuItem();
-			this.menuItemCreators = new Telerik.WinControls.UI.RadMenuItem();
-			this.menuItemHelp = new Telerik.WinControls.UI.RadMenuItem();
 			this.statusStrip = new Telerik.WinControls.UI.RadStatusStrip();
 			this.labelStatusInStatusStrip = new Telerik.WinControls.UI.RadLabelElement();
 			this.menuMain = new Telerik.WinControls.UI.RadMenu();
+			this.menuItemOpenFile = new Telerik.WinControls.UI.RadMenuItem();
+			this.MenuItemSave = new Telerik.WinControls.UI.RadMenuItem();
+			this.radMenuItemPluginWizard = new Telerik.WinControls.UI.RadMenuItem();
+			this.menuItemMasterDictionary = new Telerik.WinControls.UI.RadMenuItem();
+			this.menuItemCreators = new Telerik.WinControls.UI.RadMenuItem();
+			this.menuItemHelp = new Telerik.WinControls.UI.RadMenuItem();
+			this.buttonStartStop = new Telerik.WinControls.UI.RadButton();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPlugins)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonAddPlugin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxPlugins)).BeginInit();
@@ -65,12 +64,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.buttonBrowseForPlugin)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).BeginInit();
 			this.groupBoxStatus.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.statusStrip)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.menuMain)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -119,11 +118,15 @@
 			// 
 			// buttonAddPlugin
 			// 
+			this.buttonAddPlugin.Image = global::ModernSteward.Properties.Resources.pluginIcon;
+			this.buttonAddPlugin.ImageAlignment = System.Drawing.ContentAlignment.MiddleRight;
 			this.buttonAddPlugin.Location = new System.Drawing.Point(194, 72);
 			this.buttonAddPlugin.Name = "buttonAddPlugin";
 			this.buttonAddPlugin.Size = new System.Drawing.Size(135, 24);
 			this.buttonAddPlugin.TabIndex = 1;
 			this.buttonAddPlugin.Text = "Добави плъгин";
+			this.buttonAddPlugin.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonAddPlugin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.buttonAddPlugin.Click += new System.EventHandler(this.buttonAddPlugin_Click);
 			// 
 			// groupBoxPlugins
@@ -206,15 +209,6 @@
 			this.labelPluginName.TabIndex = 3;
 			this.labelPluginName.Text = "Име:";
 			// 
-			// buttonStartStop
-			// 
-			this.buttonStartStop.Location = new System.Drawing.Point(189, 21);
-			this.buttonStartStop.Name = "buttonStartStop";
-			this.buttonStartStop.Size = new System.Drawing.Size(139, 73);
-			this.buttonStartStop.TabIndex = 5;
-			this.buttonStartStop.Text = "Стартирай";
-			this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
-			// 
 			// groupBoxStatus
 			// 
 			this.groupBoxStatus.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
@@ -259,26 +253,6 @@
 			this.menuItemFile.Text = "Файл";
 			this.menuItemFile.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
-			// menuItemOpenFile
-			// 
-			this.menuItemOpenFile.AccessibleDescription = "Отвори";
-			this.menuItemOpenFile.AccessibleName = "Отвори";
-			this.menuItemOpenFile.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOpenFile.Image")));
-			this.menuItemOpenFile.Name = "menuItemOpenFile";
-			this.menuItemOpenFile.Text = "Отвори";
-			this.menuItemOpenFile.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.menuItemOpenFile.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.menuItemOpenFile.Click += new System.EventHandler(this.menuItemOpenFile_Click);
-			// 
-			// MenuItemSave
-			// 
-			this.MenuItemSave.AccessibleDescription = "Запази";
-			this.MenuItemSave.AccessibleName = "Запази";
-			this.MenuItemSave.Name = "MenuItemSave";
-			this.MenuItemSave.Text = "Запази";
-			this.MenuItemSave.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.MenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
-			// 
 			// menuItemAdvanced
 			// 
 			this.menuItemAdvanced.AccessibleDescription = "Напреднали";
@@ -290,24 +264,6 @@
 			this.menuItemAdvanced.Text = "Напреднали";
 			this.menuItemAdvanced.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
-			// radMenuItemPluginWizard
-			// 
-			this.radMenuItemPluginWizard.AccessibleDescription = "radMenuItem3";
-			this.radMenuItemPluginWizard.AccessibleName = "radMenuItem3";
-			this.radMenuItemPluginWizard.Name = "radMenuItemPluginWizard";
-			this.radMenuItemPluginWizard.Text = "Магьосник за плъгини";
-			this.radMenuItemPluginWizard.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.radMenuItemPluginWizard.Click += new System.EventHandler(this.radMenuItemPluginWizard_Click);
-			// 
-			// menuItemMasterDictionary
-			// 
-			this.menuItemMasterDictionary.AccessibleDescription = "Главен речник";
-			this.menuItemMasterDictionary.AccessibleName = "Главен речник";
-			this.menuItemMasterDictionary.Name = "menuItemMasterDictionary";
-			this.menuItemMasterDictionary.Text = "Главен речник";
-			this.menuItemMasterDictionary.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.menuItemMasterDictionary.Click += new System.EventHandler(this.menuItemMasterDictionary_Click);
-			// 
 			// menuItemAbout
 			// 
 			this.menuItemAbout.AccessibleDescription = "За програмата";
@@ -318,24 +274,6 @@
 			this.menuItemAbout.Name = "menuItemAbout";
 			this.menuItemAbout.Text = "За програмата";
 			this.menuItemAbout.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			// 
-			// menuItemCreators
-			// 
-			this.menuItemCreators.AccessibleDescription = "Създатели";
-			this.menuItemCreators.AccessibleName = "Създатели";
-			this.menuItemCreators.Name = "menuItemCreators";
-			this.menuItemCreators.Text = "Създатели";
-			this.menuItemCreators.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.menuItemCreators.Click += new System.EventHandler(this.menuItemCreators_Click);
-			// 
-			// menuItemHelp
-			// 
-			this.menuItemHelp.AccessibleDescription = "Помощ";
-			this.menuItemHelp.AccessibleName = "Помощ";
-			this.menuItemHelp.Name = "menuItemHelp";
-			this.menuItemHelp.Text = "Помощ";
-			this.menuItemHelp.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-			this.menuItemHelp.Click += new System.EventHandler(this.menuItemHelp_Click);
 			// 
 			// statusStrip
 			// 
@@ -371,6 +309,80 @@
 			this.menuMain.TabIndex = 0;
 			this.menuMain.Text = "radMenu1";
 			// 
+			// menuItemOpenFile
+			// 
+			this.menuItemOpenFile.AccessibleDescription = "Отвори";
+			this.menuItemOpenFile.AccessibleName = "Отвори";
+			this.menuItemOpenFile.Image = global::ModernSteward.Properties.Resources.iconOpen;
+			this.menuItemOpenFile.Name = "menuItemOpenFile";
+			this.menuItemOpenFile.Text = "Отвори";
+			this.menuItemOpenFile.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.menuItemOpenFile.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.menuItemOpenFile.Click += new System.EventHandler(this.menuItemOpenFile_Click);
+			// 
+			// MenuItemSave
+			// 
+			this.MenuItemSave.AccessibleDescription = "Запази";
+			this.MenuItemSave.AccessibleName = "Запази";
+			this.MenuItemSave.Image = global::ModernSteward.Properties.Resources.iconSave;
+			this.MenuItemSave.Name = "MenuItemSave";
+			this.MenuItemSave.Text = "Запази";
+			this.MenuItemSave.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.MenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
+			// 
+			// radMenuItemPluginWizard
+			// 
+			this.radMenuItemPluginWizard.AccessibleDescription = "radMenuItem3";
+			this.radMenuItemPluginWizard.AccessibleName = "radMenuItem3";
+			this.radMenuItemPluginWizard.Image = global::ModernSteward.Properties.Resources.wizardIcon;
+			this.radMenuItemPluginWizard.Name = "radMenuItemPluginWizard";
+			this.radMenuItemPluginWizard.Text = "Магьосник за плъгини";
+			this.radMenuItemPluginWizard.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.radMenuItemPluginWizard.Click += new System.EventHandler(this.radMenuItemPluginWizard_Click);
+			// 
+			// menuItemMasterDictionary
+			// 
+			this.menuItemMasterDictionary.AccessibleDescription = "Главен речник";
+			this.menuItemMasterDictionary.AccessibleName = "Главен речник";
+			this.menuItemMasterDictionary.Image = global::ModernSteward.Properties.Resources.iconDictionary;
+			this.menuItemMasterDictionary.Name = "menuItemMasterDictionary";
+			this.menuItemMasterDictionary.Text = "Главен речник";
+			this.menuItemMasterDictionary.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.menuItemMasterDictionary.Click += new System.EventHandler(this.menuItemMasterDictionary_Click);
+			// 
+			// menuItemCreators
+			// 
+			this.menuItemCreators.AccessibleDescription = "Създатели";
+			this.menuItemCreators.AccessibleName = "Създатели";
+			this.menuItemCreators.Image = global::ModernSteward.Properties.Resources.iconCreators;
+			this.menuItemCreators.Name = "menuItemCreators";
+			this.menuItemCreators.Text = "Създатели";
+			this.menuItemCreators.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.menuItemCreators.Click += new System.EventHandler(this.menuItemCreators_Click);
+			// 
+			// menuItemHelp
+			// 
+			this.menuItemHelp.AccessibleDescription = "Помощ";
+			this.menuItemHelp.AccessibleName = "Помощ";
+			this.menuItemHelp.Image = global::ModernSteward.Properties.Resources.iconHelp;
+			this.menuItemHelp.Name = "menuItemHelp";
+			this.menuItemHelp.Text = "Помощ";
+			this.menuItemHelp.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			this.menuItemHelp.Click += new System.EventHandler(this.menuItemHelp_Click);
+			// 
+			// buttonStartStop
+			// 
+			this.buttonStartStop.Image = global::ModernSteward.Properties.Resources.iconRun;
+			this.buttonStartStop.ImageAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.buttonStartStop.Location = new System.Drawing.Point(189, 21);
+			this.buttonStartStop.Name = "buttonStartStop";
+			this.buttonStartStop.Size = new System.Drawing.Size(139, 73);
+			this.buttonStartStop.TabIndex = 5;
+			this.buttonStartStop.Text = "Стартирай";
+			this.buttonStartStop.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonStartStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.buttonStartStop.Click += new System.EventHandler(this.buttonStartStop_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,13 +412,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.buttonBrowseForPlugin)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textBoxPluginName)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.labelPluginName)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxStatus)).EndInit();
 			this.groupBoxStatus.ResumeLayout(false);
 			this.groupBoxStatus.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.statusStrip)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.menuMain)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

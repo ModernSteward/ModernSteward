@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 
 namespace ModernSteward
 {
-	[Serializable()]
+	[Serializable]
     public class PluginHandler
     {
         public List<Plugin> Plugins = new List<Plugin>();
