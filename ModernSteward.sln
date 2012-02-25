@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginWizard", "PluginWizar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterDictionaryUserControl", "MasterDictionaryUserControl\MasterDictionaryUserControl.csproj", "{B5549520-B124-41C4-9FB0-B2F1D92169B0}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{D53A89C3-9BF1-415C-8886-0A54FFE76970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,12 @@ Global
 		{B5549520-B124-41C4-9FB0-B2F1D92169B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B5549520-B124-41C4-9FB0-B2F1D92169B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B5549520-B124-41C4-9FB0-B2F1D92169B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Debug|Any CPU.ActiveCfg = Debug
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Debug|x86.ActiveCfg = Debug
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Release|Any CPU.ActiveCfg = Release
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Release|Mixed Platforms.ActiveCfg = Release
+		{D53A89C3-9BF1-415C-8886-0A54FFE76970}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

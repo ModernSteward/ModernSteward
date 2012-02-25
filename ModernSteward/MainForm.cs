@@ -27,6 +27,9 @@ namespace ModernSteward
 		{
 			InitializeComponent();
 
+			LoadingForm loadingForm = new LoadingForm();
+			loadingForm.ShowLoadingForm();
+
 			try
 			{
 				mCore = new Core();
@@ -50,8 +53,11 @@ namespace ModernSteward
 			gridViewPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewPlugins_CommandCellClick);
 
 			labelStatusInStatusStrip.Text = "";
-			labelStatusInStatusStrip.TextChanged += new EventHandler(labelStatusInStatusStrip_TextChanged);	
+			labelStatusInStatusStrip.TextChanged += new EventHandler(labelStatusInStatusStrip_TextChanged);
 
+
+			loadingForm.CloseLoadingForm();
+			this.Show();
 		}
 
 		int ticks = 0;
@@ -99,6 +105,14 @@ namespace ModernSteward
 				else
 				{
 					RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
+					foreach (var plugin in mPluginHandler.Plugins)
+					{
+						if (plugin.Name == row.Cells["Name"].Value.ToString())
+						{
+							mPluginHandler.Plugins.Remove(plugin);
+							break;
+						}
+					}
 				}
 			}
 			else
@@ -156,7 +170,6 @@ namespace ModernSteward
 							string name = row.Cells["Name"].Value.ToString();
 							if (name == textBoxPluginName.Text)
 							{
-
 								nameAlreadyTaken = true;
 							}
 						}
@@ -168,8 +181,6 @@ namespace ModernSteward
 							testPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
 							AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
-
-							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
 							labelStatusInStatusStrip.Text = textBoxPluginName.Text + " бе добавен.";
 
@@ -201,8 +212,18 @@ namespace ModernSteward
 		{
 			if (!recognitionEngineRunning)
 			{
-				if (mPluginHandler.Plugins.Count != 0)
+
+				bool allPluginsInitialized = true;
+				foreach (var plugin in mPluginHandler.Plugins)
 				{
+					if (plugin.Initialized == false)
+					{
+						allPluginsInitialized = false;
+					}
+				}
+				if (mPluginHandler.Plugins.Count != 0 && allPluginsInitialized)
+				{
+					
 					mCore.LoadPlugins(mPluginHandler);
 					try
 					{
@@ -261,8 +282,14 @@ namespace ModernSteward
 				var stream = new FileStream(saveUserProfileFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
 				try
 				{
-					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
-					xmlSerializer.Serialize(stream, mPluginHandler);
+					PluginHandler tempPluginHandler = new PluginHandler();
+					foreach (var row in gridViewPlugins.Rows)
+					{
+						tempPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
+					}
+
+					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(tempPluginHandler.GetType());
+					xmlSerializer.Serialize(stream, tempPluginHandler);
 
 					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
 				}
@@ -281,18 +308,19 @@ namespace ModernSteward
 		private void menuItemOpenFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openUserProfileFileDialog = new OpenFileDialog();
-			openUserProfileFileDialog.Filter = "*ModernSteward user profile|*.msu|All files|*.*";
+			openUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
 			if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 				Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
 				try
 				{
+					var tempPluginHandler = new PluginHandler();
 					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
-					mPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
+					tempPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
 
 					gridViewPlugins.Rows.Clear();
 
-					foreach (var plugin in mPluginHandler.Plugins)
+					foreach (var plugin in tempPluginHandler.Plugins)
 					{
 						AddPluginToTheGridView(plugin.Name, plugin.AssemblyPath);
 					}

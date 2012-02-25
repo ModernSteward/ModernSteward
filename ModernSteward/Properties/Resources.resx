@@ -121,6 +121,9 @@
   <data name="iconSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pluginIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pluginIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="iconRun" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconRun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,7 +142,7 @@
   <data name="iconHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pluginIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pluginIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loadingScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loadingScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

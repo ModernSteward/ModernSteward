@@ -102,6 +102,13 @@ namespace ModernSteward.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap loadingScreen {
+            get {
+                object obj = ResourceManager.GetObject("loadingScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap pluginIcon {
             get {
                 object obj = ResourceManager.GetObject("pluginIcon", resourceCulture);

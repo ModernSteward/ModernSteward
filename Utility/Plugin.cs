@@ -21,7 +21,10 @@ namespace ModernSteward
         private Assembly Assembly;
 
 		[NonSerialized]
-        object instanceOfMyType;
+        private object instanceOfMyType;
+		[NonSerialized]
+		public bool Initialized = false;
+	
 
 		public Plugin() { }
 
@@ -52,7 +55,8 @@ namespace ModernSteward
 
         public bool Initialize()
         {
-            return (instanceOfMyType as PluginFunctionality).Initialize();
+			Initialized = (instanceOfMyType as PluginFunctionality).Initialize();
+            return Initialized;
         }
 
         public override string ToString()
