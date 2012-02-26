@@ -146,7 +146,7 @@ namespace PluginWizard
 
         
 
-        private string pluginPath = @"C:\CustomPlugin";
+        private string pluginPath = @"C:\";
 
         private void pluginWizard_Finish(object sender, EventArgs e)
         {
