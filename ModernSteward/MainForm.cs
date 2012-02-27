@@ -226,7 +226,6 @@ namespace ModernSteward
 					try
 					{
 						mCore.StartAsyncRecognition();
-					catch
 						buttonStartStop.Text = "Изключи";
 						labelStartStop.Text = "ВКЛЮЧЕНО";
 						labelStartStop.ForeColor = Color.Green;
