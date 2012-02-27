@@ -26,20 +26,23 @@ namespace ModernSteward
             else if ((currentNode.Tag as GrammarTreeViewTag).IsDictation)
             {
                 GrammarBuilder fakeDictation = new GrammarBuilder();
-                fakeDictation.AppendDictation();
                 string dictation = (currentNode.Tag as GrammarTreeViewTag).DictationContext;
-                try
-                {
-                    DictationGrammar dictGrammar = new DictationGrammar(dictation);
-                }
-                catch (Exception e)
-                {
-                    DictationGrammar dictGrammar = new DictationGrammar("grammar:dictation#" + dictation);
-                }
-                if ((currentNode.Tag as GrammarTreeViewTag).Optional)
-                {
-                    currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation), 0, 1);
-                }
+				if (dictation == string.Empty)
+				{
+					fakeDictation.AppendDictation();
+				}
+				else
+				{
+					fakeDictation.AppendDictation(dictation);
+				}
+				if ((currentNode.Tag as GrammarTreeViewTag).Optional)
+				{
+					currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation), 0, 1);
+				}
+				else
+				{
+					currentGrammar = new GrammarBuilder(new SemanticResultKey(currentNode.Text, fakeDictation));
+				}
             }
 
             Choices tempGrammar = new Choices();

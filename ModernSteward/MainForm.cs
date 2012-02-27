@@ -212,7 +212,6 @@ namespace ModernSteward
 		{
 			if (!recognitionEngineRunning)
 			{
-
 				bool allPluginsInitialized = true;
 				foreach (var plugin in mPluginHandler.Plugins)
 				{
@@ -229,7 +228,7 @@ namespace ModernSteward
 					{
 						mCore.StartAsyncRecognition();
 					}
-					catch
+					catch (Exception ex)
 					{
 						RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
 					}

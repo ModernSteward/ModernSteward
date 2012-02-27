@@ -70,7 +70,7 @@ namespace ModernSteward
                     mRecognitionEngine.LoadGrammar(pluginGrammar);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

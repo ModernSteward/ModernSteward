@@ -18,14 +18,15 @@ namespace ModernSteward
 
 		public string AssemblyPath;
 
-        private Assembly Assembly;
+        private Assembly mAssembly;
 
 		[NonSerialized]
         private object instanceOfMyType;
+
 		[NonSerialized]
 		public bool Initialized = false;
 	
-
+		
 		public Plugin() { }
 
         public Plugin(string aName, string aAssemblyPath)
@@ -33,9 +34,8 @@ namespace ModernSteward
             Name = aName;
 			AssemblyPath = aAssemblyPath;
 
-
-            Assembly = Assembly.LoadFile(aAssemblyPath);
-            Type type = Assembly.GetType("ModernSteward.CustomPlugin");
+			mAssembly = Assembly.LoadFile(aAssemblyPath);
+            Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
             instanceOfMyType = Activator.CreateInstance(type);
         }
 
@@ -46,6 +46,7 @@ namespace ModernSteward
 
         public Grammar GetGrammar()
         {
+			//System.Windows.Forms.MessageBox.Show((instanceOfMyType as PluginFunctionality).GetGrammarBuilder().DebugShowPhrases);
             return (instanceOfMyType as PluginFunctionality).GetGrammar();
         }
 
