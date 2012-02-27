@@ -222,22 +222,24 @@ namespace ModernSteward
 				}
 				if (mPluginHandler.Plugins.Count != 0 && allPluginsInitialized)
 				{
+					
 					mCore.LoadPlugins(mPluginHandler);
 					try
 					{
 						mCore.StartAsyncRecognition();
-						buttonStartStop.Text = "Изключи";
-						labelStartStop.Text = "ВКЛЮЧЕНО";
-						labelStartStop.ForeColor = Color.Green;
-
-						recognitionEngineRunning = true;
-
-						gridViewPlugins.Enabled = false;
 					}
 					catch (Exception ex)
 					{
 						RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
 					}
+
+					buttonStartStop.Text = "Изключи";
+					labelStartStop.Text = "ВКЛЮЧЕНО";
+					labelStartStop.ForeColor = Color.Green;
+
+					recognitionEngineRunning = true;
+
+					gridViewPlugins.Enabled = false;
 				}
 				else
 				{
@@ -335,6 +337,14 @@ namespace ModernSteward
 						stream.Close();
 					}
 				}
+			}
+		}
+
+		private void textBoxPluginName_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				buttonAddPlugin_Click(this, new EventArgs());
 			}
 		}
 	}

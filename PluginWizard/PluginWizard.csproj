@@ -38,6 +38,7 @@
       <HintPath>..\Libraries\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +57,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Telerik.WinControls.GridView.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.WinControls.RichTextBox, Version=2011.3.11.1219, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls.UI, Version=2011.3.11.1219, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Telerik.WinControls.UI.dll</HintPath>

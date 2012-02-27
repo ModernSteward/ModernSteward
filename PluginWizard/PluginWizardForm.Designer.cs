@@ -51,8 +51,10 @@
 			this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
 			this.wizardWelcomePage1 = new Telerik.WinControls.UI.WizardWelcomePage();
 			this.wizardPage1 = new Telerik.WinControls.UI.WizardPage();
+			this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).BeginInit();
 			this.pluginWizard.SuspendLayout();
+			this.panel3.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.labelWelcome)).BeginInit();
@@ -71,6 +73,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pluginWizard
@@ -105,6 +108,7 @@
 			// panel3
 			// 
 			this.panel3.BackColor = System.Drawing.Color.White;
+			this.panel3.Controls.Add(this.radLabel3);
 			this.panel3.Location = new System.Drawing.Point(150, 56);
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(503, 449);
@@ -124,9 +128,9 @@
 			// 
 			this.radLabel1.Location = new System.Drawing.Point(17, 75);
 			this.radLabel1.Name = "radLabel1";
-			this.radLabel1.Size = new System.Drawing.Size(423, 16);
+			this.radLabel1.Size = new System.Drawing.Size(421, 65);
 			this.radLabel1.TabIndex = 1;
-			this.radLabel1.Text = "Чрез този магьосник можете да създадете нов плъгин за \"Модерният иконом\"";
+			this.radLabel1.Text = resources.GetString("radLabel1.Text");
 			// 
 			// labelWelcome
 			// 
@@ -312,6 +316,14 @@
 			this.wizardPage1.Title = "Създаване на граматика";
 			this.wizardPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
+			// radLabel3
+			// 
+			this.radLabel3.Location = new System.Drawing.Point(3, 3);
+			this.radLabel3.Name = "radLabel3";
+			this.radLabel3.Size = new System.Drawing.Size(663, 139);
+			this.radLabel3.TabIndex = 0;
+			this.radLabel3.Text = resources.GetString("radLabel3.Text");
+			// 
 			// PluginWizardForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +335,8 @@
 			this.Text = "Магьосник за създаване на плъгини";
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).EndInit();
 			this.pluginWizard.ResumeLayout(false);
+			this.panel3.ResumeLayout(false);
+			this.panel3.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
@@ -344,6 +358,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -371,7 +386,8 @@
         private Telerik.WinControls.UI.RadTextBox textBoxContext;
         private Telerik.WinControls.UI.RadLabel labelContext;
         private Telerik.WinControls.UI.RadCheckBox checkBoxItemOptional;
-        private MasterDictionaryUserControl.MasterDictionaryManager masterDictionaryManager1;
+		private MasterDictionaryUserControl.MasterDictionaryManager masterDictionaryManager1;
+		private Telerik.WinControls.UI.RadLabel radLabel3;
     }
 }
 

@@ -108,7 +108,7 @@ namespace PluginWizard
             {
                 iteration++;
 
-                currentCode += GeneratingTheCode(childNode, level + 2, generatedCode);
+                currentCode += GeneratingTheCode(childNode, level + 1, generatedCode);
             }
             currentCode += ShiftNTabsInTheConsole(level+1);
             currentCode += "}" + Environment.NewLine;

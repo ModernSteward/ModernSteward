@@ -69,8 +69,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.labelStartStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStartStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.statusStrip)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.menuMain)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridViewPlugins
@@ -200,6 +200,7 @@
 			this.textBoxPluginName.Size = new System.Drawing.Size(283, 20);
 			this.textBoxPluginName.TabIndex = 4;
 			this.textBoxPluginName.TabStop = false;
+			this.textBoxPluginName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPluginName_KeyUp);
 			// 
 			// labelPluginName
 			// 
@@ -360,12 +361,6 @@
 			this.labelStatusInStatusStrip.TextWrap = true;
 			this.labelStatusInStatusStrip.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
-			// MainForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(698, 425);
-			// 
 			// menuMain
 			// 
 			this.menuMain.Items.AddRange(new Telerik.WinControls.RadItem[] {
@@ -377,6 +372,12 @@
 			this.menuMain.Size = new System.Drawing.Size(698, 20);
 			this.menuMain.TabIndex = 0;
 			this.menuMain.Text = "radMenu1";
+			// 
+			// MainForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(698, 425);
 			this.Controls.Add(this.statusStrip);
 			this.Controls.Add(this.menuMain);
 			this.Controls.Add(this.groupBoxStatus);
