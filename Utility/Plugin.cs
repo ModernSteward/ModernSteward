@@ -33,7 +33,8 @@ namespace ModernSteward
             Name = aName;
 			AssemblyPath = aAssemblyPath;
 
-            Assembly = Assembly.LoadFrom(aAssemblyPath);
+
+            Assembly = Assembly.LoadFile(aAssemblyPath);
             Type type = Assembly.GetType("ModernSteward.CustomPlugin");
             instanceOfMyType = Activator.CreateInstance(type);
         }
