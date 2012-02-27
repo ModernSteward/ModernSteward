@@ -36,7 +36,7 @@ namespace PluginWizard
 			pluginWizard.FinishButton.Text = "Завърши";
 
             pluginWizard.HelpButton.Text = "Помощ";
-            pluginWizard.HelpButton.Click += new EventHandler(HelpButton_Click);
+			pluginWizard.HelpButton.Visibility = ElementVisibility.Hidden;
 
             treeViewCommands.AllowEdit = true;
             treeViewCommands.AllowRemove = true;
@@ -146,7 +146,7 @@ namespace PluginWizard
 
         
 
-        private string pluginPath = @"C:\";
+        private string pluginPath = @"C:\CustomPlugin";
 
         private void pluginWizard_Finish(object sender, EventArgs e)
         {
