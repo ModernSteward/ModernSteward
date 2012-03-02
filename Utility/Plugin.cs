@@ -12,58 +12,58 @@ using ModernSteward;
 namespace ModernSteward
 {
 	[Serializable]
-    public class Plugin
-    {
-        public string Name;
+	public class Plugin
+	{
+		public string Name;
 
 		public string AssemblyPath;
 
-        private Assembly mAssembly;
+		private Assembly mAssembly;
 
 		[NonSerialized]
-        private object instanceOfMyType;
+		private object instanceOfMyType;
 
 		[NonSerialized]
 		public bool Initialized = false;
-	
-		
+
+
 		public Plugin() { }
 
-        public Plugin(string aName, string aAssemblyPath)
-        {
-            Name = aName;
+		public Plugin(string aName, string aAssemblyPath)
+		{
+			Name = aName;
 			AssemblyPath = aAssemblyPath;
 
 			mAssembly = Assembly.LoadFile(aAssemblyPath);
-            Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
-            instanceOfMyType = Activator.CreateInstance(type);
-        }
+			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
+			instanceOfMyType = Activator.CreateInstance(type);
+		}
 
-        public void TriggerPlugin(List<KeyValuePair<string, string>> aSemantics)
-        {
-            (instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
-        }
+		public void TriggerPlugin(List<KeyValuePair<string, string>> aSemantics)
+		{
+			(instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
+		}
 
-        public Grammar GetGrammar()
-        {
+		public Grammar GetGrammar()
+		{
 			//System.Windows.Forms.MessageBox.Show((instanceOfMyType as PluginFunctionality).GetGrammarBuilder().DebugShowPhrases);
-            return (instanceOfMyType as PluginFunctionality).GetGrammar();
-        }
+			return (instanceOfMyType as PluginFunctionality).GetGrammar();
+		}
 
-        public GrammarBuilder GetGrammarBuilder()
-        {
-            return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
-        }
+		public GrammarBuilder GetGrammarBuilder()
+		{
+			return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
+		}
 
-        public bool Initialize()
-        {
+		public bool Initialize()
+		{
 			Initialized = (instanceOfMyType as PluginFunctionality).Initialize();
-            return Initialized;
-        }
+			return Initialized;
+		}
 
-        public override string ToString()
-        {
-            return Name;
-        }
-    }
+		public override string ToString()
+		{
+			return Name;
+		}
+	}
 }

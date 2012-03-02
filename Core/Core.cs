@@ -44,7 +44,11 @@ namespace ModernSteward
 					
 					var semantics = ModernSteward.SemanticsToDict.Convert(e.Result.Semantics);
 
-					plugin.TriggerPlugin(semantics);
+					try
+					{
+						plugin.TriggerPlugin(semantics);
+					}
+					catch { }
 					
                 }
             }

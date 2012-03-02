@@ -65,8 +65,9 @@ namespace ModernSteward
             Choices wholeGrammar = new Choices();
 			for (int i = 0; i < treeView.Nodes.Count; ++i)
 			{
-				currentGrammar.Append(MakeGrammarBuilderRecursively(treeView.Nodes[i]));
+				wholeGrammar.Add(MakeGrammarBuilderRecursively(treeView.Nodes[i]));
 			}
+			currentGrammar.Append(wholeGrammar);
             return new Choices(currentGrammar);
         }
 
