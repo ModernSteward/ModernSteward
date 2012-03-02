@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Speech.Recognition;
 using ModernSteward;
+using System.IO;
 
 namespace ModernSteward
 {
@@ -16,7 +17,7 @@ namespace ModernSteward
 	{
 		public string Name;
 
-		public string AssemblyPath;
+		public string PluginPath;
 
 		private Assembly mAssembly;
 
@@ -26,17 +27,39 @@ namespace ModernSteward
 		[NonSerialized]
 		public bool Initialized = false;
 
+		[NonSerialized]
+		private string innerPluginDirectoryPath;
 
 		public Plugin() { }
 
-		public Plugin(string aName, string aAssemblyPath)
+		public Plugin(string aName, string aPluginPath)
 		{
 			Name = aName;
-			AssemblyPath = aAssemblyPath;
+			PluginPath = aPluginPath;
 
-			mAssembly = Assembly.LoadFile(aAssemblyPath);
+			string masterPluginZip = aPluginPath;
+			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
+			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
+			innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
+
+			ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
+			
+			mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
+
+			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
 			instanceOfMyType = Activator.CreateInstance(type);
+
+		}
+
+		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+		{
+			foreach(var file in Directory.GetFiles(innerPluginDirectoryPath)){
+				if(AssemblyName.GetAssemblyName(file).FullName == args.Name){
+					return Assembly.LoadFile(file);
+				}
+			}
+			return null;
 		}
 
 		public void TriggerPlugin(List<KeyValuePair<string, string>> aSemantics)
@@ -64,6 +87,10 @@ namespace ModernSteward
 		public override string ToString()
 		{
 			return Name;
+		}
+
+		~Plugin()
+		{
 		}
 	}
 }

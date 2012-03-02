@@ -7,7 +7,7 @@ using System.IO;
 using Telerik.WinControls.UI;
 using ModernSteward;
 
-namespace PluginWizard
+namespace ModernSteward
 {
     static class CodeGenerator
     {

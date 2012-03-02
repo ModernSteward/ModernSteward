@@ -5,9 +5,9 @@ using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
 
-namespace PluginWizard
+namespace ModernSteward
 {
-    class ZipManager
+    public class ZipManager
     {
         public static int Extract(string sourceFile, string destinationPath)
         {
@@ -50,6 +50,7 @@ namespace PluginWizard
             }
             finally
             {
+				zinstream.Dispose();
                 zinstream.Close();
             }
             return numFileUnzipped;

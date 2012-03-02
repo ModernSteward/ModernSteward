@@ -1,4 +1,4 @@
-﻿namespace PluginWizard
+﻿namespace ModernSteward
 {
     partial class PluginWizardForm
     {

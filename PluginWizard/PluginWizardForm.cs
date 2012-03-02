@@ -11,11 +11,9 @@ using Telerik.WinControls.UI;
 using SpeechLib;
 using System.IO;
 using System.Collections;
-using ICSharpCode.SharpZipLib;
-using ICSharpCode.SharpZipLib.Zip;
 using Telerik.WinControls;
 
-namespace PluginWizard
+namespace ModernSteward
 {
     public partial class PluginWizardForm : Form
     {

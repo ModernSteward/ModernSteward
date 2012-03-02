@@ -93,27 +93,24 @@ namespace ModernSteward
 
 			if (((bool)row.Cells["Checkbox"].Value) == false)
 			{
-				Plugin newPlugin = new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString());
-				if (newPlugin.Initialize())
+				foreach (var plugin in mPluginHandler.Plugins)
 				{
-					mPluginHandler.Plugins.Add(newPlugin);
-					row.Cells["Checkbox"].Value = true;
-					row.Cells["Button"].Value = "Деинициализирай!";
-
-					labelStatusInStatusStrip.Text = newPlugin.Name + " бе инициализиран успешно.";
-				}
-				else
-				{
-					RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
-					foreach (var plugin in mPluginHandler.Plugins)
+					if (plugin.Name == row.Cells["Name"].Value.ToString())
 					{
-						if (plugin.Name == row.Cells["Name"].Value.ToString())
+						if (plugin.Initialize())
 						{
-							mPluginHandler.Plugins.Remove(plugin);
-							break;
+							row.Cells["Checkbox"].Value = true;
+							row.Cells["Button"].Value = "Деинициализирай!";
+
+							labelStatusInStatusStrip.Text = plugin.Name + " бе инициализиран успешно.";
+						}
+						else
+						{
+							RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
 						}
 					}
 				}
+				
 			}
 			else
 			{
@@ -122,7 +119,8 @@ namespace ModernSteward
 					if (plugin.Name == row.Cells["Name"].Value.ToString())
 					{
 						labelStatusInStatusStrip.Text = plugin.Name + " бе деинициализиран успешно.";
-						mPluginHandler.Plugins.Remove(plugin);
+
+						plugin.Initialized = false;
 
 						row.Cells["Checkbox"].Value = false;
 						row.Cells["Button"].Value = "Инициализирай!";
@@ -134,7 +132,7 @@ namespace ModernSteward
 
 		private void radMenuItemPluginWizard_Click(object sender, EventArgs e)
 		{
-			PluginWizard.PluginWizardForm pluginWizardForm = new PluginWizard.PluginWizardForm();
+			PluginWizardForm pluginWizardForm = new PluginWizardForm();
 			pluginWizardForm.Show();
 		}
 
@@ -177,8 +175,7 @@ namespace ModernSteward
 						if (!nameAlreadyTaken)
 						{
 							// Little hack to check if the program will later be able to load the plugin successfully
-							PluginHandler testPluginHandler = new PluginHandler();
-							testPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
 							AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
 
@@ -281,14 +278,8 @@ namespace ModernSteward
 				var stream = new FileStream(saveUserProfileFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
 				try
 				{
-					PluginHandler tempPluginHandler = new PluginHandler();
-					foreach (var row in gridViewPlugins.Rows)
-					{
-						tempPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
-					}
-
-					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(tempPluginHandler.GetType());
-					xmlSerializer.Serialize(stream, tempPluginHandler);
+					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
+					xmlSerializer.Serialize(stream, mPluginHandler);
 
 					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
 				}
@@ -313,15 +304,21 @@ namespace ModernSteward
 				Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
 				try
 				{
-					var tempPluginHandler = new PluginHandler();
 					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
-					tempPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
+					mPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
 
 					gridViewPlugins.Rows.Clear();
 
-					foreach (var plugin in tempPluginHandler.Plugins)
+					foreach (var plugin in mPluginHandler.Plugins)
 					{
-						AddPluginToTheGridView(plugin.Name, plugin.AssemblyPath);
+						AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
+					}
+
+					mPluginHandler.Plugins.Clear();
+
+					foreach (var row in gridViewPlugins.Rows)
+					{
+						mPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
 					}
 
 					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
