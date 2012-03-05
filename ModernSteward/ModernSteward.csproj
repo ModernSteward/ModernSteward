@@ -88,6 +88,12 @@
       <DependentUpon>MasterDictionaryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ModernSteward.cs" />
+    <Compile Include="PluginCommandsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PluginCommandsForm.Designer.cs">
+      <DependentUpon>PluginCommandsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutTheCreators.resx">
       <DependentUpon>AboutTheCreators.cs</DependentUpon>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterDictionaryForm.resx">
       <DependentUpon>MasterDictionaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluginCommandsForm.resx">
+      <DependentUpon>PluginCommandsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

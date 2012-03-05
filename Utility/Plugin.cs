@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Speech.Recognition;
 using ModernSteward;
 using System.IO;
+using Telerik.WinControls.UI;
 
 namespace ModernSteward
 {
@@ -30,26 +31,35 @@ namespace ModernSteward
 		[NonSerialized]
 		private string innerPluginDirectoryPath;
 
+		public string PluginGrammarTreePath;
+
 		public Plugin() { }
 
 		public Plugin(string aName, string aPluginPath)
 		{
-			Name = aName;
-			PluginPath = aPluginPath;
+			try
+			{
+				Name = aName;
+				PluginPath = aPluginPath;
 
-			string masterPluginZip = aPluginPath;
-			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
-			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
-			innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
+				string masterPluginZip = aPluginPath;
+				Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
+				Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
+				innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
 
-			ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
-			
-			mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
+				ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
 
-			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
-			instanceOfMyType = Activator.CreateInstance(type);
+				mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
+				PluginGrammarTreePath = innerPluginDirectoryPath + @"CustomPluginGrammar.xml";
 
+				AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+				Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
+				instanceOfMyType = Activator.CreateInstance(type);
+			}
+			catch (Exception ex)
+			{
+				System.Windows.Forms.MessageBox.Show(ex.ToString());
+			}
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

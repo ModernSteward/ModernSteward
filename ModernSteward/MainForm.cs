@@ -142,12 +142,6 @@ namespace ModernSteward
 			masterDictionaryForm.Show();
 		}
 
-		//TO IMPLEMENT!!!
-		private void menuItemHelp_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void menuItemCreators_Click(object sender, EventArgs e)
 		{
 			AboutTheCreators aboutTheCreators = new AboutTheCreators("1.0");
@@ -190,7 +184,7 @@ namespace ModernSteward
 						}
 					}
 				}
-				catch
+				catch (Exception ex)
 				{
 					RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!", "Грешка");
 				}
@@ -342,6 +336,21 @@ namespace ModernSteward
 			if (e.KeyCode == Keys.Enter)
 			{
 				buttonAddPlugin_Click(this, new EventArgs());
+			}
+		}
+
+		private void menuItemPluginCommands_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				string pluginName = gridViewPlugins.SelectedRows[0].Cells["Name"].Value.ToString();
+				var foundPlugin = mPluginHandler.Plugins.Find((plugin) => plugin.Name == pluginName);
+				var showPluginCommandsForm = new PluginCommandsForm(pluginName, foundPlugin.PluginGrammarTreePath);
+				showPluginCommandsForm.Show();
+			}
+			catch (System.ArgumentOutOfRangeException)
+			{
+				RadMessageBox.Show("Първо трябва да селектирате плъгин!");
 			}
 		}
 	}
