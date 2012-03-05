@@ -203,15 +203,15 @@ namespace ModernSteward
 		{
 			if (!recognitionEngineRunning)
 			{
-				bool allPluginsInitialized = true;
+				bool atLeastOnePluginInitialized = true;
 				foreach (var plugin in mPluginHandler.Plugins)
 				{
-					if (plugin.Initialized == false)
+					if (plugin.Initialized == true)
 					{
-						allPluginsInitialized = false;
+						atLeastOnePluginInitialized = true;
 					}
 				}
-				if (mPluginHandler.Plugins.Count != 0 && allPluginsInitialized)
+				if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
 				{
 					
 					mCore.LoadPlugins(mPluginHandler);

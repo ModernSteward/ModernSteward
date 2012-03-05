@@ -37,37 +37,36 @@ namespace ModernSteward
 
 		public Plugin(string aName, string aPluginPath)
 		{
-			try
-			{
-				Name = aName;
-				PluginPath = aPluginPath;
+			Name = aName;
+			PluginPath = aPluginPath;
 
-				string masterPluginZip = aPluginPath;
-				Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
-				Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
-				innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
+			string masterPluginZip = aPluginPath;
+			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
+			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
+			innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
 
-				ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
+			ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
 
-				mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
-				PluginGrammarTreePath = innerPluginDirectoryPath + @"CustomPluginGrammar.xml";
+			mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
+			PluginGrammarTreePath = innerPluginDirectoryPath + @"CustomPluginGrammar.xml";
 
-				AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-				Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
-				instanceOfMyType = Activator.CreateInstance(type);
-			}
-			catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show(ex.ToString());
-			}
+			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
+			instanceOfMyType = Activator.CreateInstance(type);
+
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
 		{
 			foreach(var file in Directory.GetFiles(innerPluginDirectoryPath)){
-				if(AssemblyName.GetAssemblyName(file).FullName == args.Name){
-					return Assembly.LoadFile(file);
+				try
+				{
+					if (AssemblyName.GetAssemblyName(file).FullName == args.Name)
+					{
+						return Assembly.LoadFile(file);
+					}
 				}
+				catch { }
 			}
 			return null;
 		}

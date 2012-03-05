@@ -5,6 +5,8 @@ To think about the generation of the grammar.
 Create a mobile version?
 Create a web service?
 Market for plugins...
+	User profiles:
+		Stores all the plugins and the trained speech recognizer file
 
 Startup plugins:
 To initialize plugins on startup.
@@ -13,6 +15,8 @@ NOTES: Have to make a checkbox about it, and the plugin should get the variables
 Crash report system:
 Sends report to the developers.
 	Maybe it will be usefull to use Google Docs (Form)
+
+
 
 Version 2:
 Text to speech for better experience

@@ -48,7 +48,10 @@ namespace ModernSteward
 					{
 						plugin.TriggerPlugin(semantics);
 					}
-					catch { }
+					catch (Exception ex)
+					{
+						System.Windows.Forms.MessageBox.Show(ex.Message);
+					}
 
 				}
 			}

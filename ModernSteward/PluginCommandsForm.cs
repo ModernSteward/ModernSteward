@@ -18,7 +18,7 @@ namespace ModernSteward
 			this.Text = "Команди за " + pluginName;
 
 			RadTreeViewGrammarManager.LoadGrammarFromXML(pathToTheXML, ref treeViewCommands);
-			//treeViewCommands.Enabled = false;
+			treeViewCommands.Enabled = false;
         }
     }
 }
