@@ -40,10 +40,18 @@ namespace ModernSteward
 			Name = aName;
 			PluginPath = aPluginPath;
 
-			string masterPluginZip = aPluginPath;
+			LoadPlugin();
+		}
+
+		/// <summary>
+		/// Must be used only after deserialization or in the constructor of the class!!!
+		/// </summary>
+		public void LoadPlugin()
+		{
+			string masterPluginZip = PluginPath;
 			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
-			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + aName);
-			innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + aName + @"\";
+			Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + Name);
+			innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + Name + @"\";
 
 			ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
 
@@ -53,7 +61,6 @@ namespace ModernSteward
 			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
 			instanceOfMyType = Activator.CreateInstance(type);
-
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

@@ -293,6 +293,7 @@ namespace ModernSteward
 		{
 			OpenFileDialog openUserProfileFileDialog = new OpenFileDialog();
 			openUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
+			bool openedSuccessfull = false;
 			if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 				Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
@@ -305,17 +306,11 @@ namespace ModernSteward
 
 					foreach (var plugin in mPluginHandler.Plugins)
 					{
+						plugin.LoadPlugin();
 						AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
 					}
 
-					mPluginHandler.Plugins.Clear();
-
-					foreach (var row in gridViewPlugins.Rows)
-					{
-						mPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
-					}
-
-					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+					openedSuccessfull = true;
 				}
 				catch (Exception ex)
 				{
@@ -323,6 +318,14 @@ namespace ModernSteward
 				}
 				finally
 				{
+					if (openedSuccessfull)
+					{
+						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+					}
+					else
+					{
+						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден НЕуспешно.";
+					}
 					if (stream != null)
 					{
 						stream.Close();
