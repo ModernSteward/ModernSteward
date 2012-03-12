@@ -37,8 +37,6 @@ namespace ModernSteward
 
 		public Plugin(string aName, string aPluginPath)
 		{
-			try
-			{
 				Name = aName;
 				PluginPath = aPluginPath;
 
@@ -55,11 +53,7 @@ namespace ModernSteward
 				AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 				Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
 				instanceOfMyType = Activator.CreateInstance(type);
-			}
-			catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show(ex.ToString());
-			}
+			
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

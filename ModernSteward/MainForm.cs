@@ -16,342 +16,369 @@ using System.Xml;
 
 namespace ModernSteward
 {
-	public partial class MainForm : Telerik.WinControls.UI.RadForm
-	{
-		private PluginHandler mPluginHandler = new PluginHandler();
-		private Core mCore;
+    public partial class MainForm : Telerik.WinControls.UI.RadForm
+    {
+        private PluginHandler mPluginHandler = new PluginHandler();
+        private Core mCore;
 
-		private bool recognitionEngineRunning = false;
+        private bool recognitionEngineRunning = false;
 
-		public MainForm()
-		{
-			InitializeComponent();
+        public MainForm()
+        {
+            InitializeComponent();
 
-			LoadingForm loadingForm = new LoadingForm();
-			loadingForm.ShowLoadingForm();
+            LoadingForm loadingForm = new LoadingForm();
+            loadingForm.ShowLoadingForm();
 
-			try
-			{
-				mCore = new Core();
-				mCore.SpeechRecognizedCoreEvent += new Core.SpeechRecognizedCoreEventHandler(mCore_SpeechRecognizedCoreEvent);
-			}
-			catch (InvalidOperationException)
-			{
-				RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!", "Грешка");
-				this.Close();
-			}
+            try
+            {
+                mCore = new Core();
+                mCore.SpeechRecognizedCoreEvent += new Core.SpeechRecognizedCoreEventHandler(mCore_SpeechRecognizedCoreEvent);
+            }
+            catch (InvalidOperationException)
+            {
+                RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!", "Грешка");
+                this.Close();
+            }
 
-			this.MaximumSize = this.Size;
-			this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
 
-			gridViewPlugins.AllowAutoSizeColumns = true;
-			gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            gridViewPlugins.AllowAutoSizeColumns = true;
+            gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
 
-			gridViewPlugins.AllowAutoSizeColumns = true;
-			gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            gridViewPlugins.AllowAutoSizeColumns = true;
+            gridViewPlugins.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
 
-			gridViewPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewPlugins_CommandCellClick);
+            gridViewPlugins.CommandCellClick += new CommandCellClickEventHandler(gridViewPlugins_CommandCellClick);
 
-			labelStatusInStatusStrip.Text = "";
-			labelStatusInStatusStrip.TextChanged += new EventHandler(labelStatusInStatusStrip_TextChanged);
+            labelStatusInStatusStrip.Text = "";
+            labelStatusInStatusStrip.TextChanged += new EventHandler(labelStatusInStatusStrip_TextChanged);
+
+            notifyIcon = new NotifyIcon(this.components);
+            notifyIcon.Visible = true;
+
+            loadingForm.CloseLoadingForm();
+            this.Show();
+        }
+
+        int ticks = 0;
+        void labelStatusInStatusStrip_TextChanged(object sender, EventArgs e)
+        {
+            ticks = 0;
+            Timer timer = new Timer();
+            timer.Start();
+            timer.Tick += new EventHandler(timer_Tick);
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            ticks++;
+            if (ticks == 20)
+            {
+                labelStatusInStatusStrip.Text = "";
+                (sender as Timer).Stop();
+                ticks = 0;
+            }
+        }
+
+        void mCore_SpeechRecognizedCoreEvent(Plugin pluginTriggered)
+        {
+            labelStatusInStatusStrip.Text = pluginTriggered.Name + " бе задействан.";
+            labelStatusInStatusStrip.UpdateLayout();
+        }
+
+        void gridViewPlugins_CommandCellClick(object sender, EventArgs e)
+        {
+            var buttonCell = (sender as GridCommandCellElement);
+            var row = buttonCell.RowInfo;
+
+            if (((bool)row.Cells["Checkbox"].Value) == false)
+            {
+                foreach (var plugin in mPluginHandler.Plugins)
+                {
+                    if (plugin.Name == row.Cells["Name"].Value.ToString())
+                    {
+                        if (plugin.Initialize())
+                        {
+                            row.Cells["Checkbox"].Value = true;
+                            row.Cells["Button"].Value = "Деинициализирай!";
+
+                            labelStatusInStatusStrip.Text = plugin.Name + " бе инициализиран успешно.";
+                        }
+                        else
+                        {
+                            RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                foreach (var plugin in mPluginHandler.Plugins)
+                {
+                    if (plugin.Name == row.Cells["Name"].Value.ToString())
+                    {
+                        labelStatusInStatusStrip.Text = plugin.Name + " бе деинициализиран успешно.";
+
+                        plugin.Initialized = false;
+
+                        row.Cells["Checkbox"].Value = false;
+                        row.Cells["Button"].Value = "Инициализирай!";
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void radMenuItemPluginWizard_Click(object sender, EventArgs e)
+        {
+            PluginWizardForm pluginWizardForm = new PluginWizardForm();
+            pluginWizardForm.Show();
+        }
+
+        private void menuItemMasterDictionary_Click(object sender, EventArgs e)
+        {
+            MasterDictionaryForm masterDictionaryForm = new MasterDictionaryForm();
+            masterDictionaryForm.Show();
+        }
+
+        private void menuItemCreators_Click(object sender, EventArgs e)
+        {
+            AboutTheCreators aboutTheCreators = new AboutTheCreators("1.0");
+            aboutTheCreators.Show();
+        }
+
+        private void buttonAddPlugin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (textBoxPluginName.Text != "" && textBoxPluginPath.Text != "")
+                    {
+                        bool nameAlreadyTaken = false;
+                        foreach (var row in gridViewPlugins.Rows)
+                        {
+                            string name = row.Cells["Name"].Value.ToString();
+                            if (name == textBoxPluginName.Text)
+                            {
+                                nameAlreadyTaken = true;
+                            }
+                        }
+
+                        if (!nameAlreadyTaken)
+                        {
+                            // Little hack to check if the program will later be able to load the plugin successfully
+                            mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+
+                            AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
+
+                            labelStatusInStatusStrip.Text = textBoxPluginName.Text + " бе добавен.";
+
+                            textBoxPluginPath.Text = "";
+                            textBoxPluginName.Text = "";
+                        }
+                        else
+                        {
+                            RadMessageBox.Show("Вече има плъгин с това име!", "Грешка");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!", "Грешка");
+                }
+            }
+            catch { }
+        }
+
+        private void AddPluginToTheGridView(string pluginName, string pluginPath)
+        {
+            gridViewPlugins.Rows.Add(false, pluginName, "Инициализирай!");
+            gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = pluginPath;
+        }
 
 
-			loadingForm.CloseLoadingForm();
-			this.Show();
-		}
+        private void buttonStartStop_Click(object sender, EventArgs e)
+        {
+            if (!recognitionEngineRunning)
+            {
+                bool allPluginsInitialized = true;
+                foreach (var plugin in mPluginHandler.Plugins)
+                {
+                    if (plugin.Initialized == false)
+                    {
+                        allPluginsInitialized = false;
+                    }
+                }
+                if (mPluginHandler.Plugins.Count != 0 && allPluginsInitialized)
+                {
 
-		int ticks = 0;
-		void labelStatusInStatusStrip_TextChanged(object sender, EventArgs e)
-		{
-			ticks = 0;
-			Timer timer = new Timer();
-			timer.Start();
-			timer.Tick += new EventHandler(timer_Tick);
-		}
+                    mCore.LoadPlugins(mPluginHandler);
+                    try
+                    {
+                        mCore.StartAsyncRecognition();
+                    }
+                    catch (Exception ex)
+                    {
+                        RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
+                    }
 
-		void timer_Tick(object sender, EventArgs e)
-		{
-			ticks++;
-			if (ticks == 20)
-			{
-				labelStatusInStatusStrip.Text = "";
-				(sender as Timer).Stop();
-				ticks = 0;
-			}
-		}
+                    buttonStartStop.Text = "Изключи";
+                    labelStartStop.Text = "ВКЛЮЧЕНО";
+                    labelStartStop.ForeColor = Color.Green;
 
-		void  mCore_SpeechRecognizedCoreEvent(Plugin pluginTriggered)
-		{
-			labelStatusInStatusStrip.Text = pluginTriggered.Name + " бе задействан.";
-			labelStatusInStatusStrip.UpdateLayout();
-		}
+                    recognitionEngineRunning = true;
 
-		void gridViewPlugins_CommandCellClick(object sender, EventArgs e)
-		{
-			var buttonCell = (sender as GridCommandCellElement);
-			var row = buttonCell.RowInfo;
+                    gridViewPlugins.Enabled = false;
+                }
+                else
+                {
+                    RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.", "Грешка");
+                }
+            }
+            else
+            {
+                mCore.StopAsyncRecognition();
 
-			if (((bool)row.Cells["Checkbox"].Value) == false)
-			{
-				foreach (var plugin in mPluginHandler.Plugins)
-				{
-					if (plugin.Name == row.Cells["Name"].Value.ToString())
-					{
-						if (plugin.Initialize())
-						{
-							row.Cells["Checkbox"].Value = true;
-							row.Cells["Button"].Value = "Деинициализирай!";
+                buttonStartStop.Text = "Включи";
+                labelStartStop.Text = "ИЗКЛЮЧЕНО";
+                labelStartStop.ForeColor = Color.Red;
 
-							labelStatusInStatusStrip.Text = plugin.Name + " бе инициализиран успешно.";
-						}
-						else
-						{
-							RadMessageBox.Show("Получи се някаква грешка при инициализирането на плъгина. Моля, свържете се със създателя на плъгина.", "Грешка");
-						}
-					}
-				}
-				
-			}
-			else
-			{
-				foreach (var plugin in mPluginHandler.Plugins)
-				{
-					if (plugin.Name == row.Cells["Name"].Value.ToString())
-					{
-						labelStatusInStatusStrip.Text = plugin.Name + " бе деинициализиран успешно.";
+                recognitionEngineRunning = false;
 
-						plugin.Initialized = false;
+                gridViewPlugins.Enabled = true;
+            }
+        }
 
-						row.Cells["Checkbox"].Value = false;
-						row.Cells["Button"].Value = "Инициализирай!";
-						break;
-					}
-				}
-			}
-		}
+        private void buttonBrowseForPlugin_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openPluginAssemblyFileDialog = new OpenFileDialog();
+            openPluginAssemblyFileDialog.Filter = "ModernSteward Plugins|*.zip|All files|*.*";
+            if (openPluginAssemblyFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxPluginPath.Text = openPluginAssemblyFileDialog.FileName;
+            }
+        }
 
-		private void radMenuItemPluginWizard_Click(object sender, EventArgs e)
-		{
-			PluginWizardForm pluginWizardForm = new PluginWizardForm();
-			pluginWizardForm.Show();
-		}
+        private void MenuItemSave_Click(object sender, EventArgs e)
+        {
 
-		private void menuItemMasterDictionary_Click(object sender, EventArgs e)
-		{
-			MasterDictionaryForm masterDictionaryForm = new MasterDictionaryForm();
-			masterDictionaryForm.Show();
-		}
+            SaveFileDialog saveUserProfileFileDialog = new SaveFileDialog();
+            saveUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
 
-		private void menuItemCreators_Click(object sender, EventArgs e)
-		{
-			AboutTheCreators aboutTheCreators = new AboutTheCreators("1.0");
-			aboutTheCreators.Show();
-		}
+            if (saveUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var stream = new FileStream(saveUserProfileFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                try
+                {
+                    System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
+                    xmlSerializer.Serialize(stream, mPluginHandler);
 
-		private void buttonAddPlugin_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				try
-				{
-					if (textBoxPluginName.Text != "" && textBoxPluginPath.Text != "")
-					{
-						bool nameAlreadyTaken = false;
-						foreach (var row in gridViewPlugins.Rows)
-						{
-							string name = row.Cells["Name"].Value.ToString();
-							if (name == textBoxPluginName.Text)
-							{
-								nameAlreadyTaken = true;
-							}
-						}
+                    labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
+                }
+                catch (Exception ex)
+                {
+                    RadMessageBox.Show("Възникна проблем при запазването на профила. Моля, свържете се с администратор", "Грешка");
+                }
+                finally
+                {
+                    stream.Flush();
+                    stream.Close();
+                }
+            }
+        }
 
-						if (!nameAlreadyTaken)
-						{
-							// Little hack to check if the program will later be able to load the plugin successfully
-							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+        private void menuItemOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openUserProfileFileDialog = new OpenFileDialog();
+            openUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
+            if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                try
+                {
+                    System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
+                    mPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
 
-							AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
+                    gridViewPlugins.Rows.Clear();
 
-							labelStatusInStatusStrip.Text = textBoxPluginName.Text + " бе добавен.";
+                    foreach (var plugin in mPluginHandler.Plugins)
+                    {
+                        AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
+                    }
 
-							textBoxPluginPath.Text = "";
-							textBoxPluginName.Text = "";
-						}
-						else
-						{
-							RadMessageBox.Show("Вече има плъгин с това име!", "Грешка");
-						}
-					}
-				}
-				catch (Exception ex)
-				{
-					RadMessageBox.Show("Плъгинът е невалиден или несъвместим с настоящата версия!", "Грешка");
-				}
-			}
-			catch { }
-		}
+                    mPluginHandler.Plugins.Clear();
 
-		private void AddPluginToTheGridView(string pluginName, string pluginPath)
-		{
-			gridViewPlugins.Rows.Add(false, pluginName, "Инициализирай!");
-			gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = pluginPath;
-		}
+                    foreach (var row in gridViewPlugins.Rows)
+                    {
+                        mPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
+                    }
 
+                    labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+                }
+                catch (Exception ex)
+                {
+                    RadMessageBox.Show("Възникна проблем при отварянето на профила. Най-вероятно файлът е развален. \nМоля, свържете се с администратор", "Грешка");
+                }
+                finally
+                {
+                    if (stream != null)
+                    {
+                        stream.Close();
+                    }
+                }
+            }
+        }
 
-		private void buttonStartStop_Click(object sender, EventArgs e)
-		{
-			if (!recognitionEngineRunning)
-			{
-				bool allPluginsInitialized = true;
-				foreach (var plugin in mPluginHandler.Plugins)
-				{
-					if (plugin.Initialized == false)
-					{
-						allPluginsInitialized = false;
-					}
-				}
-				if (mPluginHandler.Plugins.Count != 0 && allPluginsInitialized)
-				{
-					
-					mCore.LoadPlugins(mPluginHandler);
-					try
-					{
-						mCore.StartAsyncRecognition();
-					}
-					catch (Exception ex)
-					{
-						RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
-					}
+        private void textBoxPluginName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonAddPlugin_Click(this, new EventArgs());
+            }
+        }
 
-					buttonStartStop.Text = "Изключи";
-					labelStartStop.Text = "ВКЛЮЧЕНО";
-					labelStartStop.ForeColor = Color.Green;
+        private void menuItemPluginCommands_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string pluginName = gridViewPlugins.SelectedRows[0].Cells["Name"].Value.ToString();
+                var foundPlugin = mPluginHandler.Plugins.Find((plugin) => plugin.Name == pluginName);
+                var showPluginCommandsForm = new PluginCommandsForm(pluginName, foundPlugin.PluginGrammarTreePath);
+                showPluginCommandsForm.Show();
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                RadMessageBox.Show("Първо трябва да селектирате плъгин!");
+            }
+        }
 
-					recognitionEngineRunning = true;
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+            }
+            this.Activate();
+        }
 
-					gridViewPlugins.Enabled = false;
-				}
-				else
-				{
-					RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне един плъгин.", "Грешка");
-				}
-			}
-			else
-			{
-				mCore.StopAsyncRecognition();
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
+        }
 
-				buttonStartStop.Text = "Включи";
-				labelStartStop.Text = "ИЗКЛЮЧЕНО";
-				labelStartStop.ForeColor = Color.Red;
-
-				recognitionEngineRunning = false;
-
-				gridViewPlugins.Enabled = true;
-			}
-		}
-
-		private void buttonBrowseForPlugin_Click(object sender, EventArgs e)
-		{
-			OpenFileDialog openPluginAssemblyFileDialog = new OpenFileDialog();
-			openPluginAssemblyFileDialog.Filter = "ModernSteward Plugins|*.msp|All files|*.*";
-			if (openPluginAssemblyFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				textBoxPluginPath.Text = openPluginAssemblyFileDialog.FileName;
-			}
-		}
-
-		private void MenuItemSave_Click(object sender, EventArgs e)
-		{
-
-			SaveFileDialog saveUserProfileFileDialog = new SaveFileDialog();
-			saveUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
-
-			if (saveUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				var stream = new FileStream(saveUserProfileFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-				try
-				{
-					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
-					xmlSerializer.Serialize(stream, mPluginHandler);
-
-					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
-				}
-				catch (Exception ex)
-				{
-					RadMessageBox.Show("Възникна проблем при запазването на профила. Моля, свържете се с администратор", "Грешка");
-				}
-				finally
-				{
-					stream.Flush();
-					stream.Close();
-				}
-			}
-		}
-
-		private void menuItemOpenFile_Click(object sender, EventArgs e)
-		{
-			OpenFileDialog openUserProfileFileDialog = new OpenFileDialog();
-			openUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
-			if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
-				try
-				{
-					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
-					mPluginHandler = (PluginHandler)xmlSerializer.Deserialize(stream);
-
-					gridViewPlugins.Rows.Clear();
-
-					foreach (var plugin in mPluginHandler.Plugins)
-					{
-						AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
-					}
-
-					mPluginHandler.Plugins.Clear();
-
-					foreach (var row in gridViewPlugins.Rows)
-					{
-						mPluginHandler.Plugins.Add(new Plugin(row.Cells["Name"].Value.ToString(), row.Tag.ToString()));
-					}
-
-					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
-				}
-				catch (Exception ex)
-				{
-					RadMessageBox.Show("Възникна проблем при отварянето на профила. Най-вероятно файлът е развален. \nМоля, свържете се с администратор", "Грешка");
-				}
-				finally
-				{
-					if (stream != null)
-					{
-						stream.Close();
-					}
-				}
-			}
-		}
-
-		private void textBoxPluginName_KeyUp(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				buttonAddPlugin_Click(this, new EventArgs());
-			}
-		}
-
-		private void menuItemPluginCommands_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				string pluginName = gridViewPlugins.SelectedRows[0].Cells["Name"].Value.ToString();
-				var foundPlugin = mPluginHandler.Plugins.Find((plugin) => plugin.Name == pluginName);
-				var showPluginCommandsForm = new PluginCommandsForm(pluginName, foundPlugin.PluginGrammarTreePath);
-				showPluginCommandsForm.Show();
-			}
-			catch (System.ArgumentOutOfRangeException)
-			{
-				RadMessageBox.Show("Първо трябва да селектирате плъгин!");
-			}
-		}
-	}
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                //this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+            }
+        }
+    }
 }
