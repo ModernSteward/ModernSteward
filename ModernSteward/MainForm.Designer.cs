@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-			Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-			Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn2 = new Telerik.WinControls.UI.GridViewCommandColumn();
+			Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn3 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+			Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+			Telerik.WinControls.UI.GridViewCommandColumn gridViewCommandColumn3 = new Telerik.WinControls.UI.GridViewCommandColumn();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.gridViewPlugins = new Telerik.WinControls.UI.RadGridView();
 			this.groupBoxPlugins = new Telerik.WinControls.UI.RadGroupBox();
@@ -87,28 +87,28 @@
 			// gridViewPlugins
 			// 
 			this.gridViewPlugins.MasterTemplate.AllowAddNewRow = false;
-			gridViewCheckBoxColumn2.FieldName = "Checkbox";
-			gridViewCheckBoxColumn2.HeaderText = "";
-			gridViewCheckBoxColumn2.MaxWidth = 20;
-			gridViewCheckBoxColumn2.Name = "Checkbox";
-			gridViewCheckBoxColumn2.ReadOnly = true;
-			gridViewCheckBoxColumn2.Width = 20;
-			gridViewTextBoxColumn2.EnableExpressionEditor = false;
-			gridViewTextBoxColumn2.FieldName = "Name";
-			gridViewTextBoxColumn2.HeaderText = "Име";
-			gridViewTextBoxColumn2.Name = "Name";
-			gridViewTextBoxColumn2.ReadOnly = true;
-			gridViewCommandColumn2.EnableExpressionEditor = false;
-			gridViewCommandColumn2.FieldName = "Button";
-			gridViewCommandColumn2.MaxWidth = 130;
-			gridViewCommandColumn2.MinWidth = 130;
-			gridViewCommandColumn2.Name = "Button";
-			gridViewCommandColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			gridViewCommandColumn2.Width = 130;
+			gridViewCheckBoxColumn3.FieldName = "Checkbox";
+			gridViewCheckBoxColumn3.HeaderText = "";
+			gridViewCheckBoxColumn3.MaxWidth = 20;
+			gridViewCheckBoxColumn3.Name = "Checkbox";
+			gridViewCheckBoxColumn3.ReadOnly = true;
+			gridViewCheckBoxColumn3.Width = 20;
+			gridViewTextBoxColumn3.EnableExpressionEditor = false;
+			gridViewTextBoxColumn3.FieldName = "Name";
+			gridViewTextBoxColumn3.HeaderText = "Име";
+			gridViewTextBoxColumn3.Name = "Name";
+			gridViewTextBoxColumn3.ReadOnly = true;
+			gridViewCommandColumn3.EnableExpressionEditor = false;
+			gridViewCommandColumn3.FieldName = "Button";
+			gridViewCommandColumn3.MaxWidth = 130;
+			gridViewCommandColumn3.MinWidth = 130;
+			gridViewCommandColumn3.Name = "Button";
+			gridViewCommandColumn3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			gridViewCommandColumn3.Width = 130;
 			this.gridViewPlugins.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewCheckBoxColumn2,
-            gridViewTextBoxColumn2,
-            gridViewCommandColumn2});
+            gridViewCheckBoxColumn3,
+            gridViewTextBoxColumn3,
+            gridViewCommandColumn3});
 			this.gridViewPlugins.MasterTemplate.EnableGrouping = false;
 			this.gridViewPlugins.MasterTemplate.ShowRowHeaderColumn = false;
 			this.gridViewPlugins.Name = "gridViewPlugins";

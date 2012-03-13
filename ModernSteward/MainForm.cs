@@ -188,7 +188,7 @@ namespace ModernSteward
                 }
                 catch (Exception ex)
                 {
-                    RadMessageBox.Show("Добавката е невалиден или несъвместим с настоящата версия!", "Грешка");
+                    RadMessageBox.Show("Добавката е невалидна или несъвместима с настоящата версия!", "Грешка");
                 }
             }
             catch { }
@@ -205,7 +205,7 @@ namespace ModernSteward
         {
             if (!recognitionEngineRunning)
             {
-				bool atLeastOnePluginInitialized = true;
+				bool atLeastOnePluginInitialized = false;
                 foreach (var plugin in mPluginHandler.Plugins)
                 {
 					if (plugin.Initialized == true)
@@ -213,7 +213,8 @@ namespace ModernSteward
 						atLeastOnePluginInitialized = true;
                     }
                 }
-		if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
+
+				if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
                 {
                     mCore.LoadPlugins(mPluginHandler);
                     try
@@ -354,7 +355,7 @@ namespace ModernSteward
             }
             catch (System.ArgumentOutOfRangeException)
             {
-                RadMessageBox.Show("Първо трябва да селектирате плъгин!");
+                RadMessageBox.Show("Първо трябва да селектирате добавка!");
             }
         }
 
