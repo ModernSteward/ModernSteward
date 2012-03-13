@@ -32,6 +32,7 @@
 			this.pluginWizard = new Telerik.WinControls.UI.RadWizard();
 			this.wizardCompletionPage1 = new Telerik.WinControls.UI.WizardCompletionPage();
 			this.panel3 = new System.Windows.Forms.Panel();
+			this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
 			this.labelWelcome = new Telerik.WinControls.UI.RadLabel();
@@ -51,10 +52,10 @@
 			this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
 			this.wizardWelcomePage1 = new Telerik.WinControls.UI.WizardWelcomePage();
 			this.wizardPage1 = new Telerik.WinControls.UI.WizardPage();
-			this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).BeginInit();
 			this.pluginWizard.SuspendLayout();
 			this.panel3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.labelWelcome)).BeginInit();
@@ -73,7 +74,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pluginWizard
@@ -84,7 +84,7 @@
 			this.pluginWizard.Controls.Add(this.panel3);
 			this.pluginWizard.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pluginWizard.Location = new System.Drawing.Point(0, 0);
-			this.pluginWizard.Mode = Telerik.WinControls.UI.WizardMode.Wizard97;
+			this.pluginWizard.Mode = Telerik.WinControls.UI.WizardMode.Aero;
 			this.pluginWizard.Name = "pluginWizard";
 			this.pluginWizard.PageHeaderIcon = ((System.Drawing.Image)(resources.GetObject("pluginWizard.PageHeaderIcon")));
 			this.pluginWizard.Pages.Add(this.wizardWelcomePage1);
@@ -109,26 +109,34 @@
 			// 
 			this.panel3.BackColor = System.Drawing.Color.White;
 			this.panel3.Controls.Add(this.radLabel3);
-			this.panel3.Location = new System.Drawing.Point(150, 56);
+			this.panel3.Location = new System.Drawing.Point(150, 41);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(503, 449);
+			this.panel3.Size = new System.Drawing.Size(503, 464);
 			this.panel3.TabIndex = 2;
+			// 
+			// radLabel3
+			// 
+			this.radLabel3.Location = new System.Drawing.Point(3, 3);
+			this.radLabel3.Name = "radLabel3";
+			this.radLabel3.Size = new System.Drawing.Size(663, 139);
+			this.radLabel3.TabIndex = 0;
+			this.radLabel3.Text = resources.GetString("radLabel3.Text");
 			// 
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.White;
 			this.panel1.Controls.Add(this.radLabel1);
 			this.panel1.Controls.Add(this.labelWelcome);
-			this.panel1.Location = new System.Drawing.Point(150, 56);
+			this.panel1.Location = new System.Drawing.Point(150, 41);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(503, 449);
+			this.panel1.Size = new System.Drawing.Size(503, 464);
 			this.panel1.TabIndex = 0;
 			// 
 			// radLabel1
 			// 
 			this.radLabel1.Location = new System.Drawing.Point(17, 75);
 			this.radLabel1.Name = "radLabel1";
-			this.radLabel1.Size = new System.Drawing.Size(421, 65);
+			this.radLabel1.Size = new System.Drawing.Size(418, 65);
 			this.radLabel1.TabIndex = 1;
 			this.radLabel1.Text = resources.GetString("radLabel1.Text");
 			// 
@@ -149,9 +157,9 @@
 			this.panel2.Controls.Add(this.radLabel2);
 			this.panel2.Controls.Add(this.groupBoxBuiltInDictionary);
 			this.panel2.Controls.Add(this.groupBoxGrammarBuilder);
-			this.panel2.Location = new System.Drawing.Point(0, 64);
+			this.panel2.Location = new System.Drawing.Point(0, 41);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(653, 441);
+			this.panel2.Size = new System.Drawing.Size(653, 464);
 			this.panel2.TabIndex = 1;
 			// 
 			// buttonBrowse
@@ -304,7 +312,7 @@
 			this.wizardWelcomePage1.Header = "Page header";
 			this.wizardWelcomePage1.HeaderVisibility = Telerik.WinControls.ElementVisibility.Hidden;
 			this.wizardWelcomePage1.Name = "wizardWelcomePage1";
-			this.wizardWelcomePage1.Title = "Създаване на плъгин";
+			this.wizardWelcomePage1.Title = "Създаване на добавка";
 			this.wizardWelcomePage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
 			// wizardPage1
@@ -316,14 +324,6 @@
 			this.wizardPage1.Title = "Създаване на граматика";
 			this.wizardPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
-			// radLabel3
-			// 
-			this.radLabel3.Location = new System.Drawing.Point(3, 3);
-			this.radLabel3.Name = "radLabel3";
-			this.radLabel3.Size = new System.Drawing.Size(663, 139);
-			this.radLabel3.TabIndex = 0;
-			this.radLabel3.Text = resources.GetString("radLabel3.Text");
-			// 
 			// PluginWizardForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,11 +332,12 @@
 			this.Controls.Add(this.pluginWizard);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "PluginWizardForm";
-			this.Text = "Магьосник за създаване на плъгини";
+			this.Text = "Магьосник за създаване на добавки";
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).EndInit();
 			this.pluginWizard.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
 			this.panel3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
@@ -358,7 +359,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLoadTree)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonExportToXML)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
 			this.ResumeLayout(false);
 
         }

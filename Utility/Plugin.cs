@@ -61,6 +61,7 @@ namespace ModernSteward
 			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
 			instanceOfMyType = Activator.CreateInstance(type);
+			
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
