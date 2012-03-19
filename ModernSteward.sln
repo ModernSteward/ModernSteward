@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterDictionaryUserControl
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{D53A89C3-9BF1-415C-8886-0A54FFE76970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderRemoverAtUninstall", "PluginsRemover\FolderRemoverAtUninstall.csproj", "{2E803B7C-8120-40E7-8CA0-D921572F0532}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderRemoverAtUninstall", "FolderRemoverAtUninstall\FolderRemoverAtUninstall.csproj", "{2E803B7C-8120-40E7-8CA0-D921572F0532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
