@@ -11,7 +11,6 @@ namespace ModernSteward
     {
         public override void Trigger(List<KeyValuePair<string, string>> aSemantics)
         {
-            
         }
 
         public override GrammarBuilder GetGrammarBuilder()

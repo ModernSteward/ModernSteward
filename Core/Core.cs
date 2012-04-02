@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Speech.Recognition;
+using System.Threading;
 
 namespace ModernSteward
 {
@@ -35,9 +36,10 @@ namespace ModernSteward
 
 		void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
 		{
-			//System.Windows.Forms.MessageBox.Show(e.Result.Text);
-			foreach (var plugin in mPluginHandler.Plugins)
+			foreach (var _plugin in mPluginHandler.Plugins)
 			{
+				var plugin = _plugin; //pretty cool hack because of the renewing variable in the foreach
+
 				if (e.Result.Grammar.Name == plugin.Name)
 				{
 					SpeechRecognizedCoreEvent.Invoke(plugin);
@@ -46,13 +48,16 @@ namespace ModernSteward
 
 					try
 					{
-						plugin.TriggerPlugin(semantics);
+						Thread pluginThread = new Thread(delegate()
+						{
+							plugin.TriggerPlugin(semantics);
+						});
+						pluginThread.Start();
 					}
 					catch (Exception ex)
 					{
 						System.Windows.Forms.MessageBox.Show(ex.Message);
 					}
-
 				}
 			}
 
@@ -60,10 +65,10 @@ namespace ModernSteward
 
 		/// <summary>
 		/// Loads the grammar ONLY of the plugins from the passed PluginHandler. Grammar loaded before will be unloaded!
-		/// You can only load pluggins while the recognition is not running!
+		/// You can only load plugins while the recognition is not running!
 		/// </summary>
 		/// <param name="aPluginHandler"></param>
-		/// <returns>Boolean if the loading was successfull</returns>
+		/// <returns>Boolean if the loading was successful</returns>
 		public bool LoadPlugins(PluginHandler aPluginHandler)
 		{
 			mPluginHandler = aPluginHandler;
@@ -84,7 +89,6 @@ namespace ModernSteward
 						mPluginHandler.Plugins.Remove(plugin);
 					}
 				}
-
 			}
 			catch (Exception ex)
 			{

@@ -112,7 +112,6 @@ namespace ModernSteward
                         }
                     }
                 }
-
             }
             else
             {
@@ -170,7 +169,6 @@ namespace ModernSteward
 
                         if (!nameAlreadyTaken)
                         {
-                            // Little hack to check if the program will later be able to load the plugin successfully
                             mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
                             AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
@@ -379,7 +377,6 @@ namespace ModernSteward
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
-                //this.WindowState = FormWindowState.Minimized;
                 this.ShowInTaskbar = false;
             }
         }
