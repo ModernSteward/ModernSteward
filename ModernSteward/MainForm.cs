@@ -186,7 +186,8 @@ namespace ModernSteward
                 }
                 catch (Exception ex)
                 {
-                    RadMessageBox.Show("Добавката е невалидна или несъвместима с настоящата версия!", "Грешка");
+                    RadMessageBox.Show(@"Добавката е невалидна или несъвместима с настоящата версия!
+						Възможно е обаче и програмата да е инстлирана в директория, за която няма права. Моля, опитайте отново, като стартирате Модерният иконом като администратор", "Грешка");
                 }
             }
             catch { }
@@ -214,7 +215,7 @@ namespace ModernSteward
 
 				if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
                 {
-                    mCore.LoadPlugins(mPluginHandler);
+                    mCore.LoadPluginsGrammar(mPluginHandler);
                     try
                     {
                         mCore.StartAsyncRecognition();
@@ -222,6 +223,7 @@ namespace ModernSteward
                     catch (Exception ex)
                     {
                         RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
+						return;
                     }
 
                     buttonStartStop.Text = "Изключи";

@@ -69,7 +69,7 @@ namespace ModernSteward
 		/// </summary>
 		/// <param name="aPluginHandler"></param>
 		/// <returns>Boolean if the loading was successful</returns>
-		public bool LoadPlugins(PluginHandler aPluginHandler)
+		public bool LoadPluginsGrammar(PluginHandler aPluginHandler)
 		{
 			mPluginHandler = aPluginHandler;
 			try
@@ -83,6 +83,7 @@ namespace ModernSteward
 						Grammar pluginGrammar = plugin.GetGrammar();
 						pluginGrammar.Name = plugin.Name;
 						mRecognitionEngine.LoadGrammar(pluginGrammar);
+						plugin.RequestGrammarUpdate += new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequested);
 					}
 					else
 					{
@@ -97,6 +98,16 @@ namespace ModernSteward
 			return true;
 		}
 
+		protected void GrammarUpdateRequested(object sender, EventArgs e)
+		{
+			mRecognitionEngine.RequestRecognizerUpdate();
+			mRecognitionEngine.RecognizerUpdateReached += new EventHandler<RecognizerUpdateReachedEventArgs>(mRecognitionEngine_RecognizerUpdateReached);
+		}
+
+		void mRecognitionEngine_RecognizerUpdateReached(object sender, RecognizerUpdateReachedEventArgs e)
+		{
+			LoadPluginsGrammar(mPluginHandler);
+		}
 
 
 		/// <summary>

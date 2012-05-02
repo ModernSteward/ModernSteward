@@ -61,6 +61,9 @@ namespace ModernSteward
 			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
 			instanceOfMyType = Activator.CreateInstance(type);
+
+			(instanceOfMyType as PluginFunctionality).RequestGrammarUpdate += 
+				new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequestHandler);
 			
 		}
 
@@ -105,6 +108,13 @@ namespace ModernSteward
 		{
 			return Name;
 		}
+
+		private void GrammarUpdateRequestHandler(object s, GrammarUpdateRequestEventArgs e)
+		{
+			RequestGrammarUpdate.Invoke(s, e);
+		}
+
+		public event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
 
 		~Plugin()
 		{

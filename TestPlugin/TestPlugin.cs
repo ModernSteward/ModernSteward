@@ -12,15 +12,17 @@ namespace ModernSteward
         public override void Trigger(List<KeyValuePair<string, string>> aSemantics)
         {
         }
-
+		
         public override GrammarBuilder GetGrammarBuilder()
         {
-            return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml");
+            return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml")
         }
 
         public override bool Initialize()
         {
             return true;
         }
+
+		public override event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
     }
 }
