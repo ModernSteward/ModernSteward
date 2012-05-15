@@ -15,7 +15,7 @@ namespace ModernSteward
 		
         public override GrammarBuilder GetGrammarBuilder()
         {
-            return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml")
+			return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(Environment.CurrentDirectory + @"\TestGrammarWithSearchEngine.xml");
         }
 
         public override bool Initialize()
