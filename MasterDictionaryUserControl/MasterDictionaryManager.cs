@@ -29,7 +29,7 @@ namespace MasterDictionaryUserControl
             gridViewDictionaryItems.EnableCustomSorting = false;
             gridViewDictionaryItems.EnableGrouping = false;
 
-            gridViewDictionaryItems.Columns.Add("Дума");
+            gridViewDictionaryItems.Columns.Add("Word");
 
             RenewGridViewDictionaryItems();
 

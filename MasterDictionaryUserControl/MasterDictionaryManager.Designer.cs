@@ -53,7 +53,7 @@
             this.buttonAddNewWordToTheMasterDictionary.Name = "buttonAddNewWordToTheMasterDictionary";
             this.buttonAddNewWordToTheMasterDictionary.Size = new System.Drawing.Size(142, 24);
             this.buttonAddNewWordToTheMasterDictionary.TabIndex = 1;
-            this.buttonAddNewWordToTheMasterDictionary.Text = "Добави";
+            this.buttonAddNewWordToTheMasterDictionary.Text = "Add";
             this.buttonAddNewWordToTheMasterDictionary.Click += new System.EventHandler(this.buttonAddNewWordToTheMasterDictionary_Click);
             // 
             // textBoxNewWordToAdd
@@ -71,7 +71,7 @@
             this.buttonDeleteSelectedWord.Name = "buttonDeleteSelectedWord";
             this.buttonDeleteSelectedWord.Size = new System.Drawing.Size(141, 24);
             this.buttonDeleteSelectedWord.TabIndex = 3;
-            this.buttonDeleteSelectedWord.Text = "Изтрии";
+            this.buttonDeleteSelectedWord.Text = "Delete";
             this.buttonDeleteSelectedWord.Click += new System.EventHandler(this.buttonDeleteSelectedWord_Click);
             // 
             // labelWord
@@ -80,7 +80,7 @@
             this.labelWord.Name = "labelWord";
             this.labelWord.Size = new System.Drawing.Size(41, 16);
             this.labelWord.TabIndex = 4;
-            this.labelWord.Text = "Дума: ";
+            this.labelWord.Text = "Word: ";
             // 
             // MasterDictionaryManager
             // 
