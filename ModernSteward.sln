@@ -17,7 +17,19 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderRemoverAtUninstall", "FolderRemoverAtUninstall\FolderRemoverAtUninstall.csproj", "{2E803B7C-8120-40E7-8CA0-D921572F0532}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33732F25-6991-4D6C-B8CF-D1732AD54363}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		ModernSteward.vsmdi = ModernSteward.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ModernSteward.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -103,6 +115,16 @@ Global
 		{2E803B7C-8120-40E7-8CA0-D921572F0532}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2E803B7C-8120-40E7-8CA0-D921572F0532}.Release|x86.ActiveCfg = Release|x86
 		{2E803B7C-8120-40E7-8CA0-D921572F0532}.Release|x86.Build.0 = Release|x86
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DB4D5DB1-D1A4-4A65-8C10-70E3D10C349D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

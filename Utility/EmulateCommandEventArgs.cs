@@ -8,10 +8,8 @@ namespace ModernSteward
 	public class EmulateCommandEventArgs : EventArgs
 	{
 		public string Command{ get; set; }
-		public Plugin Sender { get; set; }
-		public EmulateCommandEventArgs(Plugin aSender, string aCommand)
+		public EmulateCommandEventArgs(string aCommand)
 		{
-			Sender = aSender;
 			Command = aCommand;
 		}
 	}

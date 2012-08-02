@@ -128,79 +128,71 @@ namespace ModernSteward
 		{
 			mRecognitionEngine.RecognizeAsyncStop();
 		}
-
-		bool toTryEmulateCommands = false;
+		
 		List<EmulateCommandEventArgs> RequestsForCommandEmulation = new List<EmulateCommandEventArgs>();
 
 		private void TryEmulatingCommand(object sender, EmulateCommandEventArgs e)
 		{
 			StopAsyncRecognition();
 			Thread.Sleep(333);
-
-			bool isAuthorised = false;
-
-			//TODO: Check to which plugin's grammar the command belongs to
-
-			Plugin receiver = new Plugin();
-
-			isAuthorised = checkPluginControlAuthorisation(e.Sender, receiver);
-
-			if (isAuthorised)
+			try
 			{
-				try
+				bool isAuthorised = false;
+
+				Plugin receiver = null;
+				Plugin senderPlugin = sender as Plugin;
+
+				foreach (var plugin in mPluginHandler.Plugins)
 				{
-					mRecognitionEngine.EmulateRecognizeAsync("Melissa" + e.Command);
-				}
-				catch (Exception ex)
-				{
-					System.Windows.Forms.MessageBox.Show(ex.Message);
-				}
-			}
-
-			Thread.Sleep(333);
-			StartAsyncRecognition();
-		}
-
-		void mRecognitionEngine_RecognizerUpdateReachedToTryEmulateCommands(object sender, RecognizerUpdateReachedEventArgs e)
-		{
-			mRecognitionEngine.RecognizeAsyncStop();
-			if (toTryEmulateCommands)
-			{
-				toTryEmulateCommands = false;
-
-				foreach (var request in RequestsForCommandEmulation)
-				{
-					bool isAuthorised = false;
-
-					//TODO: Check to which plugin's grammar the command belongs to
-
-					Plugin receiver = new Plugin();
-
-					isAuthorised = checkPluginControlAuthorisation(request.Sender, receiver);
-
-					if (isAuthorised)
+					string pathToXls = plugin.PluginGrammarTreePath;
+					if (RadTreeViewGrammarManager.MatchGrammarToPlugin(pathToXls, e.Command))
 					{
-						try
-						{
-							mRecognitionEngine.EmulateRecognize(request.Command);
-						}
-						catch (Exception ex)
-						{
-							System.Windows.Forms.MessageBox.Show(ex.Message);
-						}
+						receiver = plugin;
 					}
 				}
 
-				RequestsForCommandEmulation.Clear();
+				if (receiver == null)
+				{
+					throw new NullReferenceException();
+				}
+
+				
+				isAuthorised = checkPluginControlAuthorisation(senderPlugin, receiver);
+				
+
+				if (isAuthorised)
+				{
+					try
+					{
+						mRecognitionEngine.EmulateRecognizeAsync("Melissa " + e.Command);
+					}
+					catch (Exception ex)
+					{
+						System.Windows.Forms.MessageBox.Show(ex.Message);
+					}
+				}
+
 			}
-			mRecognitionEngine.RecognizeAsync();
+			finally
+			{
+				Thread.Sleep(333);
+				StartAsyncRecognition();
+			}
+
 		}
 
-
-
-		private bool checkPluginControlAuthorisation(Plugin sender, Plugin Receiver)
+		private bool checkPluginControlAuthorisation(Plugin aSender, Plugin aReceiver)
 		{
-			//TODO: Hash function and connection to the database
+			try
+			{
+				string senderHash = ZipManager.GetMD5FromAZip(aSender.PluginPath);
+				string receiverHash = ZipManager.GetMD5FromAZip(aReceiver.PluginPath);
+			}
+			catch { }
+
+
+			//TODO: connection to the database
+
 			return true;
 		}
 	}

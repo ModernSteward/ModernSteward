@@ -45,5 +45,46 @@ namespace ModernSteward
             return true;
         }
 
+		public static bool MatchGrammarToPlugin(string pathToXml, string aCommand)
+		{
+			List<string> pluginsCommands = new List<string>();
+			RadTreeView tree = new RadTreeView();
+			LoadGrammarFromXML(pathToXml, ref tree);
+
+			foreach (var node in tree.Nodes)
+			{
+				DepthFirstSearch(node, node.Text, ref pluginsCommands);
+			}
+
+			foreach (var command in pluginsCommands)
+			{
+				if (command == aCommand)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private static void DepthFirstSearch(RadTreeNode root, string text, ref List<String> result)
+		{
+			if (root == null)
+			{
+				return;
+			}
+
+			if (root.Nodes.Count == 0)
+			{
+				result.Add(text);
+			}
+
+			RadTreeNode child = null;
+			for (int i = 0; i < root.Nodes.Count; i++)
+			{
+				child = root.Nodes[i];
+				text += ' ' + child.Text;
+				DepthFirstSearch(child, text, ref result);
+			}
+		}
     }
 }

@@ -20,7 +20,7 @@ namespace ModernSteward
 
         public override bool Initialize()
         {
-			TryToEmulateCommand(this, new EmulateCommandEventArgs(null, "test"));
+			TryToEmulateCommand(this, new EmulateCommandEventArgs("test"));
             return true;
         }
 

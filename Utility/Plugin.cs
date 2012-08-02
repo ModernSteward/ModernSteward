@@ -128,7 +128,7 @@ namespace ModernSteward
 
 		public void TryToEmulateCommandHandler(object s, EmulateCommandEventArgs e)
 		{
-			TryToEmulateCommand.Invoke(s, e);
+			TryToEmulateCommand.Invoke(this, e);
 		}
 	}
 }

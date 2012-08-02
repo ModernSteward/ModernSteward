@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace ModernSteward
 {
@@ -90,5 +91,20 @@ namespace ModernSteward
                     wstream.Close();
             }
         }
+
+		public static string GetMD5FromAZip(string filePath)
+		{
+			FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+			MD5 md5 = new MD5CryptoServiceProvider();
+			byte[] retVal = md5.ComputeHash(file);
+			file.Close();
+
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < retVal.Length; i++)
+			{
+				sb.Append(retVal[i].ToString("x2"));
+			}
+			return sb.ToString();
+		}
     }
 }
