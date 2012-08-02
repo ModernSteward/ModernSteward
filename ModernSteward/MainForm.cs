@@ -35,7 +35,7 @@ namespace ModernSteward
                 mCore = new Core();
                 mCore.SpeechRecognizedCoreEvent += new Core.SpeechRecognizedCoreEventHandler(mCore_SpeechRecognizedCoreEvent);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
                 RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!", "Грешка");
                 this.Close();
@@ -169,7 +169,7 @@ namespace ModernSteward
 
                         if (!nameAlreadyTaken)
                         {
-                            mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
                             AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
 
@@ -198,7 +198,6 @@ namespace ModernSteward
             gridViewPlugins.Rows.Add(false, pluginName, "Инициализирай!");
             gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = pluginPath;
         }
-
 
         private void buttonStartStop_Click(object sender, EventArgs e)
         {

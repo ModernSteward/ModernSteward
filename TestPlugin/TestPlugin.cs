@@ -20,9 +20,12 @@ namespace ModernSteward
 
         public override bool Initialize()
         {
+			TryToEmulateCommand(this, new EmulateCommandEventArgs(null, "test"));
             return true;
         }
 
 		public override event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
+
+		public override event EventHandler<EmulateCommandEventArgs> TryToEmulateCommand;
     }
 }

@@ -33,6 +33,7 @@ namespace ModernSteward
 
 		public string PluginGrammarTreePath;
 
+
 		public Plugin() { }
 
 		public Plugin(string aName, string aPluginPath)
@@ -64,6 +65,9 @@ namespace ModernSteward
 
 			(instanceOfMyType as PluginFunctionality).RequestGrammarUpdate += 
 				new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequestHandler);
+
+			(instanceOfMyType as PluginFunctionality).TryToEmulateCommand +=
+				new EventHandler<EmulateCommandEventArgs>(TryToEmulateCommandHandler);
 			
 		}
 
@@ -116,8 +120,15 @@ namespace ModernSteward
 
 		public event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
 
+		public event EventHandler<EmulateCommandEventArgs> TryToEmulateCommand;
+
 		~Plugin()
 		{
+		}
+
+		public void TryToEmulateCommandHandler(object s, EmulateCommandEventArgs e)
+		{
+			TryToEmulateCommand.Invoke(s, e);
 		}
 	}
 }

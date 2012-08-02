@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Speech.Recognition;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ModernSteward
 {
@@ -60,7 +58,6 @@ namespace ModernSteward
 					}
 				}
 			}
-
 		}
 
 		/// <summary>
@@ -84,6 +81,7 @@ namespace ModernSteward
 						pluginGrammar.Name = plugin.Name;
 						mRecognitionEngine.LoadGrammar(pluginGrammar);
 						plugin.RequestGrammarUpdate += new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequested);
+						plugin.TryToEmulateCommand += new EventHandler<EmulateCommandEventArgs>(TryEmulatingCommand);
 					}
 					else
 					{
@@ -98,15 +96,21 @@ namespace ModernSteward
 			return true;
 		}
 
+		bool toReloadTheGrammars = false;
+
 		protected void GrammarUpdateRequested(object sender, EventArgs e)
 		{
 			mRecognitionEngine.RequestRecognizerUpdate();
-			mRecognitionEngine.RecognizerUpdateReached += new EventHandler<RecognizerUpdateReachedEventArgs>(mRecognitionEngine_RecognizerUpdateReached);
+			mRecognitionEngine.RecognizerUpdateReached += new EventHandler<RecognizerUpdateReachedEventArgs>(RecognitionEngine_RecognizerUpdateReached);
+			toReloadTheGrammars = true;
 		}
 
-		void mRecognitionEngine_RecognizerUpdateReached(object sender, RecognizerUpdateReachedEventArgs e)
+		void RecognitionEngine_RecognizerUpdateReached(object sender, RecognizerUpdateReachedEventArgs e)
 		{
-			LoadPluginsGrammar(mPluginHandler);
+			if(toReloadTheGrammars){
+				LoadPluginsGrammar(mPluginHandler);
+				toReloadTheGrammars = false;
+			}
 		}
 
 		/// <summary>
@@ -123,6 +127,81 @@ namespace ModernSteward
 		public void StopAsyncRecognition()
 		{
 			mRecognitionEngine.RecognizeAsyncStop();
+		}
+
+		bool toTryEmulateCommands = false;
+		List<EmulateCommandEventArgs> RequestsForCommandEmulation = new List<EmulateCommandEventArgs>();
+
+		private void TryEmulatingCommand(object sender, EmulateCommandEventArgs e)
+		{
+			StopAsyncRecognition();
+			Thread.Sleep(333);
+
+			bool isAuthorised = false;
+
+			//TODO: Check to which plugin's grammar the command belongs to
+
+			Plugin receiver = new Plugin();
+
+			isAuthorised = checkPluginControlAuthorisation(e.Sender, receiver);
+
+			if (isAuthorised)
+			{
+				try
+				{
+					mRecognitionEngine.EmulateRecognizeAsync("Melissa" + e.Command);
+				}
+				catch (Exception ex)
+				{
+					System.Windows.Forms.MessageBox.Show(ex.Message);
+				}
+			}
+
+			Thread.Sleep(333);
+			StartAsyncRecognition();
+		}
+
+		void mRecognitionEngine_RecognizerUpdateReachedToTryEmulateCommands(object sender, RecognizerUpdateReachedEventArgs e)
+		{
+			mRecognitionEngine.RecognizeAsyncStop();
+			if (toTryEmulateCommands)
+			{
+				toTryEmulateCommands = false;
+
+				foreach (var request in RequestsForCommandEmulation)
+				{
+					bool isAuthorised = false;
+
+					//TODO: Check to which plugin's grammar the command belongs to
+
+					Plugin receiver = new Plugin();
+
+					isAuthorised = checkPluginControlAuthorisation(request.Sender, receiver);
+
+					if (isAuthorised)
+					{
+						try
+						{
+							mRecognitionEngine.EmulateRecognize(request.Command);
+						}
+						catch (Exception ex)
+						{
+							System.Windows.Forms.MessageBox.Show(ex.Message);
+						}
+					}
+				}
+
+				RequestsForCommandEmulation.Clear();
+			}
+			mRecognitionEngine.RecognizeAsync();
+		}
+
+
+
+		private bool checkPluginControlAuthorisation(Plugin sender, Plugin Receiver)
+		{
+			//TODO: Hash function and connection to the database
+			return true;
 		}
 	}
 }

@@ -24,5 +24,7 @@ namespace ModernSteward
 		}
 
 		public abstract event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
+
+		public abstract event EventHandler<EmulateCommandEventArgs> TryToEmulateCommand;
 	}
 }
