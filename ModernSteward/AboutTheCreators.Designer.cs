@@ -95,7 +95,7 @@
 			this.radLabelProductName.RootElement.MaxSize = new System.Drawing.Size(0, 17);
 			this.radLabelProductName.Size = new System.Drawing.Size(50, 17);
 			this.radLabelProductName.TabIndex = 19;
-			this.radLabelProductName.Text = "Продукт";
+			this.radLabelProductName.Text = "Product";
 			this.radLabelProductName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// radLabelVersion
@@ -111,7 +111,7 @@
 			this.radLabelVersion.RootElement.MaxSize = new System.Drawing.Size(0, 17);
 			this.radLabelVersion.Size = new System.Drawing.Size(43, 17);
 			this.radLabelVersion.TabIndex = 0;
-			this.radLabelVersion.Text = "Версия";
+			this.radLabelVersion.Text = "Version";
 			this.radLabelVersion.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// radLabelCopyright
@@ -127,7 +127,7 @@
 			this.radLabelCopyright.RootElement.MaxSize = new System.Drawing.Size(0, 17);
 			this.radLabelCopyright.Size = new System.Drawing.Size(62, 17);
 			this.radLabelCopyright.TabIndex = 21;
-			this.radLabelCopyright.Text = "Създатели:";
+			this.radLabelCopyright.Text = "Creators:";
 			this.radLabelCopyright.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// radTextBoxDescription
@@ -146,7 +146,7 @@
 			this.radTextBoxDescription.Size = new System.Drawing.Size(251, 99);
 			this.radTextBoxDescription.TabIndex = 23;
 			this.radTextBoxDescription.TabStop = false;
-			this.radTextBoxDescription.Text = "Описание";
+			this.radTextBoxDescription.Text = "Description";
 			// 
 			// okRadButton
 			// 
@@ -178,7 +178,7 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "За създателите";
+			this.Text = "About the creators";
 			this.tableLayoutPanel.ResumeLayout(false);
 			this.tableLayoutPanel.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();

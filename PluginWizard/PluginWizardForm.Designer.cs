@@ -102,7 +102,7 @@
 			this.wizardCompletionPage1.Header = "Page header";
 			this.wizardCompletionPage1.HeaderVisibility = Telerik.WinControls.ElementVisibility.Hidden;
 			this.wizardCompletionPage1.Name = "wizardCompletionPage1";
-			this.wizardCompletionPage1.Title = "Завършване";
+			this.wizardCompletionPage1.Title = "Finish";
 			this.wizardCompletionPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
 			// panel3
@@ -147,7 +147,7 @@
 			this.labelWelcome.Name = "labelWelcome";
 			this.labelWelcome.Size = new System.Drawing.Size(253, 46);
 			this.labelWelcome.TabIndex = 0;
-			this.labelWelcome.Text = "Добре дошли!";
+			this.labelWelcome.Text = "Welcome!";
 			// 
 			// panel2
 			// 
@@ -168,7 +168,7 @@
 			this.buttonBrowse.Name = "buttonBrowse";
 			this.buttonBrowse.Size = new System.Drawing.Size(108, 24);
 			this.buttonBrowse.TabIndex = 8;
-			this.buttonBrowse.Text = "Разлисти";
+			this.buttonBrowse.Text = "Browse";
 			this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
 			// 
 			// textBoxSaveFilePath
@@ -197,7 +197,7 @@
 			this.groupBoxBuiltInDictionary.HeaderImageIndex = -1;
 			this.groupBoxBuiltInDictionary.HeaderImageKey = "";
 			this.groupBoxBuiltInDictionary.HeaderMargin = new System.Windows.Forms.Padding(0);
-			this.groupBoxBuiltInDictionary.HeaderText = "Вграден речник";
+			this.groupBoxBuiltInDictionary.HeaderText = "Main dictionary";
 			this.groupBoxBuiltInDictionary.Location = new System.Drawing.Point(335, 3);
 			this.groupBoxBuiltInDictionary.Name = "groupBoxBuiltInDictionary";
 			this.groupBoxBuiltInDictionary.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
@@ -207,7 +207,7 @@
 			this.groupBoxBuiltInDictionary.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
 			this.groupBoxBuiltInDictionary.Size = new System.Drawing.Size(306, 405);
 			this.groupBoxBuiltInDictionary.TabIndex = 5;
-			this.groupBoxBuiltInDictionary.Text = "Вграден речник";
+			this.groupBoxBuiltInDictionary.Text = "Main dictionary";
 			// 
 			// masterDictionaryManager1
 			// 
@@ -231,7 +231,7 @@
 			this.groupBoxGrammarBuilder.HeaderImageIndex = -1;
 			this.groupBoxGrammarBuilder.HeaderImageKey = "";
 			this.groupBoxGrammarBuilder.HeaderMargin = new System.Windows.Forms.Padding(0);
-			this.groupBoxGrammarBuilder.HeaderText = "Граматика";
+			this.groupBoxGrammarBuilder.HeaderText = "Grammar";
 			this.groupBoxGrammarBuilder.Location = new System.Drawing.Point(12, 3);
 			this.groupBoxGrammarBuilder.Name = "groupBoxGrammarBuilder";
 			this.groupBoxGrammarBuilder.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
@@ -241,7 +241,7 @@
 			this.groupBoxGrammarBuilder.RootElement.Padding = new System.Windows.Forms.Padding(2, 18, 2, 2);
 			this.groupBoxGrammarBuilder.Size = new System.Drawing.Size(317, 405);
 			this.groupBoxGrammarBuilder.TabIndex = 4;
-			this.groupBoxGrammarBuilder.Text = "Граматика";
+			this.groupBoxGrammarBuilder.Text = "Grammar";
 			// 
 			// textBoxContext
 			// 
@@ -258,7 +258,7 @@
 			this.labelContext.Name = "labelContext";
 			this.labelContext.Size = new System.Drawing.Size(54, 18);
 			this.labelContext.TabIndex = 5;
-			this.labelContext.Text = "Контекст:";
+			this.labelContext.Text = "Context:";
 			// 
 			// checkBoxItemOptional
 			// 
@@ -266,7 +266,7 @@
 			this.checkBoxItemOptional.Name = "checkBoxItemOptional";
 			this.checkBoxItemOptional.Size = new System.Drawing.Size(73, 18);
 			this.checkBoxItemOptional.TabIndex = 4;
-			this.checkBoxItemOptional.Text = "Избираем";
+			this.checkBoxItemOptional.Text = "Eligible";
 			this.checkBoxItemOptional.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.checkBoxItemOptional_ToggleStateChanged);
 			// 
 			// checkBoxIsTheNodeDictation
@@ -275,7 +275,7 @@
 			this.checkBoxIsTheNodeDictation.Name = "checkBoxIsTheNodeDictation";
 			this.checkBoxIsTheNodeDictation.Size = new System.Drawing.Size(75, 18);
 			this.checkBoxIsTheNodeDictation.TabIndex = 3;
-			this.checkBoxIsTheNodeDictation.Text = "Диктуване";
+			this.checkBoxIsTheNodeDictation.Text = "Dictation";
 			this.checkBoxIsTheNodeDictation.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.checkBoxIsTheNodeDictation_ToggleStateChanged);
 			// 
 			// treeViewCommands
@@ -294,7 +294,7 @@
 			this.buttonLoadTree.Name = "buttonLoadTree";
 			this.buttonLoadTree.Size = new System.Drawing.Size(153, 24);
 			this.buttonLoadTree.TabIndex = 2;
-			this.buttonLoadTree.Text = "Зареди граматика";
+			this.buttonLoadTree.Text = "Load grammar";
 			this.buttonLoadTree.Click += new System.EventHandler(this.buttonLoadTree_Click);
 			// 
 			// buttonExportToXML
@@ -303,7 +303,7 @@
 			this.buttonExportToXML.Name = "buttonExportToXML";
 			this.buttonExportToXML.Size = new System.Drawing.Size(151, 24);
 			this.buttonExportToXML.TabIndex = 1;
-			this.buttonExportToXML.Text = "Запази граматиката";
+			this.buttonExportToXML.Text = "Save grammar";
 			this.buttonExportToXML.Click += new System.EventHandler(this.buttonExportToXML_Click);
 			// 
 			// wizardWelcomePage1
@@ -311,8 +311,8 @@
 			this.wizardWelcomePage1.ContentArea = this.panel1;
 			this.wizardWelcomePage1.Header = "Page header";
 			this.wizardWelcomePage1.HeaderVisibility = Telerik.WinControls.ElementVisibility.Hidden;
-			this.wizardWelcomePage1.Name = "wizardWelcomePage1";
-			this.wizardWelcomePage1.Title = "Създаване на добавка";
+			this.wizardWelcomePage1.Name = "wizardWelcomePage";
+			this.wizardWelcomePage1.Title = "Create a plugin";
 			this.wizardWelcomePage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
 			// wizardPage1
@@ -332,7 +332,7 @@
 			this.Controls.Add(this.pluginWizard);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "PluginWizardForm";
-			this.Text = "Магьосник за създаване на добавки";
+			this.Text = "Plugin wizard";
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).EndInit();
 			this.pluginWizard.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);

@@ -37,7 +37,7 @@ namespace ModernSteward
             }
             catch (InvalidOperationException ex)
             {
-                RadMessageBox.Show("Трябва да свържете микрофона си преди да стартирате апликацията!", "Грешка");
+                RadMessageBox.Show("You have to connect the microphone before executing the program!", "Error");
                 this.Close();
             }
 
@@ -84,7 +84,7 @@ namespace ModernSteward
 
         void mCore_SpeechRecognizedCoreEvent(Plugin pluginTriggered)
         {
-            labelStatusInStatusStrip.Text = pluginTriggered.Name + " бе задействан.";
+            labelStatusInStatusStrip.Text = pluginTriggered.Name + " was triggered.";
             labelStatusInStatusStrip.UpdateLayout();
         }
 
@@ -102,13 +102,13 @@ namespace ModernSteward
                         if (plugin.Initialize())
                         {
                             row.Cells["Checkbox"].Value = true;
-                            row.Cells["Button"].Value = "Деинициализирай!";
+                            row.Cells["Button"].Value = "Deinitialize!";
 
-                            labelStatusInStatusStrip.Text = plugin.Name + " бе инициализиран успешно.";
+                            labelStatusInStatusStrip.Text = plugin.Name + " was initialized successfully.";
                         }
                         else
                         {
-                            RadMessageBox.Show("Получи се някаква грешка при инициализирането на добавката. Моля, свържете се със създателя на добавката.", "Грешка");
+                            RadMessageBox.Show("An error occured during plugin's initialization. Please, connect to the plugin's creator.", "Error");
                         }
                     }
                 }
@@ -119,12 +119,12 @@ namespace ModernSteward
                 {
                     if (plugin.Name == row.Cells["Name"].Value.ToString())
                     {
-                        labelStatusInStatusStrip.Text = plugin.Name + " бе деинициализиран успешно.";
+                        labelStatusInStatusStrip.Text = plugin.Name + " was deinitialized successfully.";
 
                         plugin.Initialized = false;
 
                         row.Cells["Checkbox"].Value = false;
-                        row.Cells["Button"].Value = "Инициализирай!";
+                        row.Cells["Button"].Value = "Initialize!";
                         break;
                     }
                 }
@@ -173,21 +173,23 @@ namespace ModernSteward
 
                             AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
 
-                            labelStatusInStatusStrip.Text = textBoxPluginName.Text + " бе добавен.";
+                            labelStatusInStatusStrip.Text = textBoxPluginName.Text + " was added.";
 
                             textBoxPluginPath.Text = "";
                             textBoxPluginName.Text = "";
                         }
                         else
                         {
-                            RadMessageBox.Show("Вече има добавка с това име!", "Грешка");
+                            RadMessageBox.Show("There is already a plugin with this name! Please, choose another one.", "Error");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    RadMessageBox.Show(@"Добавката е невалидна или несъвместима с настоящата версия!
-						Възможно е обаче и програмата да е инстлирана в директория, за която няма права. Моля, опитайте отново, като стартирате Модерният иконом като администратор", "Грешка");
+					RadMessageBox.Show(@"An error occured. The plugin might be out of date or ModernSteward is installed in a directory without administration privileges. 
+						Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
+
+					RadMessageBox.Show(ex.Message);
                 }
             }
             catch { }
@@ -195,7 +197,7 @@ namespace ModernSteward
 
         private void AddPluginToTheGridView(string pluginName, string pluginPath)
         {
-            gridViewPlugins.Rows.Add(false, pluginName, "Инициализирай!");
+            gridViewPlugins.Rows.Add(false, pluginName, "Initialize!");
             gridViewPlugins.Rows[gridViewPlugins.Rows.Count - 1].Tag = pluginPath;
         }
 
@@ -221,12 +223,12 @@ namespace ModernSteward
                     }
                     catch (Exception ex)
                     {
-                        RadMessageBox.Show("При стартиране на \"Модерният иконом\" нещо се провали. Моля, свържете се с администратор.", "Грешка");
+                        RadMessageBox.Show("An error occured while starting the ModernSteward speech recognition engine. Please, connect to the support crew.", "Error");
 						return;
                     }
 
-                    buttonStartStop.Text = "Изключи";
-                    labelStartStop.Text = "ВКЛЮЧЕНО";
+                    buttonStartStop.Text = "Turn off";
+                    labelStartStop.Text = "TURNED ON";
                     labelStartStop.ForeColor = Color.Green;
 
                     recognitionEngineRunning = true;
@@ -235,15 +237,15 @@ namespace ModernSteward
                 }
                 else
                 {
-                    RadMessageBox.Show("За да стартирате \"Модерният иконом\" трябва да сте инициализирали поне една добавка.", "Грешка");
+                    RadMessageBox.Show("To start the ModernSteward speech recognition engine you should've initlaized at least one plugin.", "Error");
                 }
             }
             else
             {
                 mCore.StopAsyncRecognition();
 
-                buttonStartStop.Text = "Включи";
-                labelStartStop.Text = "ИЗКЛЮЧЕНО";
+                buttonStartStop.Text = "Turn on";
+                labelStartStop.Text = "TURNED OFF";
                 labelStartStop.ForeColor = Color.Red;
 
                 recognitionEngineRunning = false;
@@ -254,11 +256,18 @@ namespace ModernSteward
 
         private void buttonBrowseForPlugin_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openPluginAssemblyFileDialog = new OpenFileDialog();
-            openPluginAssemblyFileDialog.Filter = "ModernSteward Plugins|*.zip|All files|*.*";
-            if (openPluginAssemblyFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            OpenFileDialog openPluginZipFileDialog = new OpenFileDialog();
+            openPluginZipFileDialog.Filter = "ModernSteward Plugins|*.zip|All files|*.*";
+            if (openPluginZipFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                textBoxPluginPath.Text = openPluginAssemblyFileDialog.FileName;
+                textBoxPluginPath.Text = openPluginZipFileDialog.FileName;
+				try
+				{
+					textBoxPluginName.Text =
+						openPluginZipFileDialog.FileName.Remove(0, Path.GetDirectoryName(openPluginZipFileDialog.FileName).Length + 1);
+					textBoxPluginName.Text = textBoxPluginName.Text.Remove(textBoxPluginName.Text.Length - 4, 4);
+				}
+				catch { }
             }
         }
 
@@ -280,7 +289,7 @@ namespace ModernSteward
                 }
                 catch (Exception ex)
                 {
-                    RadMessageBox.Show("Възникна проблем при запазването на профила. Моля, свържете се с администратор", "Грешка");
+                    RadMessageBox.Show("An error occured while saving the profile. Please, connect to the support crew.", "Error");
                 }
                 finally
                 {
@@ -315,13 +324,13 @@ namespace ModernSteward
                 }
                 catch (Exception ex)
                 {
-                    RadMessageBox.Show("Възникна проблем при отварянето на профила. Най-вероятно файлът е развален. \nМоля, свържете се с администратор", "Грешка");
+                    RadMessageBox.Show("The file is corrupted. \nPlease, connect to the support crew.", "Error");
                 }
                 finally
                 {
 					if (openedSuccessfull)
 					{
-						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " was loaded successfully.";
 					}
 					else
 					{
@@ -354,7 +363,7 @@ namespace ModernSteward
             }
             catch (System.ArgumentOutOfRangeException)
             {
-                RadMessageBox.Show("Първо трябва да селектирате добавка!");
+                RadMessageBox.Show("You should select a plugin first!");
             }
         }
 
@@ -372,6 +381,7 @@ namespace ModernSteward
         {
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
+			this.notifyIcon.Dispose();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)

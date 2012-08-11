@@ -46,7 +46,7 @@
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
-            this.Text = "Модерният иконом";
+            this.Text = "ModernSteward";
             this.ThemeName = "ControlDefault";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);

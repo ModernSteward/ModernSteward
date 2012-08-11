@@ -16,8 +16,8 @@ namespace ModernSteward
         public AboutTheCreators(string aCurrentVersion)
         {
             InitializeComponent();
-            this.radLabelProductName.Text = "Модерният иконом";
-            this.radLabelVersion.Text = String.Format("Версия {0}", aCurrentVersion);
+            this.radLabelProductName.Text = "ModernSteward";
+            this.radLabelVersion.Text = String.Format("Version {0}", aCurrentVersion);
 
             string AssemblyDescription = "";
 

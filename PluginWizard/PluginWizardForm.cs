@@ -28,12 +28,12 @@ namespace ModernSteward
 
             textBoxSaveFilePath.ReadOnly = false;
 
-            pluginWizard.NextButton.Text = "Следващ";
-            pluginWizard.BackButton.Text = "Назад";
-            pluginWizard.CancelButton.Text = "Откажи";
-			pluginWizard.FinishButton.Text = "Завърши";
+            pluginWizard.NextButton.Text = "Next";
+            pluginWizard.BackButton.Text = "Back";
+            pluginWizard.CancelButton.Text = "Cancel";
+			pluginWizard.FinishButton.Text = "Finish";
 
-            pluginWizard.HelpButton.Text = "Помощ";
+            pluginWizard.HelpButton.Text = "Help";
 			pluginWizard.HelpButton.Visibility = ElementVisibility.Hidden;
 
             treeViewCommands.AllowEdit = true;
@@ -104,11 +104,11 @@ namespace ModernSteward
                 try
                 {
                     RadTreeViewGrammarManager.LoadGrammarFromXML(openFileDialog.FileName, ref treeViewCommands);
-                    RadMessageBox.Show("Граматиката заредена успешно!");
+                    RadMessageBox.Show("The grammar is loaded successfully!");
                 }
                 catch
                 {
-                    RadMessageBox.Show("Невалиден формат на файла!", "Грешка");
+                    RadMessageBox.Show("File corrupted!", "Error");
                 }
             }
         }

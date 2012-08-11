@@ -15,7 +15,7 @@ namespace ModernSteward
         public PluginCommandsForm(string pluginName, string pathToTheXML)
         {
             InitializeComponent();
-			this.Text = "Команди за " + pluginName;
+			this.Text = "Commands for " + pluginName;
 
 			RadTreeViewGrammarManager.LoadGrammarFromXML(pathToTheXML, ref treeViewCommands);
 			treeViewCommands.Enabled = false;
