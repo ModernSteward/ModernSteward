@@ -52,7 +52,7 @@
 			// 
 			// 
 			this.RootElement.ApplyShapeToControl = true;
-			this.Text = "Главен речник";
+			this.Text = "Master dictionary";
 			this.ThemeName = "ControlDefault";
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 			this.ResumeLayout(false);

@@ -56,7 +56,7 @@
 			// 
 			// 
 			this.RootElement.ApplyShapeToControl = true;
-			this.Text = "Команди";
+			this.Text = "Commands";
 			this.ThemeName = "ControlDefault";
 			((System.ComponentModel.ISupportInitialize)(this.treeViewCommands)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();

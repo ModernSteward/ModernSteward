@@ -28,7 +28,7 @@ namespace ModernSteward
             InitializeComponent();
 
             LoadingForm loadingForm = new LoadingForm();
-            loadingForm.ShowLoadingForm();
+            loadingForm.ShowDialog();
 
             try
             {
@@ -58,7 +58,7 @@ namespace ModernSteward
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
 
-            loadingForm.CloseLoadingForm();
+
             this.Show();
         }
 
@@ -169,7 +169,7 @@ namespace ModernSteward
 
                         if (!nameAlreadyTaken)
                         {
-							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+                            mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
 
                             AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
 
@@ -186,13 +186,19 @@ namespace ModernSteward
                 }
                 catch (Exception ex)
                 {
-					RadMessageBox.Show(@"An error occured. The plugin might be out of date or ModernSteward is installed in a directory without administration privileges. 
+                    var reporter = new CrashReporter();
+                    reporter.Report(ex);
+
+                    RadMessageBox.Show(@"An error occured. The plugin might be out of date or ModernSteward is installed in a directory without administration privileges. 
 						Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
 
-					RadMessageBox.Show(ex.Message);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                var reporter = new CrashReporter();
+                reporter.Report(ex);
+            }
         }
 
         private void AddPluginToTheGridView(string pluginName, string pluginPath)
@@ -205,16 +211,16 @@ namespace ModernSteward
         {
             if (!recognitionEngineRunning)
             {
-				bool atLeastOnePluginInitialized = false;
+                bool atLeastOnePluginInitialized = false;
                 foreach (var plugin in mPluginHandler.Plugins)
                 {
-					if (plugin.Initialized == true)
+                    if (plugin.Initialized == true)
                     {
-						atLeastOnePluginInitialized = true;
+                        atLeastOnePluginInitialized = true;
                     }
                 }
 
-				if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
+                if (mPluginHandler.Plugins.Count != 0 && atLeastOnePluginInitialized)
                 {
                     mCore.LoadPluginsGrammar(mPluginHandler);
                     try
@@ -224,7 +230,7 @@ namespace ModernSteward
                     catch (Exception ex)
                     {
                         RadMessageBox.Show("An error occured while starting the ModernSteward speech recognition engine. Please, connect to the support crew.", "Error");
-						return;
+                        return;
                     }
 
                     buttonStartStop.Text = "Turn off";
@@ -261,13 +267,13 @@ namespace ModernSteward
             if (openPluginZipFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 textBoxPluginPath.Text = openPluginZipFileDialog.FileName;
-				try
-				{
-					textBoxPluginName.Text =
-						openPluginZipFileDialog.FileName.Remove(0, Path.GetDirectoryName(openPluginZipFileDialog.FileName).Length + 1);
-					textBoxPluginName.Text = textBoxPluginName.Text.Remove(textBoxPluginName.Text.Length - 4, 4);
-				}
-				catch { }
+                try
+                {
+                    textBoxPluginName.Text =
+                        openPluginZipFileDialog.FileName.Remove(0, Path.GetDirectoryName(openPluginZipFileDialog.FileName).Length + 1);
+                    textBoxPluginName.Text = textBoxPluginName.Text.Remove(textBoxPluginName.Text.Length - 4, 4);
+                }
+                catch { }
             }
         }
 
@@ -290,6 +296,8 @@ namespace ModernSteward
                 catch (Exception ex)
                 {
                     RadMessageBox.Show("An error occured while saving the profile. Please, connect to the support crew.", "Error");
+                    var reporter = new CrashReporter();
+                    reporter.Report(ex);
                 }
                 finally
                 {
@@ -303,7 +311,7 @@ namespace ModernSteward
         {
             OpenFileDialog openUserProfileFileDialog = new OpenFileDialog();
             openUserProfileFileDialog.Filter = "ModernSteward user profile|*.msu|All files|*.*";
-			bool openedSuccessfull = false;
+            bool openedSuccessfull = false;
             if (openUserProfileFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Stream stream = new FileStream(openUserProfileFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
@@ -316,7 +324,7 @@ namespace ModernSteward
 
                     foreach (var plugin in mPluginHandler.Plugins)
                     {
-                 		plugin.LoadPlugin();
+                        plugin.LoadPlugin();
                         AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
                     }
 
@@ -325,17 +333,19 @@ namespace ModernSteward
                 catch (Exception ex)
                 {
                     RadMessageBox.Show("The file is corrupted. \nPlease, connect to the support crew.", "Error");
+                    var reporter = new CrashReporter();
+                    reporter.Report(ex);
                 }
                 finally
                 {
-					if (openedSuccessfull)
-					{
-						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " was loaded successfully.";
-					}
-					else
-					{
-						labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден НЕуспешно.";
-					}
+                    if (openedSuccessfull)
+                    {
+                        labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " was loaded successfully.";
+                    }
+                    else
+                    {
+                        labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " was loaded UNsuccessfully.";
+                    }
                     if (stream != null)
                     {
                         stream.Close();
@@ -381,7 +391,7 @@ namespace ModernSteward
         {
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
-			this.notifyIcon.Dispose();
+            this.notifyIcon.Dispose();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)

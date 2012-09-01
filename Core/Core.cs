@@ -2,7 +2,6 @@
 using System.Speech.Recognition;
 using System.Threading;
 using System.Collections.Generic;
-
 namespace ModernSteward
 {
 	public class Core
@@ -54,7 +53,8 @@ namespace ModernSteward
 					}
 					catch (Exception ex)
 					{
-						//System.Windows.Forms.MessageBox.Show(ex.Message);
+                        var reporter = new CrashReporter();
+                        reporter.Report(ex);
 					}
 				}
 			}
@@ -168,7 +168,8 @@ namespace ModernSteward
 					}
 					catch (Exception ex)
 					{
-						System.Windows.Forms.MessageBox.Show(ex.Message);
+                        var reporter = new CrashReporter();
+                        reporter.Report(ex);
 					}
 				}
 
