@@ -261,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_935D5BD25958D7441A88A28BF7BACD28"
+        "OwnerKey" = "8:_AC310DB3D59E4276A1920F997B397523"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_97002FB62D2F1D88F33D90F75FBCAA7F"
         "OwnerKey" = "8:_AC310DB3D59E4276A1920F997B397523"
         "MsmSig" = "8:_UNDEFINED"
@@ -321,6 +327,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A4D8574207ED4091689BC8ABCE90708D"
+        "OwnerKey" = "8:_36E30291DD834745BAD26B9315E80429"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A4D8574207ED4091689BC8ABCE90708D"
+        "OwnerKey" = "8:_72EDA2391008A8983F91D89E3B8C2C4A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AC310DB3D59E4276A1920F997B397523"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -335,6 +353,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_72EDA2391008A8983F91D89E3B8C2C4A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_935D5BD25958D7441A88A28BF7BACD28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -365,6 +389,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0AE9CDFC8A50A79F5A3712E8C7787A42"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A4D8574207ED4091689BC8ABCE90708D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -808,6 +838,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_935D5BD25958D7441A88A28BF7BACD28"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MacroManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_935D5BD25958D7441A88A28BF7BACD28"
+                    {
+                    "Name" = "8:MacroManager.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MacroManager.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97002FB62D2F1D88F33D90F75FBCAA7F"
             {
             "AssemblyRegister" = "3:1"
@@ -873,6 +934,37 @@
                     }
                 }
             "SourcePath" = "8:Telerik.WinControls.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A4D8574207ED4091689BC8ABCE90708D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MacroManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A4D8574207ED4091689BC8ABCE90708D"
+                    {
+                    "Name" = "8:MacroManager.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MacroManager.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_938CF4246BBB432286BB43352562164E"
@@ -979,7 +1071,7 @@
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:ModernSteward"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPLINK" = "8:http://modernsteward.com"
         "Title" = "8:ModernWizard Setup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Lyubomir Yanchev & Hristo Stoyanov"

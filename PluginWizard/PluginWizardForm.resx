@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="radLabel3.Text" xml:space="preserve">
+    <value>&lt;html&gt;&lt;p&gt;&lt;span&gt;&lt;strong&gt;Честито!&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;След завъшрване на магьосника ще се отвори папката, където запазихте своята добавка.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;Повече информация как да имплементирате своята добавка - в документацията на продукта &lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;или може да ни попитате на мейлове: &lt;a&gt;lljubo@gmail.com&lt;/a&gt; или &lt;a&gt;renegat96@gmail.com&lt;/a&gt;, ще ви отговорим възможно най-бързо : )&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;Скоро ще можете да ни попитате и на сайта ни, за жалост, той все още е в разработка.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;strong&gt;Успех!&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/html&gt;</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pluginWizard.PageHeaderIcon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAANSSURBVDhPfZNZTFNBFIabSEzELRJ9IL4aY0xINDE+EIzK
+        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAANSSURBVDhPfZNZTFNBFIabSEzELRJ9IL4aY0xINDE+EIzK
         UqWU1kgXMEVbryJQaC2SVrBwA1StbGEpCoWUqojSAlZsWYKkokixyCKKsqkPAgHcMYKW6u+9VR7Q6Ekm
         8zDzfXPmzBkG449QaIwbGYzdXkcSUraU1za4SEODy3v1Oha9LTDsMLX2n8gqNhc3dgxDkky6DxCpva3d
         k7j7eAahAtm0Vl+5UN3SD6ZAMfJPRVSCdvz+03dofzyNkqoWFF2lxuUW5OgtsLaPoOPpezCFxJyvr6/3
@@ -137,12 +140,6 @@
         O6JPFkOYoAMvXod9FMyTV4OTWI+9XDn9/ktbedHiHypOZbPTXHu58fNMoWzgqNqKQ8qb8GdJpvdwZDNb
         BUr3Jr9d9r9O/uN3rfpdHK8gQdKHPb86TkQNuu/p7/yr/3/HT7Un2jkY2hVMAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="radLabel3.Text" xml:space="preserve">
-    <value>&lt;html&gt;&lt;p&gt;&lt;span&gt;&lt;strong&gt;Честито!&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;След завъшрване на магьосника ще се отвори папката, където запазихте своята добавка.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;Повече информация как да имплементирате своята добавка - в документацията на продукта &lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span&gt;&lt;span&gt;или може да ни попитате на мейлове: &lt;a&gt;lljubo@gmail.com&lt;/a&gt; или &lt;a&gt;renegat96@gmail.com&lt;/a&gt;, ще ви отговорим възможно най-бързо : )&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;span&gt;Скоро ще можете да ни попитате и на сайта ни, за жалост, той все още е в разработка.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;strong&gt;Успех!&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/html&gt;</value>
-  </data>
-  <data name="radLabel1.Text" xml:space="preserve">
-    <value>&lt;html&gt;&lt;p&gt;&lt;span&gt;Чрез този магьосник можете да създадете нова добавка "Модерният иконом"&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;Просто следвайте следващите няколко прости стъпки.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;Успех!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/html&gt;</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

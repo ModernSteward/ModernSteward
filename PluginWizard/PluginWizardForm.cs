@@ -56,6 +56,13 @@ namespace ModernSteward
             textBoxContext.Visible = false;
             labelContext.Visible = false;
             checkBoxItemOptional.Visible = false;
+
+			mouseHook.MouseMove += new MouseEventHandler(mouseHook_MouseMove);
+			mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
+			mouseHook.MouseUp += new MouseEventHandler(mouseHook_MouseUp);
+
+			keyboardHook.KeyDown += new KeyEventHandler(keyboardHook_KeyDown);
+			keyboardHook.KeyUp += new KeyEventHandler(keyboardHook_KeyUp);
         }
 
         void HelpButton_Click(object sender, EventArgs e)
@@ -209,5 +216,110 @@ namespace ModernSteward
         {
             e.Node.Tag = new GrammarTreeViewTag(false, "", false);
         }
-    }
+
+		#region Macro managment
+
+		int lastTimeRecorded = 0;
+
+		MouseHook mouseHook = new MouseHook();
+		KeyboardHook keyboardHook = new KeyboardHook();
+
+		List<MacroEvent> events = new List<MacroEvent>();
+
+		private void buttonRecordMacro_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				(treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).IsRecording = true;
+
+				events.Clear();
+				lastTimeRecorded = Environment.TickCount;
+
+				keyboardHook.Start();
+				mouseHook.Start();
+			}
+			catch { }
+		}
+
+		void mouseHook_MouseMove(object sender, MouseEventArgs e)
+		{
+			events.Add(
+				new MacroEvent(
+					MacroEventType.MouseMove,
+					e,
+					Environment.TickCount - lastTimeRecorded
+				));
+
+			lastTimeRecorded = Environment.TickCount;
+
+		}
+
+		void mouseHook_MouseDown(object sender, MouseEventArgs e)
+		{
+			events.Add(
+				new MacroEvent(
+					MacroEventType.MouseDown,
+					e,
+					Environment.TickCount - lastTimeRecorded
+				));
+
+			lastTimeRecorded = Environment.TickCount;
+
+		}
+
+		void mouseHook_MouseUp(object sender, MouseEventArgs e)
+		{
+
+			events.Add(
+				new MacroEvent(
+					MacroEventType.MouseUp,
+					e,
+					Environment.TickCount - lastTimeRecorded
+				));
+
+			lastTimeRecorded = Environment.TickCount;
+
+		}
+
+		void keyboardHook_KeyDown(object sender, KeyEventArgs e)
+		{
+
+			if (e.KeyCode == Keys.Escape)
+			{
+				this.StopRecordingMacroAndSaveIt(events);
+			}
+
+			events.Add(
+				new MacroEvent(
+					MacroEventType.KeyDown,
+					e,
+					Environment.TickCount - lastTimeRecorded
+				));
+
+			lastTimeRecorded = Environment.TickCount;
+
+		}
+
+		private void StopRecordingMacroAndSaveIt(List<MacroEvent> events)
+		{
+			keyboardHook.Stop();
+			mouseHook.Stop();
+			(treeViewCommands.SelectedNode.Tag as GrammarTreeViewTag).Recording = events;
+			events.Clear();
+		}
+
+		void keyboardHook_KeyUp(object sender, KeyEventArgs e)
+		{
+
+			events.Add(
+				new MacroEvent(
+					MacroEventType.KeyUp,
+					e,
+					Environment.TickCount - lastTimeRecorded
+				));
+
+			lastTimeRecorded = Environment.TickCount;
+		}
+		#endregion
+	}
 }

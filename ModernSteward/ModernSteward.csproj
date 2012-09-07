@@ -79,6 +79,12 @@
     <Compile Include="LoadingForm.Designer.cs">
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MacroWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MacroWizard.Designer.cs">
+      <DependentUpon>MacroWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MacroWizard.resx">
+      <DependentUpon>MacroWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -144,6 +153,10 @@
       <Project>{E465DCA0-BEE6-48E8-A7C1-1DB4DBC5B2D9}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MacroManager\MacroManager\MacroManager.csproj">
+      <Project>{1DB789A1-2B77-46C4-ADB2-05916F70E61B}</Project>
+      <Name>MacroManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MasterDictionaryUserControl\MasterDictionaryUserControl.csproj">
       <Project>{B5549520-B124-41C4-9FB0-B2F1D92169B0}</Project>
       <Name>MasterDictionaryUserControl</Name>
@@ -158,6 +171,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="SpeechLib">
       <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -194,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loadingScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\macroIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

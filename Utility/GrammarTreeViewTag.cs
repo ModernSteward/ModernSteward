@@ -22,5 +22,8 @@ namespace ModernSteward
         public bool IsDictation { get; set; }
         public string DictationContext { get; set; }
         public bool Optional { get; set; }
+		public bool IsRecording { get; set; }
+		public object Recording { get; set; }
+
     }
 }

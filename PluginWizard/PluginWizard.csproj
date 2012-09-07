@@ -103,6 +103,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MacroManager\MacroManager\MacroManager.csproj">
+      <Project>{1DB789A1-2B77-46C4-ADB2-05916F70E61B}</Project>
+      <Name>MacroManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MasterDictionaryUserControl\MasterDictionaryUserControl.csproj">
       <Project>{B5549520-B124-41C4-9FB0-B2F1D92169B0}</Project>
       <Name>MasterDictionaryUserControl</Name>

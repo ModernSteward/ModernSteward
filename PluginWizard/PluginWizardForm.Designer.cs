@@ -52,6 +52,7 @@
 			this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
 			this.wizardWelcomePage1 = new Telerik.WinControls.UI.WizardWelcomePage();
 			this.wizardPage1 = new Telerik.WinControls.UI.WizardPage();
+			this.buttonRecordMacro = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).BeginInit();
 			this.pluginWizard.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -136,16 +137,18 @@
 			// 
 			this.radLabel1.Location = new System.Drawing.Point(17, 75);
 			this.radLabel1.Name = "radLabel1";
-			this.radLabel1.Size = new System.Drawing.Size(418, 65);
+			this.radLabel1.Size = new System.Drawing.Size(406, 52);
 			this.radLabel1.TabIndex = 1;
-			this.radLabel1.Text = resources.GetString("radLabel1.Text");
+			this.radLabel1.Text = "<html><p><span>With the help of the PluginWizard you are able to easy create your" +
+    " own plugins.</span></p><p>Just follow the next few easy steps.</p><p>Have fun!<" +
+    "/p><p></p></html>";
 			// 
 			// labelWelcome
 			// 
 			this.labelWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelWelcome.Location = new System.Drawing.Point(13, 22);
 			this.labelWelcome.Name = "labelWelcome";
-			this.labelWelcome.Size = new System.Drawing.Size(253, 46);
+			this.labelWelcome.Size = new System.Drawing.Size(175, 46);
 			this.labelWelcome.TabIndex = 0;
 			this.labelWelcome.Text = "Welcome!";
 			// 
@@ -184,9 +187,9 @@
 			// 
 			this.radLabel2.Location = new System.Drawing.Point(12, 419);
 			this.radLabel2.Name = "radLabel2";
-			this.radLabel2.Size = new System.Drawing.Size(76, 16);
+			this.radLabel2.Size = new System.Drawing.Size(52, 16);
 			this.radLabel2.TabIndex = 6;
-			this.radLabel2.Text = "Директория: ";
+			this.radLabel2.Text = "Directory";
 			// 
 			// groupBoxBuiltInDictionary
 			// 
@@ -219,6 +222,7 @@
 			// groupBoxGrammarBuilder
 			// 
 			this.groupBoxGrammarBuilder.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+			this.groupBoxGrammarBuilder.Controls.Add(this.buttonRecordMacro);
 			this.groupBoxGrammarBuilder.Controls.Add(this.textBoxContext);
 			this.groupBoxGrammarBuilder.Controls.Add(this.labelContext);
 			this.groupBoxGrammarBuilder.Controls.Add(this.checkBoxItemOptional);
@@ -256,7 +260,7 @@
 			// 
 			this.labelContext.Location = new System.Drawing.Point(159, 336);
 			this.labelContext.Name = "labelContext";
-			this.labelContext.Size = new System.Drawing.Size(54, 18);
+			this.labelContext.Size = new System.Drawing.Size(47, 18);
 			this.labelContext.TabIndex = 5;
 			this.labelContext.Text = "Context:";
 			// 
@@ -264,7 +268,7 @@
 			// 
 			this.checkBoxItemOptional.Location = new System.Drawing.Point(5, 356);
 			this.checkBoxItemOptional.Name = "checkBoxItemOptional";
-			this.checkBoxItemOptional.Size = new System.Drawing.Size(73, 18);
+			this.checkBoxItemOptional.Size = new System.Drawing.Size(56, 18);
 			this.checkBoxItemOptional.TabIndex = 4;
 			this.checkBoxItemOptional.Text = "Eligible";
 			this.checkBoxItemOptional.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.checkBoxItemOptional_ToggleStateChanged);
@@ -273,7 +277,7 @@
 			// 
 			this.checkBoxIsTheNodeDictation.Location = new System.Drawing.Point(5, 336);
 			this.checkBoxIsTheNodeDictation.Name = "checkBoxIsTheNodeDictation";
-			this.checkBoxIsTheNodeDictation.Size = new System.Drawing.Size(75, 18);
+			this.checkBoxIsTheNodeDictation.Size = new System.Drawing.Size(65, 18);
 			this.checkBoxIsTheNodeDictation.TabIndex = 3;
 			this.checkBoxIsTheNodeDictation.Text = "Dictation";
 			this.checkBoxIsTheNodeDictation.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.checkBoxIsTheNodeDictation_ToggleStateChanged);
@@ -311,7 +315,7 @@
 			this.wizardWelcomePage1.ContentArea = this.panel1;
 			this.wizardWelcomePage1.Header = "Page header";
 			this.wizardWelcomePage1.HeaderVisibility = Telerik.WinControls.ElementVisibility.Hidden;
-			this.wizardWelcomePage1.Name = "wizardWelcomePage";
+			this.wizardWelcomePage1.Name = "wizardWelcomePage1";
 			this.wizardWelcomePage1.Title = "Create a plugin";
 			this.wizardWelcomePage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
@@ -323,6 +327,16 @@
 			this.wizardPage1.Name = "wizardPage1";
 			this.wizardPage1.Title = "Създаване на граматика";
 			this.wizardPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+			// 
+			// buttonRecordMacro
+			// 
+			this.buttonRecordMacro.Location = new System.Drawing.Point(287, 329);
+			this.buttonRecordMacro.Name = "buttonRecordMacro";
+			this.buttonRecordMacro.Size = new System.Drawing.Size(25, 23);
+			this.buttonRecordMacro.TabIndex = 7;
+			this.buttonRecordMacro.Text = "R";
+			this.buttonRecordMacro.UseVisualStyleBackColor = true;
+			this.buttonRecordMacro.Click += new System.EventHandler(this.buttonRecordMacro_Click);
 			// 
 			// PluginWizardForm
 			// 
@@ -388,6 +402,7 @@
         private Telerik.WinControls.UI.RadCheckBox checkBoxItemOptional;
 		private MasterDictionaryUserControl.MasterDictionaryManager masterDictionaryManager1;
 		private Telerik.WinControls.UI.RadLabel radLabel3;
+		private System.Windows.Forms.Button buttonRecordMacro;
     }
 }
 
