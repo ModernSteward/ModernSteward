@@ -27,7 +27,7 @@ namespace ModernSteward
 				{
 					case MacroEventType.MouseMove:
 						{
-							MouseEventArgs mouseArgs = (MouseEventArgs)macroEvent.EventArgs;
+							MyMouseEventArgs mouseArgs = (MyMouseEventArgs)macroEvent.EventArgs;
 
 							MouseSimulator.X = mouseArgs.X;
 							MouseSimulator.Y = mouseArgs.Y;
@@ -35,13 +35,13 @@ namespace ModernSteward
 						break;
 					case MacroEventType.MouseDown:
 						{
-							MouseEventArgs mouseArgs = (MouseEventArgs)macroEvent.EventArgs;
+							MyMouseEventArgs mouseArgs = (MyMouseEventArgs)macroEvent.EventArgs;
 							MouseSimulator.MouseDown(mouseArgs.Button);
 						}
 						break;
 					case MacroEventType.MouseUp:
 						{
-							MouseEventArgs mouseArgs = (MouseEventArgs)macroEvent.EventArgs;
+							MyMouseEventArgs mouseArgs = (MyMouseEventArgs)macroEvent.EventArgs;
 							MouseSimulator.MouseUp(mouseArgs.Button);
 						}
 						break;
@@ -68,7 +68,7 @@ namespace ModernSteward
 			togglingDesktopDone += new EventHandler(Macro_togglingDesktopDone);
 		}
 
-		Thread threadToggleDesktop;
+		[NonSerialized]Thread threadToggleDesktop;
 
 		private event EventHandler togglingDesktopDone;
 

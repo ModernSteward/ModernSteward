@@ -103,14 +103,6 @@ namespace ModernSteward
                 }
             }
 
-			if ((node.Tag as GrammarTreeViewTag).IsRecording)
-			{
-				if ((node.Tag as GrammarTreeViewTag) != null)
-				{
-
-				}
-			}
-
             int iteration = 0;
             foreach (var childNode in node.Nodes)
             {

@@ -48,7 +48,10 @@
     <Compile Include="Macro.cs" />
     <Compile Include="MacroEvent.cs" />
     <Compile Include="MouseHook.cs" />
-    <Compile Include="MouseSimulator.cs" />
+    <Compile Include="MouseSimulator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyMouseEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using Telerik.WinControls.UI;
 
 namespace ModernSteward
 {
@@ -60,7 +64,7 @@ namespace ModernSteward
 			macro.Events.Add(
 				new MacroEvent(
 					MacroEventType.MouseMove,
-					e,
+					new MyMouseEventArgs(e),
 					Environment.TickCount - lastTimeRecorded
 				));
 
@@ -73,7 +77,7 @@ namespace ModernSteward
 			macro.Events.Add(
 				new MacroEvent(
 					MacroEventType.MouseDown,
-					e,
+					new MyMouseEventArgs(e),
 					Environment.TickCount - lastTimeRecorded
 				));
 
@@ -85,7 +89,7 @@ namespace ModernSteward
 			macro.Events.Add(
 				new MacroEvent(
 					MacroEventType.MouseUp,
-					e,
+					new MyMouseEventArgs(e),
 					Environment.TickCount - lastTimeRecorded
 				));
 
@@ -136,10 +140,50 @@ namespace ModernSteward
 			lastTimeRecorded = Environment.TickCount;
 		}
 
-		private void radButton1_Click(object sender, EventArgs e)
+		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			macro.Execute();
-		}
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
 
+			saveFileDialog.Filter = "zip files (*.zip)|*.zip";
+			saveFileDialog.FilterIndex = 2;
+			saveFileDialog.RestoreDirectory = true;
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				string zipFilePath = saveFileDialog.FileName;
+				string tempMacroPath = Environment.CurrentDirectory + @"\macro.mr";
+				string tempGrammarPath = Environment.CurrentDirectory + @"\CustomPluginGrammar.xml";
+
+
+				Stream stream = null;
+				try
+				{
+					IFormatter formatter = new BinaryFormatter();
+					stream = new FileStream(tempMacroPath, FileMode.Create, FileAccess.Write, FileShare.None);
+					formatter.Serialize(stream, macro);
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+					// do nothing, just ignore any possible errors
+				}
+				finally
+				{
+					if (null != stream)
+						stream.Close();
+				}
+				RadTreeView tree = new RadTreeView();
+				tree.Nodes.Add(textboxCommand.Text);
+				tree.Nodes[0].Tag = new GrammarTreeViewTag(false, "", false);
+
+				RadTreeViewGrammarManager.SaveGrammarToXML(tree, @"CustomPluginGrammar.xml");
+
+				ZipManager.AddFileToZip(zipFilePath, tempMacroPath);
+				ZipManager.AddFileToZip(zipFilePath, tempGrammarPath);
+
+				File.Delete(tempMacroPath);
+				File.Delete(tempGrammarPath);
+			}
+		}
 	}
 }

@@ -84,8 +84,15 @@ namespace ModernSteward
 
 		void mCore_SpeechRecognizedCoreEvent(Plugin pluginTriggered)
 		{
-			labelStatusInStatusStrip.Text = pluginTriggered.Name + " was triggered.";
-			labelStatusInStatusStrip.UpdateLayout();
+			try
+			{
+				labelStatusInStatusStrip.Text = pluginTriggered.Name + " was triggered.";
+				labelStatusInStatusStrip.UpdateLayout();
+			}
+			catch
+			{
+				// Telerik RadControls, dude... failing for some reason
+			}
 		}
 
 		void gridViewPlugins_CommandCellClick(object sender, EventArgs e)
@@ -143,12 +150,6 @@ namespace ModernSteward
 			masterDictionaryForm.Show();
 		}
 
-		private void menuItemCreators_Click(object sender, EventArgs e)
-		{
-			AboutTheCreators aboutTheCreators = new AboutTheCreators("1.0");
-			aboutTheCreators.Show();
-		}
-
 		private void buttonAddPlugin_Click(object sender, EventArgs e)
 		{
 			try
@@ -189,7 +190,7 @@ namespace ModernSteward
 					var reporter = new CrashReporter();
 					reporter.Report(ex);
 
-					RadMessageBox.Show(@"An error occured. The plugin might be out of date or ModernSteward is installed in a directory without administration privileges. 
+					RadMessageBox.Show(@"An error occured. The plugin might be out of date, not valid or ModernSteward is installed in a directory without administration privileges. 
 						Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
 
 				}
@@ -393,7 +394,7 @@ namespace ModernSteward
 			this.ShowInTaskbar = false;
 			this.notifyIcon.Visible = false;
 			this.notifyIcon.Dispose();
-			
+
 		}
 
 		private void MainForm_Resize(object sender, EventArgs e)

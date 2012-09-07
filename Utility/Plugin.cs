@@ -10,6 +10,8 @@ using System.Speech.Recognition;
 using ModernSteward;
 using System.IO;
 using Telerik.WinControls.UI;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace ModernSteward
 {
@@ -33,6 +35,9 @@ namespace ModernSteward
 
 		public string PluginGrammarTreePath;
 
+		public Macro Macros;
+
+		public PluginType Type;
 
 		public Plugin() { }
 
@@ -56,24 +61,54 @@ namespace ModernSteward
 
 			ZipManager.Extract(masterPluginZip, innerPluginDirectoryPath);
 
-			mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
 			PluginGrammarTreePath = innerPluginDirectoryPath + @"CustomPluginGrammar.xml";
 
-			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-			Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
-			instanceOfMyType = Activator.CreateInstance(type);
+			if (File.Exists(innerPluginDirectoryPath + @"CustomPlugin.dll")) //Standart plugin
+			{
 
-			(instanceOfMyType as PluginFunctionality).RequestGrammarUpdate += 
-				new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequestHandler);
+				mAssembly = Assembly.LoadFile(innerPluginDirectoryPath + @"CustomPlugin.dll");
+				
+				AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+				Type type = mAssembly.GetType("ModernSteward.CustomPlugin");
+				instanceOfMyType = Activator.CreateInstance(type);
 
-			(instanceOfMyType as PluginFunctionality).TryToEmulateCommand +=
-				new EventHandler<EmulateCommandEventArgs>(TryToEmulateCommandHandler);
-			
+				(instanceOfMyType as PluginFunctionality).RequestGrammarUpdate +=
+					new EventHandler<GrammarUpdateRequestEventArgs>(GrammarUpdateRequestHandler);
+
+				(instanceOfMyType as PluginFunctionality).TryToEmulateCommand +=
+					new EventHandler<EmulateCommandEventArgs>(TryToEmulateCommandHandler);
+
+				Type = PluginType.StandartPlugin;
+			}
+
+			else //Macro plugin
+			{
+				Stream stream = null;
+				try
+				{
+					IFormatter formatter = new BinaryFormatter();
+					stream = new FileStream(innerPluginDirectoryPath + "macro.mr", FileMode.Open, FileAccess.Read, FileShare.None);
+					stream.Position = 0;
+					Macros = (Macro)formatter.Deserialize(stream);
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					if (null != stream)
+						stream.Close();
+				}
+
+				Type = PluginType.MacroPlugin;
+			}
 		}
 
 		Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
 		{
-			foreach(var file in Directory.GetFiles(innerPluginDirectoryPath)){
+			foreach (var file in Directory.GetFiles(innerPluginDirectoryPath))
+			{
 				try
 				{
 					if (AssemblyName.GetAssemblyName(file).FullName == args.Name)
@@ -88,24 +123,52 @@ namespace ModernSteward
 
 		public void TriggerPlugin(List<KeyValuePair<string, string>> aSemantics)
 		{
-			(instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
+			if (Type == PluginType.StandartPlugin)
+			{
+				(instanceOfMyType as PluginFunctionality).Trigger(aSemantics);
+			}
+			else //Macro plugin
+			{
+				Macros.Execute();
+			}
 		}
 
 		public Grammar GetGrammar()
 		{
-			//System.Windows.Forms.MessageBox.Show((instanceOfMyType as PluginFunctionality).GetGrammarBuilder().DebugShowPhrases);
-			return (instanceOfMyType as PluginFunctionality).GetGrammar();
+			if (Type == PluginType.StandartPlugin)
+			{
+				return (instanceOfMyType as PluginFunctionality).GetGrammar();
+			}
+			else
+			{ // Macro plugin
+				return new Grammar(TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(PluginGrammarTreePath));
+			}
 		}
 
 		public GrammarBuilder GetGrammarBuilder()
 		{
-			return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
+			if (Type == PluginType.StandartPlugin)
+			{
+				return (instanceOfMyType as PluginFunctionality).GetGrammarBuilder();
+			}
+			else // Macro plugin
+			{
+				return TreeViewToGrammarBuilderAlgorithm.CreateGrammarBuilderFromXML(PluginGrammarTreePath);
+			}
 		}
 
 		public bool Initialize()
 		{
-			Initialized = (instanceOfMyType as PluginFunctionality).Initialize();
-			return Initialized;
+			if (Type == PluginType.StandartPlugin)
+			{
+				Initialized = (instanceOfMyType as PluginFunctionality).Initialize();
+				return Initialized;
+			}
+			else // Macro plugin
+			{
+				Initialized = true;
+				return Initialized;
+			}
 		}
 
 		public override string ToString()
@@ -115,7 +178,10 @@ namespace ModernSteward
 
 		private void GrammarUpdateRequestHandler(object s, GrammarUpdateRequestEventArgs e)
 		{
-			RequestGrammarUpdate.Invoke(s, e);
+			if (Type == PluginType.StandartPlugin)
+			{
+				RequestGrammarUpdate.Invoke(s, e);
+			}
 		}
 
 		public event EventHandler<GrammarUpdateRequestEventArgs> RequestGrammarUpdate;
@@ -128,7 +194,10 @@ namespace ModernSteward
 
 		public void TryToEmulateCommandHandler(object s, EmulateCommandEventArgs e)
 		{
-			TryToEmulateCommand.Invoke(this, e);
+			if (Type == PluginType.StandartPlugin)
+			{
+				TryToEmulateCommand.Invoke(this, e);
+			}
 		}
 	}
 }

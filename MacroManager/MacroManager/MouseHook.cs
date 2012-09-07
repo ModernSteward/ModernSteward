@@ -63,7 +63,7 @@ namespace ModernSteward
                 MouseButtons button = GetButton(wParam);
                 MouseEventType eventType = GetEventType(wParam);
 
-                MouseEventArgs e = new MouseEventArgs(
+				MyMouseEventArgs e = new MyMouseEventArgs(
                     button,
                     (eventType == MouseEventType.DoubleClick ? 2 : 1),
                     mouseHookStruct.pt.x,

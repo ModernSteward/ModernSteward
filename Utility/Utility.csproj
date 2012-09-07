@@ -58,6 +58,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\TelerikCommon.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="EmulateCommandEventArgs.cs" />
     <Compile Include="GrammarUpdateRequestEventArgs.cs" />
     <Compile Include="Melissa.cs" />
+    <Compile Include="PluginType.cs" />
     <Compile Include="RadTreeViewGrammarManager.cs" />
     <Compile Include="GrammarTreeViewTag.cs" />
     <Compile Include="Plugin.cs" />

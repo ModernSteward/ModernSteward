@@ -34,7 +34,6 @@
 			this.buttonSave = new Telerik.WinControls.UI.RadButton();
 			this.groupBoxMain = new Telerik.WinControls.UI.RadGroupBox();
 			this.buttonRecord = new Telerik.WinControls.UI.RadButton();
-			this.radButton1 = new Telerik.WinControls.UI.RadButton();
 			((System.ComponentModel.ISupportInitialize)(this.labelStatus)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.labelCommand)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textboxCommand)).BeginInit();
@@ -42,7 +41,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxMain)).BeginInit();
 			this.groupBoxMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.buttonRecord)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -77,11 +75,11 @@
 			this.buttonSave.Size = new System.Drawing.Size(86, 24);
 			this.buttonSave.TabIndex = 3;
 			this.buttonSave.Text = "Save";
+			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
 			// groupBoxMain
 			// 
 			this.groupBoxMain.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-			this.groupBoxMain.Controls.Add(this.radButton1);
 			this.groupBoxMain.Controls.Add(this.labelCommand);
 			this.groupBoxMain.Controls.Add(this.labelStatus);
 			this.groupBoxMain.Controls.Add(this.textboxCommand);
@@ -114,15 +112,6 @@
 			this.buttonRecord.TabIndex = 2;
 			this.buttonRecord.Click += new System.EventHandler(this.buttonRecord_Click);
 			// 
-			// radButton1
-			// 
-			this.radButton1.Location = new System.Drawing.Point(188, 49);
-			this.radButton1.Name = "radButton1";
-			this.radButton1.Size = new System.Drawing.Size(46, 24);
-			this.radButton1.TabIndex = 5;
-			this.radButton1.Text = "radButton1";
-			this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
-			// 
 			// MacroWizardForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,7 +133,6 @@
 			this.groupBoxMain.ResumeLayout(false);
 			this.groupBoxMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.buttonRecord)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 			this.ResumeLayout(false);
 
@@ -158,6 +146,5 @@
 		private Telerik.WinControls.UI.RadButton buttonRecord;
 		private Telerik.WinControls.UI.RadButton buttonSave;
 		private Telerik.WinControls.UI.RadGroupBox groupBoxMain;
-		private Telerik.WinControls.UI.RadButton radButton1;
     }
 }

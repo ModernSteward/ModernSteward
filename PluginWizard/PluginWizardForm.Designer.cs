@@ -52,7 +52,6 @@
 			this.buttonExportToXML = new Telerik.WinControls.UI.RadButton();
 			this.wizardWelcomePage1 = new Telerik.WinControls.UI.WizardWelcomePage();
 			this.wizardPage1 = new Telerik.WinControls.UI.WizardPage();
-			this.buttonRecordMacro = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pluginWizard)).BeginInit();
 			this.pluginWizard.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -222,7 +221,6 @@
 			// groupBoxGrammarBuilder
 			// 
 			this.groupBoxGrammarBuilder.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-			this.groupBoxGrammarBuilder.Controls.Add(this.buttonRecordMacro);
 			this.groupBoxGrammarBuilder.Controls.Add(this.textBoxContext);
 			this.groupBoxGrammarBuilder.Controls.Add(this.labelContext);
 			this.groupBoxGrammarBuilder.Controls.Add(this.checkBoxItemOptional);
@@ -328,16 +326,6 @@
 			this.wizardPage1.Title = "Създаване на граматика";
 			this.wizardPage1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
 			// 
-			// buttonRecordMacro
-			// 
-			this.buttonRecordMacro.Location = new System.Drawing.Point(287, 329);
-			this.buttonRecordMacro.Name = "buttonRecordMacro";
-			this.buttonRecordMacro.Size = new System.Drawing.Size(25, 23);
-			this.buttonRecordMacro.TabIndex = 7;
-			this.buttonRecordMacro.Text = "R";
-			this.buttonRecordMacro.UseVisualStyleBackColor = true;
-			this.buttonRecordMacro.Click += new System.EventHandler(this.buttonRecordMacro_Click);
-			// 
 			// PluginWizardForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,7 +390,6 @@
         private Telerik.WinControls.UI.RadCheckBox checkBoxItemOptional;
 		private MasterDictionaryUserControl.MasterDictionaryManager masterDictionaryManager1;
 		private Telerik.WinControls.UI.RadLabel radLabel3;
-		private System.Windows.Forms.Button buttonRecordMacro;
     }
 }
 
