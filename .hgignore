@@ -134,3 +134,13 @@ Core/bin/Release/Utility.pdb
 Core/bin/Release/Utility.dll
 Core/bin/Release/Core.pdb
 Core/bin/Release/Core.dll
+obj
+bin
+Release
+Debug
+*.idc
+*.user
+~$
+Documentation/~$cumentation english.docx
+syntax: regexp
+~$
