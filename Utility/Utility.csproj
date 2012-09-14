@@ -66,6 +66,7 @@
     <Compile Include="EmulateCommandEventArgs.cs" />
     <Compile Include="GrammarUpdateRequestEventArgs.cs" />
     <Compile Include="Melissa.cs" />
+    <Compile Include="OperatingMode.cs" />
     <Compile Include="PluginType.cs" />
     <Compile Include="RadTreeViewGrammarManager.cs" />
     <Compile Include="GrammarTreeViewTag.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="TreeViewToGrammarBuilderAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebControlManager.cs" />
+    <Compile Include="WebPlugin.cs" />
     <Compile Include="ZipManager.cs" />
   </ItemGroup>
   <ItemGroup>

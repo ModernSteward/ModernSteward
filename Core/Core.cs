@@ -20,15 +20,19 @@ namespace ModernSteward
 
 		public event SpeechRecognizedCoreEventHandler SpeechRecognizedCoreEvent;
 
+		OperatingMode Mode = OperatingMode.Normal;
+
 		/// <summary>
 		/// Initializes the RecognitionEngine
 		/// </summary>
-		public Core()
+		public Core(OperatingMode aMode)
 		{
 			mRecognitionEngine = new SpeechRecognitionEngine();
 			mRecognitionEngine.SetInputToDefaultAudioDevice();
 
 			mRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecognitionEngine_SpeechRecognized);
+
+			Mode = aMode;
 		}
 
 		void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -156,10 +160,15 @@ namespace ModernSteward
 					throw new NullReferenceException();
 				}
 
+				if (Mode == OperatingMode.Normal)
+				{
+					isAuthorised = checkPluginControlAuthorisation(senderPlugin, receiver);
+				}
+				else
+				{
+					isAuthorised = true;
+				}
 				
-				isAuthorised = checkPluginControlAuthorisation(senderPlugin, receiver);
-				
-
 				if (isAuthorised)
 				{
 					try
@@ -190,7 +199,6 @@ namespace ModernSteward
 				string receiverHash = ZipManager.GetMD5FromAZip(aReceiver.PluginPath);
 			}
 			catch { }
-
 
 			//TODO: connection to the database
 

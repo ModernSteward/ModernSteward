@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_14FE8E3E2733434B92D99090101381C8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_19CB2CD5ADE84BEAB7D0FBAA5422F080"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,6 +189,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5BD6B30641244C46B5C2E8425C37D4A0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6CB2E17A5C4E79AE4F9181B349AE9471"
         "OwnerKey" = "8:_19CB2CD5ADE84BEAB7D0FBAA5422F080"
         "MsmSig" = "8:_UNDEFINED"
@@ -255,14 +255,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_90B6F1AA634D4EDBB3210F774E774E9A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_869C98A24CB65A5C0A331EA3C7AE1233"
+        "OwnerKey" = "8:_19CB2CD5ADE84BEAB7D0FBAA5422F080"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_935D5BD25958D7441A88A28BF7BACD28"
-        "OwnerKey" = "8:_AC310DB3D59E4276A1920F997B397523"
+        "MsmKey" = "8:_869C98A24CB65A5C0A331EA3C7AE1233"
+        "OwnerKey" = "8:_865AA4D3E6C8629D51EC4A73D4A72442"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_90B6F1AA634D4EDBB3210F774E774E9A"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -334,7 +340,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A4D8574207ED4091689BC8ABCE90708D"
-        "OwnerKey" = "8:_72EDA2391008A8983F91D89E3B8C2C4A"
+        "OwnerKey" = "8:_AC310DB3D59E4276A1920F997B397523"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -353,12 +359,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_72EDA2391008A8983F91D89E3B8C2C4A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_935D5BD25958D7441A88A28BF7BACD28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -419,6 +419,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_865AA4D3E6C8629D51EC4A73D4A72442"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_869C98A24CB65A5C0A331EA3C7AE1233"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -581,26 +587,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_14FE8E3E2733434B92D99090101381C8"
-            {
-            "SourcePath" = "8:..\\GUI images\\iconModernSteward.ico"
-            "TargetName" = "8:iconModernSteward.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2943BECF00FEF78C834076A6E2BD8F49"
             {
             "AssemblyRegister" = "3:1"
@@ -725,6 +711,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BD6B30641244C46B5C2E8425C37D4A0"
+            {
+            "SourcePath" = "8:..\\GUI images\\iconModernSteward.ico"
+            "TargetName" = "8:iconModernSteward.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6CB2E17A5C4E79AE4F9181B349AE9471"
             {
             "AssemblyRegister" = "3:1"
@@ -818,34 +824,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90B6F1AA634D4EDBB3210F774E774E9A"
-            {
-            "SourcePath" = "8:..\\GUI images\\wizardIcon.ico"
-            "TargetName" = "8:iconWizard.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_935D5BD25958D7441A88A28BF7BACD28"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_869C98A24CB65A5C0A331EA3C7AE1233"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:MacroManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_935D5BD25958D7441A88A28BF7BACD28"
+                    "_869C98A24CB65A5C0A331EA3C7AE1233"
                     {
                     "Name" = "8:MacroManager.dll"
                     "Attributes" = "3:512"
@@ -867,6 +853,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90B6F1AA634D4EDBB3210F774E774E9A"
+            {
+            "SourcePath" = "8:..\\GUI images\\wizardIcon.ico"
+            "TargetName" = "8:iconWizard.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_938CF4246BBB432286BB43352562164E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97002FB62D2F1D88F33D90F75FBCAA7F"
@@ -1061,7 +1067,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ModernSteward"
         "ProductCode" = "8:{5D65FD3C-2BD4-4677-BF39-61FF39D626F8}"
-        "PackageCode" = "8:{9D042291-3F1E-470E-93F0-180C5260B2F9}"
+        "PackageCode" = "8:{D7CA84E6-A465-46E4-8546-3B55AA66A438}"
         "UpgradeCode" = "8:{197DA4E3-6E4D-4D00-A782-C01D5DB89D7B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1192,7 +1198,7 @@
             "Target" = "8:_AC310DB3D59E4276A1920F997B397523"
             "Folder" = "8:_CA06018F128542ED954F15EF76F66989"
             "WorkingFolder" = "8:_938CF4246BBB432286BB43352562164E"
-            "Icon" = "8:_14FE8E3E2733434B92D99090101381C8"
+            "Icon" = "8:_5BD6B30641244C46B5C2E8425C37D4A0"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8B0E0D2934034BAE8632FEE6F846CEE5"
@@ -1206,7 +1212,7 @@
             "Target" = "8:_AC310DB3D59E4276A1920F997B397523"
             "Folder" = "8:_BCA88CD2CA444C39B66BCFE893D6CE44"
             "WorkingFolder" = "8:_938CF4246BBB432286BB43352562164E"
-            "Icon" = "8:_14FE8E3E2733434B92D99090101381C8"
+            "Icon" = "8:_5BD6B30641244C46B5C2E8425C37D4A0"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D4789D043A2B48C78A71615C156BF85F"

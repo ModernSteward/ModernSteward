@@ -11,6 +11,9 @@ namespace ModernSteward
 {
     public partial class LoadingForm : Telerik.WinControls.UI.RadForm
     {
+		public List<WebPlugin> DownloadedPlugins = new List<WebPlugin>();
+		public OperatingMode Mode = OperatingMode.Normal;
+
         public LoadingForm()
         {
             InitializeComponent();
@@ -61,5 +64,13 @@ namespace ModernSteward
 
             this.Close();
         }
+
+		private void LoadingForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (checkBoxGeneralPluginControl.Checked)
+			{
+				Mode = OperatingMode.Advanced;
+			}
+		}
     }
 }

@@ -23,6 +23,8 @@ namespace ModernSteward
 
 		private bool recognitionEngineRunning = false;
 
+		private OperatingMode Mode = OperatingMode.Normal;
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -30,9 +32,16 @@ namespace ModernSteward
 			LoadingForm loadingForm = new LoadingForm();
 			loadingForm.ShowDialog();
 
+			Mode = loadingForm.Mode;
+
+			if (Mode == OperatingMode.Normal)
+			{
+				LoadDownloadedPlugins(loadingForm.DownloadedPlugins);
+			}
+
 			try
 			{
-				mCore = new Core();
+				mCore = new Core(Mode);
 				mCore.SpeechRecognizedCoreEvent += new Core.SpeechRecognizedCoreEventHandler(mCore_SpeechRecognizedCoreEvent);
 			}
 			catch (InvalidOperationException ex)
@@ -60,6 +69,14 @@ namespace ModernSteward
 
 
 			this.Show();
+		}
+
+		private void LoadDownloadedPlugins(List<WebPlugin> list)
+		{
+			foreach (var plugin in list)
+			{
+				AddPluginToPluginManagerSafely(plugin.Name, plugin.PluginPath);
+			}
 		}
 
 		int ticks = 0;
@@ -152,6 +169,11 @@ namespace ModernSteward
 
 		private void buttonAddPlugin_Click(object sender, EventArgs e)
 		{
+			AddPluginToPluginManagerSafely(textBoxPluginName.Text, textBoxPluginPath.Text);
+		}
+
+		void AddPluginToPluginManagerSafely(string aName, string aPath)
+		{
 			try
 			{
 				try
@@ -162,7 +184,7 @@ namespace ModernSteward
 						foreach (var row in gridViewPlugins.Rows)
 						{
 							string name = row.Cells["Name"].Value.ToString();
-							if (name == textBoxPluginName.Text)
+							if (name == aName)
 							{
 								nameAlreadyTaken = true;
 							}
@@ -170,11 +192,11 @@ namespace ModernSteward
 
 						if (!nameAlreadyTaken)
 						{
-							mPluginHandler.Plugins.Add(new Plugin(textBoxPluginName.Text, textBoxPluginPath.Text));
+							mPluginHandler.Plugins.Add(new Plugin(aName, aPath));
 
-							AddPluginToTheGridView(textBoxPluginName.Text, textBoxPluginPath.Text);
+							AddPluginToTheGridView(aName, aPath);
 
-							labelStatusInStatusStrip.Text = textBoxPluginName.Text + " was added.";
+							labelStatusInStatusStrip.Text = aName+ " was added.";
 
 							textBoxPluginPath.Text = "";
 							textBoxPluginName.Text = "";
@@ -190,9 +212,7 @@ namespace ModernSteward
 					var reporter = new CrashReporter();
 					reporter.Report(ex);
 
-					RadMessageBox.Show(@"An error occured. The plugin might be out of date, not valid or ModernSteward is installed in a directory without administration privileges. 
-						Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
-
+					RadMessageBox.Show(@"An error occured. The plugin " + aName+ " might be out of date, not valid or ModernSteward is installed in a directory without administration privileges. Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
 				}
 			}
 			catch (Exception ex)

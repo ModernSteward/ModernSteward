@@ -210,6 +210,9 @@
   <ItemGroup>
     <None Include="Resources\macroIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\notifyIcon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

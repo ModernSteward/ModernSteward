@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MacroWizardForm));
 			this.labelStatus = new Telerik.WinControls.UI.RadLabel();
 			this.labelCommand = new Telerik.WinControls.UI.RadLabel();
 			this.textboxCommand = new Telerik.WinControls.UI.RadTextBox();
@@ -118,6 +119,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(357, 102);
 			this.Controls.Add(this.groupBoxMain);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MacroWizardForm";
 			// 
 			// 
