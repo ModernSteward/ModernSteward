@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Telerik.WinControls;
+using WebControl;
+using System.IO;
 
 namespace ModernSteward
 {
     public partial class LoadingForm : Telerik.WinControls.UI.RadForm
     {
 		public List<WebPlugin> DownloadedPlugins = new List<WebPlugin>();
-		public OperatingMode Mode = OperatingMode.Normal;
+		public OperatingMode Mode = OperatingMode.OnlineNormal;
 
         public LoadingForm()
         {
@@ -32,7 +34,7 @@ namespace ModernSteward
             if (!textBoxEmailEntered)
             {
                 textBoxEmail.Text = "";
-                textBoxPasswordEntered = true;
+				textBoxEmailEntered = true;
             }
         }
 
@@ -47,30 +49,50 @@ namespace ModernSteward
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            string email = textBoxEmail.Text;
-            string password = textBoxPassword.Text;
+            Email = textBoxEmail.Text;
+            Password = textBoxPassword.Text;
 
-            WebControlManager webControl = new WebControlManager(email, password);
+			WebControlManager webControl = new WebControlManager(Email, Password);
+			if (webControl.Login())
+			{
+				var listInstalledPlugins = webControl.GetInstalled();
+				foreach (var webPlugin in listInstalledPlugins)
+				{
+					string innerPluginDirectoryPath = "";
+					Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
+					Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + webPlugin.Name);
+					innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + webPlugin.Name + @"\";
 
-            //TODO: Download the users' plugins and add them
+					if (webPlugin.Download(innerPluginDirectoryPath))
+					{
+						DownloadedPlugins.Add(webPlugin);
+					}
+				}
+			}
 
             this.Close();
         }
 
         private void buttonOfflineMode_Click(object sender, EventArgs e)
         {
-            //TODO: Maybe it will need some additional information e.g. advanced mode 
-            //for the plugin rights distribution system
+			Mode = OperatingMode.OfflineAdvanced;
 
             this.Close();
         }
 
 		private void LoadingForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (checkBoxGeneralPluginControl.Checked)
+			if (Mode != OperatingMode.OfflineAdvanced) // hack -  When the Offline button is clicked, the mode changes to OfflineAdvanced. Because the initalization value of Mode is OnlineNormal this way we are checking wether the buttonOfflineMode or the buttonLogin was clicked 
 			{
-				Mode = OperatingMode.Advanced;
+				if (checkBoxGeneralPluginControl.Checked)
+				{
+					Mode = OperatingMode.OnlineAdvanced;
+				}
 			}
 		}
-    }
+
+		public string Email { get; set; }
+
+		public string Password { get; set; }
+	}
 }

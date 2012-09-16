@@ -5,10 +5,11 @@ using System.Text;
 
 namespace ModernSteward
 {
-	public enum OperatingMode
+	public class  WebPluginPrinciple
 	{
-		OnlineNormal,
-		OnlineAdvanced,
-		OfflineAdvanced
+		public int Id;
+		public string Title;
+		public string Description;
+		public string FilePath;
 	}
 }

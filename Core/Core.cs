@@ -2,6 +2,7 @@
 using System.Speech.Recognition;
 using System.Threading;
 using System.Collections.Generic;
+using WebControl;
 namespace ModernSteward
 {
 	public class Core
@@ -20,7 +21,9 @@ namespace ModernSteward
 
 		public event SpeechRecognizedCoreEventHandler SpeechRecognizedCoreEvent;
 
-		OperatingMode Mode = OperatingMode.Normal;
+		private OperatingMode Mode = OperatingMode.OfflineAdvanced;
+
+		private WebControlManager webControlManager;
 
 		/// <summary>
 		/// Initializes the RecognitionEngine
@@ -33,6 +36,20 @@ namespace ModernSteward
 			mRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecognitionEngine_SpeechRecognized);
 
 			Mode = aMode;
+		}
+
+		public Core(OperatingMode aMode, string aEmail, string aPassword)
+		{
+			mRecognitionEngine = new SpeechRecognitionEngine();
+			mRecognitionEngine.SetInputToDefaultAudioDevice();
+
+			mRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecognitionEngine_SpeechRecognized);
+
+			Mode = aMode;
+			Email = aEmail;
+			Password = aPassword;
+
+			webControlManager = new WebControlManager(Email, Password);
 		}
 
 		void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -134,6 +151,8 @@ namespace ModernSteward
 		}
 		
 		List<EmulateCommandEventArgs> RequestsForCommandEmulation = new List<EmulateCommandEventArgs>();
+		private string Email;
+		private string Password;
 
 		private void TryEmulatingCommand(object sender, EmulateCommandEventArgs e)
 		{
@@ -160,7 +179,7 @@ namespace ModernSteward
 					throw new NullReferenceException();
 				}
 
-				if (Mode == OperatingMode.Normal)
+				if (Mode == OperatingMode.OnlineNormal)
 				{
 					isAuthorised = checkPluginControlAuthorisation(senderPlugin, receiver);
 				}
@@ -193,16 +212,7 @@ namespace ModernSteward
 
 		private bool checkPluginControlAuthorisation(Plugin aSender, Plugin aReceiver)
 		{
-			try
-			{
-				string senderHash = ZipManager.GetMD5FromAZip(aSender.PluginPath);
-				string receiverHash = ZipManager.GetMD5FromAZip(aReceiver.PluginPath);
-			}
-			catch { }
-
-			//TODO: connection to the database
-
-			return true;
+			return webControlManager.CheckPermission(aSender.ID, aReceiver.ID);
 		}
 	}
 }

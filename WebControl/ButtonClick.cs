@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ModernSteward
+namespace WebControl
 {
-	public enum OperatingMode
+	public class ButtonClick
 	{
-		OnlineNormal,
-		OnlineAdvanced,
-		OfflineAdvanced
+		public string Time;
+		public string Text;
 	}
 }

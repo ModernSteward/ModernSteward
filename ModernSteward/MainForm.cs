@@ -23,7 +23,10 @@ namespace ModernSteward
 
 		private bool recognitionEngineRunning = false;
 
-		private OperatingMode Mode = OperatingMode.Normal;
+		private OperatingMode Mode = OperatingMode.OfflineAdvanced;
+
+		public string Email { get; set; }
+		public string Password { get; set; }
 
 		public MainForm()
 		{
@@ -34,14 +37,16 @@ namespace ModernSteward
 
 			Mode = loadingForm.Mode;
 
-			if (Mode == OperatingMode.Normal)
+			if (Mode == OperatingMode.OnlineNormal || Mode == OperatingMode.OnlineAdvanced)
 			{
+				Email = loadingForm.Email;
+				Password = loadingForm.Password;
 				LoadDownloadedPlugins(loadingForm.DownloadedPlugins);
 			}
 
 			try
 			{
-				mCore = new Core(Mode);
+				mCore = new Core(Mode, Email, Password);
 				mCore.SpeechRecognizedCoreEvent += new Core.SpeechRecognizedCoreEventHandler(mCore_SpeechRecognizedCoreEvent);
 			}
 			catch (InvalidOperationException ex)
@@ -75,7 +80,7 @@ namespace ModernSteward
 		{
 			foreach (var plugin in list)
 			{
-				AddPluginToPluginManagerSafely(plugin.Name, plugin.PluginPath);
+				AddPluginToPluginManagerSafely(plugin.Name, plugin.LocalFilepath, plugin.ID);
 			}
 		}
 
@@ -172,13 +177,13 @@ namespace ModernSteward
 			AddPluginToPluginManagerSafely(textBoxPluginName.Text, textBoxPluginPath.Text);
 		}
 
-		void AddPluginToPluginManagerSafely(string aName, string aPath)
+		void AddPluginToPluginManagerSafely(string aName, string aPath, int ID = -1)
 		{
 			try
 			{
 				try
 				{
-					if (textBoxPluginName.Text != "" && textBoxPluginPath.Text != "")
+					if (aName != "" && aPath != "")
 					{
 						bool nameAlreadyTaken = false;
 						foreach (var row in gridViewPlugins.Rows)
@@ -192,7 +197,7 @@ namespace ModernSteward
 
 						if (!nameAlreadyTaken)
 						{
-							mPluginHandler.Plugins.Add(new Plugin(aName, aPath));
+							mPluginHandler.Plugins.Add(new Plugin(aName, aPath, ID));
 
 							AddPluginToTheGridView(aName, aPath);
 

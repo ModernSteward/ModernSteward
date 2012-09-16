@@ -18,6 +18,9 @@ namespace ModernSteward
 	[Serializable]
 	public class Plugin
 	{
+		[NonSerialized]
+		public int ID;
+
 		public string Name;
 
 		public string PluginPath;
@@ -41,10 +44,12 @@ namespace ModernSteward
 
 		public Plugin() { }
 
-		public Plugin(string aName, string aPluginPath)
+		public Plugin(string aName, string aPluginPath, int aID = -1)
 		{
 			Name = aName;
 			PluginPath = aPluginPath;
+
+			ID = aID;
 
 			LoadPlugin();
 		}

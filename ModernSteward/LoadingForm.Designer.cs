@@ -44,16 +44,16 @@
 			// 
 			// buttonOfflineMode
 			// 
-			this.buttonOfflineMode.Location = new System.Drawing.Point(12, 268);
+			this.buttonOfflineMode.Location = new System.Drawing.Point(12, 288);
 			this.buttonOfflineMode.Name = "buttonOfflineMode";
-			this.buttonOfflineMode.Size = new System.Drawing.Size(79, 24);
+			this.buttonOfflineMode.Size = new System.Drawing.Size(140, 24);
 			this.buttonOfflineMode.TabIndex = 4;
-			this.buttonOfflineMode.Text = "Offline";
+			this.buttonOfflineMode.Text = "Offline (advanced mode)";
 			this.buttonOfflineMode.Click += new System.EventHandler(this.buttonOfflineMode_Click);
 			// 
 			// textBoxEmail
 			// 
-			this.textBoxEmail.Location = new System.Drawing.Point(339, 235);
+			this.textBoxEmail.Location = new System.Drawing.Point(342, 197);
 			this.textBoxEmail.Name = "textBoxEmail";
 			this.textBoxEmail.Size = new System.Drawing.Size(166, 20);
 			this.textBoxEmail.TabIndex = 6;
@@ -63,21 +63,22 @@
 			// 
 			// textBoxPassword
 			// 
-			this.textBoxPassword.Location = new System.Drawing.Point(339, 262);
+			this.textBoxPassword.Location = new System.Drawing.Point(342, 224);
 			this.textBoxPassword.Name = "textBoxPassword";
 			this.textBoxPassword.PasswordChar = '*';
 			this.textBoxPassword.Size = new System.Drawing.Size(166, 20);
 			this.textBoxPassword.TabIndex = 7;
 			this.textBoxPassword.TabStop = false;
+			this.textBoxPassword.Text = "verylongpassword";
 			this.textBoxPassword.Enter += new System.EventHandler(this.textBoxPassword_Enter);
 			// 
 			// checkBoxGeneralPluginControl
 			// 
-			this.checkBoxGeneralPluginControl.Location = new System.Drawing.Point(12, 294);
+			this.checkBoxGeneralPluginControl.Location = new System.Drawing.Point(347, 250);
 			this.checkBoxGeneralPluginControl.Name = "checkBoxGeneralPluginControl";
-			this.checkBoxGeneralPluginControl.Size = new System.Drawing.Size(282, 18);
+			this.checkBoxGeneralPluginControl.Size = new System.Drawing.Size(161, 32);
 			this.checkBoxGeneralPluginControl.TabIndex = 8;
-			this.checkBoxGeneralPluginControl.Text = "Advanced mode (all plugins have acces to all others)";
+			this.checkBoxGeneralPluginControl.Text = "<html>  Advanced mode (all plugins <br />  have acces to all others)</html>";
 			// 
 			// buttonLogin
 			// 
@@ -94,7 +95,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Transparent;
 			this.BackgroundImage = global::ModernSteward.Properties.Resources.loadingScreen;
-			this.ClientSize = new System.Drawing.Size(543, 428);
+			this.ClientSize = new System.Drawing.Size(559, 496);
 			this.Controls.Add(this.checkBoxGeneralPluginControl);
 			this.Controls.Add(this.textBoxPassword);
 			this.Controls.Add(this.textBoxEmail);

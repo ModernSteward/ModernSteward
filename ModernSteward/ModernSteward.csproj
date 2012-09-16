@@ -159,6 +159,10 @@
       <Project>{54735883-D676-445E-A3F3-855E04AF4A52}</Project>
       <Name>Utility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebControl\WebControl.csproj">
+      <Project>{F273C998-A110-4CC1-AF12-C12910CB36A9}</Project>
+      <Name>WebControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Shell32">

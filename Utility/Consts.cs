@@ -9,5 +9,6 @@ namespace ModernSteward
     {
         public const string Dictation = "dictation";
         public const string NameOfTheGirl = "Melissa";
+		public const string PluginDownloadURL = "http://www.modernsteward.com/plugin/download/";
     }
 }
