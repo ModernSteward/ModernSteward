@@ -13,7 +13,7 @@ namespace WebControl
 	{
 		//плъгин се сваля от /plugin/download/id
 
-		private static string server = "http://modernsteward.com";
+		private static string server = Consts.ServerURL;
 
 		public string Email;
 		public string Password;
@@ -78,6 +78,7 @@ namespace WebControl
 			request.AllowWriteStreamBuffering = true;
 			request.AllowAutoRedirect = true;
 			request.CookieContainer = cookies;
+			request.Timeout = 5000;
 
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			string result = new StreamReader(response.GetResponseStream()).ReadToEnd();
@@ -87,21 +88,6 @@ namespace WebControl
 		public void Accumulate()
 		{
 			string uri = server + "/web-interface/accumulate";
-
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-			request.KeepAlive = false;
-			request.ProtocolVersion = HttpVersion.Version11;
-			request.AllowWriteStreamBuffering = true;
-			request.AllowAutoRedirect = true;
-			request.CookieContainer = cookies;
-
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			new StreamReader(response.GetResponseStream()).ReadToEnd();
-		}
-
-		public void Send(string text)
-		{
-			string uri = server + "/web-interface/send/" + text;
 
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
 			request.KeepAlive = false;
@@ -176,6 +162,15 @@ namespace WebControl
 				return true;
 			}
 			return false;
+		}
+
+		public delegate void EmulateCommand(string command);
+
+		public List<WebControl.ButtonClick> SeekForCommands()
+		{
+			var commands = GetCommands();
+			Accumulate();
+			return commands;
 		}
 	}
 }

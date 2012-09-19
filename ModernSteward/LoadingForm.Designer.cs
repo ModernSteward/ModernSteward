@@ -34,11 +34,13 @@
 			this.textBoxPassword = new Telerik.WinControls.UI.RadTextBox();
 			this.checkBoxGeneralPluginControl = new Telerik.WinControls.UI.RadCheckBox();
 			this.buttonLogin = new Telerik.WinControls.UI.RadButton();
+			this.waitingBarDownloadingPlugins = new Telerik.WinControls.UI.RadWaitingBar();
 			((System.ComponentModel.ISupportInitialize)(this.buttonOfflineMode)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textBoxEmail)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textBoxPassword)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkBoxGeneralPluginControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLogin)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.waitingBarDownloadingPlugins)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -71,6 +73,7 @@
 			this.textBoxPassword.TabStop = false;
 			this.textBoxPassword.Text = "verylongpassword";
 			this.textBoxPassword.Enter += new System.EventHandler(this.textBoxPassword_Enter);
+			this.textBoxPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_KeyUp);
 			// 
 			// checkBoxGeneralPluginControl
 			// 
@@ -89,13 +92,23 @@
 			this.buttonLogin.Text = "Login";
 			this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
 			// 
+			// waitingBarDownloadingPlugins
+			// 
+			this.waitingBarDownloadingPlugins.Location = new System.Drawing.Point(158, 288);
+			this.waitingBarDownloadingPlugins.Name = "waitingBarDownloadingPlugins";
+			this.waitingBarDownloadingPlugins.Size = new System.Drawing.Size(262, 24);
+			this.waitingBarDownloadingPlugins.TabIndex = 9;
+			this.waitingBarDownloadingPlugins.Visible = false;
+			this.waitingBarDownloadingPlugins.WaitingIndicatorSize = new System.Drawing.Size(50, 30);
+			// 
 			// LoadingForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Transparent;
 			this.BackgroundImage = global::ModernSteward.Properties.Resources.loadingScreen;
-			this.ClientSize = new System.Drawing.Size(559, 496);
+			this.ClientSize = new System.Drawing.Size(615, 734);
+			this.Controls.Add(this.waitingBarDownloadingPlugins);
 			this.Controls.Add(this.checkBoxGeneralPluginControl);
 			this.Controls.Add(this.textBoxPassword);
 			this.Controls.Add(this.textBoxEmail);
@@ -116,6 +129,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.textBoxPassword)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkBoxGeneralPluginControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonLogin)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.waitingBarDownloadingPlugins)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -129,6 +143,7 @@
 		private Telerik.WinControls.UI.RadTextBox textBoxPassword;
 		private Telerik.WinControls.UI.RadCheckBox checkBoxGeneralPluginControl;
 		private Telerik.WinControls.UI.RadButton buttonLogin;
+		private Telerik.WinControls.UI.RadWaitingBar waitingBarDownloadingPlugins;
 
 
 	}

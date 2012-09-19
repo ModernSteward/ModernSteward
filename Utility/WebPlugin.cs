@@ -20,6 +20,7 @@ namespace ModernSteward
 			ID = plugin.Id;
 			Name = plugin.Title;
 			Description = plugin.Description;
+			LocalFilepath = LocalFilepath;
 			DownloadURL = Consts.PluginDownloadURL + ID;
 		}
 
@@ -40,7 +41,7 @@ namespace ModernSteward
 			{
 				LocalFilepath = destinationPath;
 				WebClient Client = new WebClient();
-				Client.DownloadFile(DownloadURL, destinationPath + this.Name + ".zip");
+				Client.DownloadFile(DownloadURL, destinationPath);
 
 				downloadedSuccessful = true;
 			}

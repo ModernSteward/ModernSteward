@@ -201,7 +201,11 @@ namespace ModernSteward
 		{
 			if (Type == PluginType.StandartPlugin)
 			{
-				TryToEmulateCommand.Invoke(this, e);
+				try
+				{
+					TryToEmulateCommand.Invoke(this, e);
+				}
+				catch { }
 			}
 		}
 	}

@@ -53,7 +53,7 @@ namespace ModernSteward
 
 			foreach (var node in tree.Nodes)
 			{
-				DepthFirstSearch(node, node.Text, ref pluginsCommands);
+				GetAllCommands(node, node.Text, ref pluginsCommands);
 			}
 
 			foreach (var command in pluginsCommands)
@@ -66,7 +66,7 @@ namespace ModernSteward
 			return false;
 		}
 
-		private static void DepthFirstSearch(RadTreeNode root, string text, ref List<String> result)
+		public static void GetAllCommands(RadTreeNode root, string text, ref List<String> result)
 		{
 			if (root == null)
 			{
@@ -75,6 +75,7 @@ namespace ModernSteward
 
 			if (root.Nodes.Count == 0)
 			{
+
 				result.Add(text);
 			}
 
@@ -82,8 +83,8 @@ namespace ModernSteward
 			for (int i = 0; i < root.Nodes.Count; i++)
 			{
 				child = root.Nodes[i];
-				text += ' ' + child.Text;
-				DepthFirstSearch(child, text, ref result);
+				//text += ' ' + child.Text;
+				GetAllCommands(child, text + ' ' + child.Text, ref result);
 			}
 		}
     }

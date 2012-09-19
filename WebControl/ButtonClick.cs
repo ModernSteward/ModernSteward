@@ -7,6 +7,7 @@ namespace WebControl
 {
 	public class ButtonClick
 	{
+		public int PluginID;
 		public string Time;
 		public string Text;
 	}

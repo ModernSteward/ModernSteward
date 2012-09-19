@@ -3,6 +3,7 @@ using System.Speech.Recognition;
 using System.Threading;
 using System.Collections.Generic;
 using WebControl;
+using System.Threading.Tasks;
 namespace ModernSteward
 {
 	public class Core
@@ -30,26 +31,79 @@ namespace ModernSteward
 		/// </summary>
 		public Core(OperatingMode aMode)
 		{
-			mRecognitionEngine = new SpeechRecognitionEngine();
-			mRecognitionEngine.SetInputToDefaultAudioDevice();
-
-			mRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecognitionEngine_SpeechRecognized);
+			Initialization();
 
 			Mode = aMode;
 		}
 
 		public Core(OperatingMode aMode, string aEmail, string aPassword)
 		{
+			Initialization();
+			
+			Mode = aMode;
+			Email = aEmail;
+			Password = aPassword;
+		}
+
+		CancellationTokenSource webControlCancelationSorce;
+		CancellationToken webControlCancelation;
+
+		void StopWebInterfaceCommandSeeking()
+		{
+			webControlCancelationSorce.Cancel();
+		}
+
+		void StartWebInterfaceCommandsSeeking()
+		{
+			webControlCancelationSorce = new CancellationTokenSource();
+			webControlCancelation = webControlCancelationSorce.Token;
+
+			var webCommandsSeeking = new Task(() => SeekForCommandsInTheWebInterface(), webControlCancelation);
+			webCommandsSeeking.Start();
+		}
+
+		void SeekForCommandsInTheWebInterface()
+		{
+			while (true)
+			{
+				if (webControlCancelation.IsCancellationRequested)
+				{
+					return;
+				}
+				else
+				{
+					var commands = webControlManager.SeekForCommands();
+					foreach (var command in commands)
+					{
+						TryEmulatingCommand(command.PluginID, new EmulateCommandEventArgs(command.Text));
+					}
+				}
+				Thread.Sleep(Consts.CommandRequestsThreadSleep);
+			}
+		}
+
+		void Initialization()
+		{
 			mRecognitionEngine = new SpeechRecognitionEngine();
 			mRecognitionEngine.SetInputToDefaultAudioDevice();
 
 			mRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecognitionEngine_SpeechRecognized);
+			mRecognitionEngine.EmulateRecognizeCompleted += new EventHandler<EmulateRecognizeCompletedEventArgs>(mRecognitionEngine_EmulateRecognizeCompleted);
+			mRecognitionEngine.RecognizeCompleted += new EventHandler<RecognizeCompletedEventArgs>(mRecognitionEngine_RecognizeCompleted);
+		}
 
-			Mode = aMode;
-			Email = aEmail;
-			Password = aPassword;
+		void mRecognitionEngine_EmulateRecognizeCompleted(object sender, EmulateRecognizeCompletedEventArgs e)
+		{
+			StartAsyncRecognition();
+		}
 
-			webControlManager = new WebControlManager(Email, Password);
+		void mRecognitionEngine_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
+		{
+			if (commandToEmulate != "")
+			{
+				mRecognitionEngine.EmulateRecognizeAsync(commandToEmulate);
+				commandToEmulate = "";
+			}
 		}
 
 		void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -74,8 +128,7 @@ namespace ModernSteward
 					}
 					catch (Exception ex)
 					{
-                        var reporter = new CrashReporter();
-                        reporter.Report(ex);
+						CrashReporter.Report(ex);
 					}
 				}
 			}
@@ -128,42 +181,59 @@ namespace ModernSteward
 
 		void RecognitionEngine_RecognizerUpdateReached(object sender, RecognizerUpdateReachedEventArgs e)
 		{
-			if(toReloadTheGrammars){
+			if (toReloadTheGrammars)
+			{
 				LoadPluginsGrammar(mPluginHandler);
 				toReloadTheGrammars = false;
 			}
 		}
 
-		/// <summary>
-		/// Starts the speech recognition engine async.
-		/// </summary>
-		public void StartAsyncRecognition()
+		private void StartAsyncRecognition()
 		{
 			mRecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
 		}
 
 		/// <summary>
-		/// Stops the speech recognition engine async.
+		/// Starts the speech recognition engine async and start seeking for web commands.
 		/// </summary>
-		public void StopAsyncRecognition()
+		public void StartAsyncRecognitionAndWebControl()
 		{
+			StartAsyncRecognition();
+
+			webControlManager = new WebControlManager("yanchev.lyubomir@gmail.com", "test");
+			webControlManager.Login();
+
+			StartWebInterfaceCommandsSeeking();
+		}
+
+		private void StopAsyncRecognition()
+		{
+			mRecognitionEngine.RecognizeAsyncCancel();
 			mRecognitionEngine.RecognizeAsyncStop();
 		}
-		
-		List<EmulateCommandEventArgs> RequestsForCommandEmulation = new List<EmulateCommandEventArgs>();
+
+		/// <summary>
+		/// Stops the speech recognition engine async and stops seeking for web commands.
+		/// </summary>
+		public void StopAsyncRecognitionAndWebControl()
+		{
+			StopAsyncRecognition();
+
+			StopWebInterfaceCommandSeeking();
+		}
+
 		private string Email;
 		private string Password;
 
 		private void TryEmulatingCommand(object sender, EmulateCommandEventArgs e)
 		{
-			StopAsyncRecognition();
-			Thread.Sleep(333);
+			
 			try
 			{
 				bool isAuthorised = false;
 
 				Plugin receiver = null;
-				Plugin senderPlugin = sender as Plugin;
+				Plugin senderPlugin = sender as Plugin;				
 
 				foreach (var plugin in mPluginHandler.Plugins)
 				{
@@ -176,7 +246,7 @@ namespace ModernSteward
 
 				if (receiver == null)
 				{
-					throw new NullReferenceException();
+					//throw new NullReferenceException();
 				}
 
 				if (Mode == OperatingMode.OnlineNormal)
@@ -187,32 +257,39 @@ namespace ModernSteward
 				{
 					isAuthorised = true;
 				}
-				
+
+				isAuthorised = true;
 				if (isAuthorised)
 				{
 					try
 					{
-						mRecognitionEngine.EmulateRecognizeAsync("Melissa " + e.Command);
+						commandToEmulate = "Melissa " + e.Command;
+						StopAsyncRecognition();
 					}
 					catch (Exception ex)
 					{
-                        var reporter = new CrashReporter();
-                        reporter.Report(ex);
+						CrashReporter.Report(ex);
 					}
 				}
-
 			}
 			finally
 			{
-				Thread.Sleep(333);
-				StartAsyncRecognition();
+				//
 			}
-
 		}
 
 		private bool checkPluginControlAuthorisation(Plugin aSender, Plugin aReceiver)
 		{
-			return webControlManager.CheckPermission(aSender.ID, aReceiver.ID);
+			try
+			{
+				return webControlManager.CheckPermission(aSender.ID, aReceiver.ID);
+			}
+			catch
+			{
+				return false; 
+			}
 		}
+
+		public string commandToEmulate = "";
 	}
 }

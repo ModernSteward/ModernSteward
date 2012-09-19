@@ -13,6 +13,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Xml;
+using System.Threading;
 
 namespace ModernSteward
 {
@@ -87,10 +88,12 @@ namespace ModernSteward
 		int ticks = 0;
 		void labelStatusInStatusStrip_TextChanged(object sender, EventArgs e)
 		{
-			ticks = 0;
-			Timer timer = new Timer();
-			timer.Start();
-			timer.Tick += new EventHandler(timer_Tick);
+			if (ticks != 20)
+			{
+				System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+				timer.Start();
+				timer.Tick += new EventHandler(timer_Tick);
+			}
 		}
 
 		void timer_Tick(object sender, EventArgs e)
@@ -99,7 +102,7 @@ namespace ModernSteward
 			if (ticks == 20)
 			{
 				labelStatusInStatusStrip.Text = "";
-				(sender as Timer).Stop();
+				(sender as System.Windows.Forms.Timer).Stop();
 				ticks = 0;
 			}
 		}
@@ -214,16 +217,14 @@ namespace ModernSteward
 				}
 				catch (Exception ex)
 				{
-					var reporter = new CrashReporter();
-					reporter.Report(ex);
+					CrashReporter.Report(ex);
 
 					RadMessageBox.Show(@"An error occured. The plugin " + aName+ " might be out of date, not valid or ModernSteward is installed in a directory without administration privileges. Please, start ModernSteward with administrator privileges or connect to the support crew.", "Error");
 				}
 			}
 			catch (Exception ex)
 			{
-				var reporter = new CrashReporter();
-				reporter.Report(ex);
+				CrashReporter.Report(ex);
 			}
 		}
 
@@ -251,11 +252,13 @@ namespace ModernSteward
 					mCore.LoadPluginsGrammar(mPluginHandler);
 					try
 					{
-						mCore.StartAsyncRecognition();
+						mCore.StartAsyncRecognitionAndWebControl();
 					}
 					catch (Exception ex)
 					{
 						RadMessageBox.Show("An error occured while starting the ModernSteward speech recognition engine. Please, connect to the support crew.", "Error");
+						CrashReporter.Report(ex);
+
 						return;
 					}
 
@@ -274,7 +277,7 @@ namespace ModernSteward
 			}
 			else
 			{
-				mCore.StopAsyncRecognition();
+				mCore.StopAsyncRecognitionAndWebControl();
 
 				buttonStartStop.Text = "Turn on";
 				labelStartStop.Text = "TURNED OFF";
@@ -317,13 +320,12 @@ namespace ModernSteward
 					System.Xml.Serialization.XmlSerializer xmlSerializer = new System.Xml.Serialization.XmlSerializer(mPluginHandler.GetType());
 					xmlSerializer.Serialize(stream, mPluginHandler);
 
-					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " бе запазен успешно.";
+					labelStatusInStatusStrip.Text = saveUserProfileFileDialog.FileName + " was saved successfully.";
 				}
 				catch (Exception ex)
 				{
 					RadMessageBox.Show("An error occured while saving the profile. Please, connect to the support crew.", "Error");
-					var reporter = new CrashReporter();
-					reporter.Report(ex);
+					CrashReporter.Report(ex);
 				}
 				finally
 				{
@@ -354,13 +356,12 @@ namespace ModernSteward
 						AddPluginToTheGridView(plugin.Name, plugin.PluginPath);
 					}
 
-					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " бе зареден успешно.";
+					labelStatusInStatusStrip.Text = openUserProfileFileDialog.FileName + " was added successfully.";
 				}
 				catch (Exception ex)
 				{
 					RadMessageBox.Show("The file is corrupted. \nPlease, connect to the support crew.", "Error");
-					var reporter = new CrashReporter();
-					reporter.Report(ex);
+					CrashReporter.Report(ex);
 				}
 				finally
 				{
@@ -419,7 +420,6 @@ namespace ModernSteward
 			this.ShowInTaskbar = false;
 			this.notifyIcon.Visible = false;
 			this.notifyIcon.Dispose();
-
 		}
 
 		private void MainForm_Resize(object sender, EventArgs e)

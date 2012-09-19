@@ -161,6 +161,18 @@ namespace ModernSteward
             
             RadTreeViewGrammarManager.SaveGrammarToXML(treeViewCommands, pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml");
 
+			//TODO: Itso have to implement the XML parsing in the WEB part. After that, this file will not be necessary
+			List<string> pluginsCommands = new List<string>();
+			RadTreeView tree = new RadTreeView();
+			RadTreeViewGrammarManager.LoadGrammarFromXML(pluginPath + @"\CustomPlugin\CustomPlugin\CustomPluginGrammar.xml", ref tree);
+			
+			foreach (var node in tree.Nodes)
+			{
+				RadTreeViewGrammarManager.GetAllCommands(node, node.Text, ref pluginsCommands);
+			}
+
+			System.IO.File.WriteAllLines(pluginPath + @"\CustomPlugin\Commands.txt", pluginsCommands.ToArray());
+
             string windowsRootDirectory = Environment.GetEnvironmentVariable("WINDIR");
             System.Diagnostics.Process prc = new System.Diagnostics.Process();
             prc.StartInfo.FileName = windowsRootDirectory + @"\explorer.exe";

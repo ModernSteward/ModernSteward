@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using Telerik.WinControls;
 using WebControl;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ModernSteward
 {
@@ -21,7 +23,7 @@ namespace ModernSteward
             InitializeComponent();
             
             this.Width = 520;
-            this.Height = 325;
+			this.Height = 325;
 
 			this.StartPosition = FormStartPosition.CenterScreen;
         }
@@ -47,21 +49,27 @@ namespace ModernSteward
             }
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            Email = textBoxEmail.Text;
-            Password = textBoxPassword.Text;
+		public WebControlManager WebControl;
 
-			WebControlManager webControl = new WebControlManager(Email, Password);
-			if (webControl.Login())
+
+		private void DownloadPlugins()
+		{
+			//this.Invoke(new MethodInvoker(Close));
+
+			Email = textBoxEmail.Text;
+			Password = textBoxPassword.Text;
+
+			WebControl = new WebControlManager(Email, Password);
+			if (WebControl.Login())
 			{
-				var listInstalledPlugins = webControl.GetInstalled();
+				var listInstalledPlugins = WebControl.GetInstalled();
 				foreach (var webPlugin in listInstalledPlugins)
 				{
 					string innerPluginDirectoryPath = "";
 					Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins");
 					Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\" + webPlugin.Name);
-					innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + webPlugin.Name + @"\";
+					innerPluginDirectoryPath = Environment.CurrentDirectory + @"\Plugins\" + webPlugin.Name + @"\" + webPlugin.Name + ".zip";
+					webPlugin.LocalFilepath = innerPluginDirectoryPath;
 
 					if (webPlugin.Download(innerPluginDirectoryPath))
 					{
@@ -69,8 +77,35 @@ namespace ModernSteward
 					}
 				}
 			}
+			else
+			{
+				this.Invoke(new MethodInvoker(ShowLoginNotSuccessfulMessageBox));
+			}
+		}
 
-            this.Close();
+		private void ShowLoginNotSuccessfulMessageBox()
+		{
+			waitingBarDownloadingPlugins.StopWaiting();
+			waitingBarDownloadingPlugins.Visible = false;
+
+			buttonLogin.Enabled = true;
+			textBoxEmail.Enabled = true;
+			textBoxPassword.Enabled = true;
+
+			RadMessageBox.Show("Login not successful! ");
+		}
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+			buttonLogin.Enabled = false;
+			textBoxEmail.Enabled = false;
+			textBoxPassword.Enabled = false;
+			waitingBarDownloadingPlugins.Visible = true;
+			waitingBarDownloadingPlugins.StartWaiting();
+
+			Task taskDownloadPlugins = new Task(DownloadPlugins);
+			taskDownloadPlugins.Start();
+			taskDownloadPlugins.ContinueWith(x => this.Invoke(new MethodInvoker(Close)));
         }
 
         private void buttonOfflineMode_Click(object sender, EventArgs e)
@@ -94,5 +129,13 @@ namespace ModernSteward
 		public string Email { get; set; }
 
 		public string Password { get; set; }
+
+		private void textBoxPassword_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				buttonLogin_Click(this, new EventArgs());
+			}
+		}
 	}
 }
