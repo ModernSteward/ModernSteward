@@ -159,7 +159,7 @@ namespace ModernSteward
 					}
 					else
 					{
-						mPluginHandler.Plugins.Remove(plugin);
+						//mPluginHandler.Plugins.Remove(plugin);
 					}
 				}
 			}
@@ -200,10 +200,13 @@ namespace ModernSteward
 		{
 			StartAsyncRecognition();
 
-			webControlManager = new WebControlManager("yanchev.lyubomir@gmail.com", "test");
-			webControlManager.Login();
+            if (Mode == OperatingMode.OnlineNormal || Mode == OperatingMode.OnlineAdvanced)
+            {
+                webControlManager = new WebControlManager("yanchev.lyubomir@gmail.com", "test");
+                webControlManager.Login();
 
-			StartWebInterfaceCommandsSeeking();
+                StartWebInterfaceCommandsSeeking();
+            }
 		}
 
 		private void StopAsyncRecognition()
@@ -218,8 +221,10 @@ namespace ModernSteward
 		public void StopAsyncRecognitionAndWebControl()
 		{
 			StopAsyncRecognition();
-
-			StopWebInterfaceCommandSeeking();
+            if (Mode == OperatingMode.OnlineAdvanced && Mode == OperatingMode.OnlineNormal)
+            {
+                StopWebInterfaceCommandSeeking();
+            }
 		}
 
 		private string Email;
