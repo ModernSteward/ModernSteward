@@ -136,6 +136,8 @@ namespace ModernSteward
 							row.Cells["Checkbox"].Value = true;
 							row.Cells["Button"].Value = "Deinitialize!";
 
+							plugin.Initialized = true;
+
 							labelStatusInStatusStrip.Text = plugin.Name + " was initialized successfully.";
 						}
 						else
@@ -151,12 +153,19 @@ namespace ModernSteward
 				{
 					if (plugin.Name == row.Cells["Name"].Value.ToString())
 					{
-						labelStatusInStatusStrip.Text = plugin.Name + " was deinitialized successfully.";
+						if (plugin.Deinitialize())
+						{
+							plugin.Initialized = false;
 
-						plugin.Initialized = false;
+							labelStatusInStatusStrip.Text = plugin.Name + " was deinitialized successfully.";
 
-						row.Cells["Checkbox"].Value = false;
-						row.Cells["Button"].Value = "Initialize!";
+							row.Cells["Checkbox"].Value = false;
+							row.Cells["Button"].Value = "Initialize!";
+						}
+						else
+						{
+							RadMessageBox.Show("An error occured during plugin's deinitialization. Please, connect to the plugin's creator.", "Error");
+						}
 						break;
 					}
 				}

@@ -13,8 +13,14 @@ namespace ModernSteward
 		/// <summary>
 		/// Initializes the plugin
 		/// </summary>
-		/// <returns>Bool value if the initialization was successfull</returns>
+		/// <returns>Bool value showing if the initialization was successfull</returns>
 		public abstract bool Initialize();
+
+		/// <summary>
+		/// Deinitializes the plugin
+		/// </summary>
+		/// <returns>Bool value showing if the deinitialization was successfull</returns>
+		public abstract bool Deinitialize();
 
 		public abstract GrammarBuilder GetGrammarBuilder();
 

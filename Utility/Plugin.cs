@@ -176,6 +176,24 @@ namespace ModernSteward
 			}
 		}
 
+		public bool Deinitialize()
+		{
+			if (Type == PluginType.StandartPlugin)
+			{
+				var status = (instanceOfMyType as PluginFunctionality).Deinitialize();
+				if (status)
+				{
+					Initialized = false;
+				}
+				return status;
+			}
+			else // Macro plugin
+			{
+				Initialized = false;
+				return true;
+			}
+		}
+
 		public override string ToString()
 		{
 			return Name;
