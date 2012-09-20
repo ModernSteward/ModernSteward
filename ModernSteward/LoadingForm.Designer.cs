@@ -49,7 +49,7 @@
 			this.buttonOfflineMode.Location = new System.Drawing.Point(12, 288);
 			this.buttonOfflineMode.Name = "buttonOfflineMode";
 			this.buttonOfflineMode.Size = new System.Drawing.Size(140, 24);
-			this.buttonOfflineMode.TabIndex = 4;
+			this.buttonOfflineMode.TabIndex = 1;
 			this.buttonOfflineMode.Text = "Offline (advanced mode)";
 			this.buttonOfflineMode.Click += new System.EventHandler(this.buttonOfflineMode_Click);
 			// 
@@ -58,7 +58,7 @@
 			this.textBoxEmail.Location = new System.Drawing.Point(342, 197);
 			this.textBoxEmail.Name = "textBoxEmail";
 			this.textBoxEmail.Size = new System.Drawing.Size(166, 20);
-			this.textBoxEmail.TabIndex = 6;
+			this.textBoxEmail.TabIndex = 2;
 			this.textBoxEmail.TabStop = false;
 			this.textBoxEmail.Text = "melissa@modernsteward.com";
 			this.textBoxEmail.Enter += new System.EventHandler(this.textBoxEmail_Enter);
@@ -69,7 +69,7 @@
 			this.textBoxPassword.Name = "textBoxPassword";
 			this.textBoxPassword.PasswordChar = '*';
 			this.textBoxPassword.Size = new System.Drawing.Size(166, 20);
-			this.textBoxPassword.TabIndex = 7;
+			this.textBoxPassword.TabIndex = 3;
 			this.textBoxPassword.TabStop = false;
 			this.textBoxPassword.Text = "verylongpassword";
 			this.textBoxPassword.Enter += new System.EventHandler(this.textBoxPassword_Enter);
@@ -80,7 +80,7 @@
 			this.checkBoxGeneralPluginControl.Location = new System.Drawing.Point(347, 250);
 			this.checkBoxGeneralPluginControl.Name = "checkBoxGeneralPluginControl";
 			this.checkBoxGeneralPluginControl.Size = new System.Drawing.Size(161, 32);
-			this.checkBoxGeneralPluginControl.TabIndex = 8;
+			this.checkBoxGeneralPluginControl.TabIndex = 4;
 			this.checkBoxGeneralPluginControl.Text = "<html>  Advanced mode (all plugins <br />  have acces to all others)</html>";
 			// 
 			// buttonLogin
@@ -107,7 +107,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Transparent;
 			this.BackgroundImage = global::ModernSteward.Properties.Resources.loadingScreen;
-			this.ClientSize = new System.Drawing.Size(615, 734);
+			this.ClientSize = new System.Drawing.Size(623, 768);
 			this.Controls.Add(this.waitingBarDownloadingPlugins);
 			this.Controls.Add(this.checkBoxGeneralPluginControl);
 			this.Controls.Add(this.textBoxPassword);

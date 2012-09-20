@@ -76,6 +76,7 @@ namespace ModernSteward
 						DownloadedPlugins.Add(webPlugin);
 					}
 				}
+				this.Invoke(new MethodInvoker(Close));
 			}
 			else
 			{
@@ -105,7 +106,6 @@ namespace ModernSteward
 
 			Task taskDownloadPlugins = new Task(DownloadPlugins);
 			taskDownloadPlugins.Start();
-			taskDownloadPlugins.ContinueWith(x => this.Invoke(new MethodInvoker(Close)));
         }
 
         private void buttonOfflineMode_Click(object sender, EventArgs e)

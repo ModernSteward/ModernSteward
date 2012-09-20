@@ -31,7 +31,6 @@ namespace WebControl
 
 		public bool Login()
 		{
-			bool successfulLogin = false;
 
 			Logout();
 			string post_data = string.Format("email={0}&password={1}", Email, Password);
@@ -53,14 +52,15 @@ namespace WebControl
 			requestStream.Write(postBytes, 0, postBytes.Length);
 			requestStream.Close();
 
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Console.WriteLine(response.Cookies.Count);
-			Console.WriteLine(response.StatusCode);
+			try
+			{
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			}
+			catch {
+				return false;
+			}
 
-			//TODO: Check if login was successfull
-			successfulLogin = true;
-
-			return successfulLogin;
+			return true;
 		}
 
 		public void Logout()
