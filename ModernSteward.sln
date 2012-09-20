@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacroManager", "MacroManage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebControl", "WebControl\WebControl.csproj", "{F273C998-A110-4CC1-AF12-C12910CB36A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlGrammarToListOfCommands", "XmlGrammarToListOfCommandsForm\XmlGrammarToListOfCommands.csproj", "{F8447075-7772-4EE7-B471-1D4593B82B5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlGrammarToListOfCommands", "XmlGrammarToListOfCommands\XmlGrammarToListOfCommands.csproj", "{8D0A98A4-BB0B-417D-800A-685E9ABBE543}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -151,16 +151,16 @@ Global
 		{F273C998-A110-4CC1-AF12-C12910CB36A9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F273C998-A110-4CC1-AF12-C12910CB36A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F273C998-A110-4CC1-AF12-C12910CB36A9}.Release|x86.ActiveCfg = Release|Any CPU
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Debug|x86.ActiveCfg = Debug|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Debug|x86.Build.0 = Debug|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Release|Any CPU.ActiveCfg = Release|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Release|x86.ActiveCfg = Release|x86
-		{F8447075-7772-4EE7-B471-1D4593B82B5C}.Release|x86.Build.0 = Release|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Debug|x86.ActiveCfg = Debug|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Debug|x86.Build.0 = Debug|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Release|Any CPU.ActiveCfg = Release|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Release|x86.ActiveCfg = Release|x86
+		{8D0A98A4-BB0B-417D-800A-685E9ABBE543}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
