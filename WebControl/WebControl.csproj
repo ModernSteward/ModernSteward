@@ -8,7 +8,7 @@
     <ProjectGuid>{F273C998-A110-4CC1-AF12-C12910CB36A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebControl</RootNamespace>
+    <RootNamespace>ModernSteward</RootNamespace>
     <AssemblyName>WebControl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
