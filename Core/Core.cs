@@ -258,7 +258,6 @@ namespace ModernSteward
 					isAuthorised = true;
 				}
 
-				isAuthorised = true;
 				if (isAuthorised)
 				{
 					try

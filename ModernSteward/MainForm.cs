@@ -73,9 +73,12 @@ namespace ModernSteward
 			notifyIcon = new NotifyIcon();
 			notifyIcon.Visible = true;
 
+			labelStatusInStatusTripTimer.Tick += new EventHandler(labelStatusInStatusTripTimer_Tick);
 
 			this.Show();
 		}
+
+		System.Windows.Forms.Timer labelStatusInStatusTripTimer = new System.Windows.Forms.Timer();
 
 		private void LoadDownloadedPlugins(List<WebPlugin> list)
 		{
@@ -90,20 +93,18 @@ namespace ModernSteward
 		{
 			if (ticks != 20)
 			{
-				System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-				timer.Start();
-				timer.Tick += new EventHandler(timer_Tick);
+				labelStatusInStatusTripTimer.Start();
 			}
 		}
 
-		void timer_Tick(object sender, EventArgs e)
+		void labelStatusInStatusTripTimer_Tick(object sender, EventArgs e)
 		{
 			ticks++;
 			if (ticks == 20)
 			{
 				labelStatusInStatusStrip.Text = "";
-				(sender as System.Windows.Forms.Timer).Stop();
 				ticks = 0;
+				(sender as System.Windows.Forms.Timer).Stop();
 			}
 		}
 
