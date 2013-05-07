@@ -202,7 +202,7 @@ namespace ModernSteward
 
             if (Mode == OperatingMode.OnlineNormal || Mode == OperatingMode.OnlineAdvanced)
             {
-                webControlManager = new WebControlManager("yanchev.lyubomir@gmail.com", "test");
+                webControlManager = new WebControlManager(Email, Password);
                 webControlManager.Login();
 
                 StartWebInterfaceCommandsSeeking();
@@ -284,6 +284,11 @@ namespace ModernSteward
 
 		private bool checkPluginControlAuthorisation(Plugin aSender, Plugin aReceiver)
 		{
+			if (aSender == null)
+			{
+				return true;
+			}
+
 			try
 			{
 				return webControlManager.CheckPermission(aSender.ID, aReceiver.ID);

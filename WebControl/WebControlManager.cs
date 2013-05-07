@@ -56,7 +56,7 @@ namespace WebControl
 			{
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			}
-			catch {
+			catch(Exception e){
 				return false;
 			}
 

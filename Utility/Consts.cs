@@ -13,7 +13,8 @@ namespace ModernSteward
 		
 		public const string PluginDownloadURL = ServerURL + @"/plugin/download/";
 
-		public const string ServerURL = "http://78.90.135.20:3000";
+		public const string ServerURL = "http://interface.modernsteward.com";
+										//"http://78.90.135.20:3000";
 										//"http://www.modernsteward.com";
 
 		public static int CommandRequestsThreadSleep = 5000; //ms
