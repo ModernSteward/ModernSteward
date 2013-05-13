@@ -4,7 +4,7 @@ ModernSteward
 Introduction
 -------
 
-[ModernSteward] is an open-source home and computer automation system, enabling the users to command verbally, over the Internet, using cell phone and even Skype, their computer and other electrical devices connected to it.
+[ModernSteward](http://modernsteward.com) is an open-source home and computer automation system, enabling the users to command verbally, over the Internet, using cell phone and even Skype, their computer and other electrical devices connected to it.
 
 The authors have developed numerous devices using the open source hardware platform Arduino that are used to control home appliances. A couple of them are demonstrated on the stand. Tutorials how to build them are uploaded on the website of the product.
 
@@ -48,4 +48,3 @@ ModernSteward makes the computer work more natural, brings full control over alm
 
 Thanks to the way it is being built, the project can easily be extended and enriched with more functionality, with new modules and plugins that will be accessible through the Plugin market.
 
-[ModernSteward](http://modernsteward.com)
