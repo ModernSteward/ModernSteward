@@ -12,17 +12,17 @@ ModernSteward provides a plugin-based environment that ensures easy extendibilit
 
 Target groups
 -----
-Elderly people
+* Elderly people
+ 
+* Disabled people (blind people)
+ 
+* Laboratories
 
-Disabled people (blind people)
-
-Laboratories
-
-Factories
-
-Business
-
-People who want to make their daily activities easier
+* Factories
+ 
+* Business
+ 
+* People who want to make their daily activities easier
 
 Last but not least, the entire implementation is open-source, aiming to aid developers in contributing to the future development of the project.
 
